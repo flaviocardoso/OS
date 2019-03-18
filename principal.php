@@ -20,7 +20,7 @@
   </head>
   <body class="bg-light">
     <ui-view></ui-view>
-    <toaster-container toaster-options="{'time-out': 5000}"></toaster-container>
+    <toaster-container toaster-options="{'time-out': 5000, 'body-output-type': 'trustedHtml'}"></toaster-container>
     <toaster-container toaster-options="{'toaster-id' : 'info-order-service', 'time-out': 10000, 'position-class': 'toast-top-full-width'}"></toaster-container>
     <script src="/js/angularjs/1.7.3/angular.js"></script>
     <script src="/js/angularjs/1.7.3/angular-animate.min.js"></script>
