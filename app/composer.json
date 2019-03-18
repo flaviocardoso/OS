@@ -1,0 +1,9 @@
+{
+    "name": "angular/os",
+    "description": "carrega",
+    "autoload": {
+        "psr-4": {
+            "lib\\": "lib/"
+        }
+    }
+}
