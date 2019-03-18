@@ -44,7 +44,7 @@ class CN // namespace_class
 
 		try
 		{
-			$sql = "SELECT US.id_user, US.ativo, GR.grupo, US.user, US.nome, US.email, US.coord, GR.setor, GR.area, US.ala, US.sala, US.ramal FROM users AS US JOIN grupoos AS GR ON US.user = GR.user WHERE US.user=:user"; // adicionado setor, ala, sala, ramal
+			$sql = "SELECT US.id_user, US.ativo, GR.grupo, US.user, GR.S, US.nome, US.email, US.coord, GR.setor, GR.area, US.ala, US.sala, US.ramal FROM users AS US JOIN grupoos AS GR ON US.user = GR.user WHERE US.user=:user"; // adicionado setor, ala, sala, ramal
 			$stmt = $this->link->prepare($sql);
 			$stmt->bindParam(':user', $user, \PDO::PARAM_STR);
 			$stmt->execute();
