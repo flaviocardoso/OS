@@ -44,7 +44,24 @@ class CN // namespace_class
 
 		try
 		{
-			$sql = "SELECT US.id_user, US.ativo, GR.grupo, US.user, GR.S, US.nome, US.email, US.coord, GR.setor, GR.area, US.ala, US.sala, US.ramal FROM users AS US JOIN grupoos AS GR ON US.user = GR.user WHERE US.user=:user"; // adicionado setor, ala, sala, ramal
+			$sql = "SELECT 
+						US.id_user, 
+						US.ativo, 
+						GR.grupo, 
+						US.user, 
+						GR.S, 
+						US.nome, 
+						US.email, 
+						US.coord, 
+						GR.setor, 
+						GR.area, 
+						US.ala, 
+						US.sala, 
+						US.ramal 
+					FROM users AS US 
+					JOIN grupoos AS GR 
+					ON US.user = GR.user 
+					WHERE US.user=:user"; // adicionado setor, ala, sala, ramal
 			$stmt = $this->link->prepare($sql);
 			$stmt->bindParam(':user', $user, \PDO::PARAM_STR);
 			$stmt->execute();
@@ -65,7 +82,18 @@ class CN // namespace_class
 
 		try 
 		{
-			$sql = "SELECT id_user, ativo, user, nome, email, coord, ala, sala, ramal FROM users WHERE user=:user";
+			$sql = "SELECT 
+						id_user, 
+						ativo, 
+						user, 
+						nome, 
+						email, 
+						coord, 
+						ala, 
+						sala, 
+						ramal 
+					FROM users 
+					WHERE user=:user";
 			$stmt = $this->link->prepare($sql);
 			$stmt->bindParam(':user', $user, \PDO::PARAM_STR);
 			$stmt->execute();
@@ -108,7 +136,10 @@ class CN // namespace_class
 
 		try
 		{
-			$sql = "SELECT setor FROM setores WHERE coord=:coord";
+			$sql = "SELECT 
+						setor
+					FROM setores 
+					WHERE coord=:coord";
 			$stmt = $this->link->prepare($sql);
 			$stmt->bindParam(':coord', $coord, \PDO::PARAM_STR);
 			$stmt->execute();
@@ -141,7 +172,10 @@ class CN // namespace_class
 
 		try
 		{
-			$sql = "SELECT valor FROM areas WHERE setor IN ({$places})";			
+			$sql = "SELECT 
+						valor 
+					FROM areas 
+					WHERE setor IN ({$places})";			
 			$stmt = $this->link->prepare($sql);
 			//$stmt->bindParam(':setor', $places, \PDO::PARAM_STR);
 			$stmt->execute($params);
@@ -162,7 +196,9 @@ class CN // namespace_class
 
 		try
 		{
-			$sql = "UPDATE ordemservice SET `data_now`=:data_now";
+			$sql = "UPDATE 
+						ordemservice 
+					SET `data_now`=:data_now";
 			$stmt = $this->link->prepare($sql);
 			$stmt->bindParam(":data_now", $data, \PDO::PARAM_STR);
 			$stmt->execute();
@@ -186,7 +222,10 @@ class CN // namespace_class
 
 		try
 		{
-			$sql = "UPDATE ordemservice SET cor_os=:cor_os WHERE id_os=:id_os";
+			$sql = "UPDATE 
+						ordemservice 
+					SET cor_os=:cor_os 
+					WHERE id_os=:id_os";
 			$stmt = $this->link->prepare($sql);
 			$stmt->bindParam(':cor_os', $color, \PDO::PARAM_STR);
 			$stmt->bindParam(':id_os', $id, \PDO::PARAM_STR);
@@ -212,7 +251,12 @@ class CN // namespace_class
 
 		try
 		{
-			$sql = "SELECT `id_os`, data_in, `data_up` FROM `ordemservice` WHERE `status`='NOVA'";
+			$sql = "SELECT 
+						`id_os`, 
+						data_in, 
+						`data_up` 
+					FROM `ordemservice`
+					WHERE `status`='NOVA'";
 			$stmt = $this->link->prepare($sql);
 			$stmt->execute();
 			$rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -233,7 +277,12 @@ class CN // namespace_class
 
 		try
 		{
-			$sql = "SELECT `id_os`, data_in, `data_up` FROM `ordemservice` WHERE `status`='Andamento'";
+			$sql = "SELECT 
+						`id_os`, 
+						data_in, 
+						`data_up` 
+					FROM `ordemservice` 
+					WHERE `status`='Andamento'";
 			$stmt = $this->link->prepare($sql);
 			$stmt->execute();
 			$rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -270,8 +319,8 @@ class CN // namespace_class
 		// trocar posição 
 		try 
 		{		
-			$sql1 = "INSERT INTO grupoos (id_grupo, user, grupo, setor, area)";
-			$sql1 = $sql1 . " VALUES (NULL, :user, :grupo, :setor, :area)";
+			$sql1 = "INSERT INTO grupoos (id_grupo, user, S, grupo, setor, area)";
+			$sql1 = $sql1 . " VALUES (NULL, :user, 0, :grupo, :setor, :area)";
 
 			$stmt1 = $this->link->prepare($sql1);
 			$stmt1->bindParam(':user', $User->user, \PDO::PARAM_STR);
@@ -313,7 +362,22 @@ class CN // namespace_class
 
 		try
 		{
-			$sql = "SELECT US.ativo, US.user, US.nome, US.email, GR.grupo, US.coord, GR.setor, GR.area, US.ramal, US.ala, US.sala FROM users AS US JOIN grupoos AS GR ON US.user=GR.user";
+			$sql = "SELECT 
+						US.ativo, 
+						US.user, 
+						US.nome, 
+						US.email, 
+						GR.grupo, 
+						US.coord, 
+						GR.setor, 
+						GR.area, 
+						US.ramal, 
+						US.ala, 
+						US.sala 
+					FROM users AS US 
+					JOIN grupoos AS GR 
+					ON US.user=GR.user
+					WHERE GR.S=0";
 			$stmt = $this->link->prepare($sql);
 			$stmt->execute();
 			$count = $stmt->rowCount();
