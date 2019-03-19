@@ -17,16 +17,16 @@
 		<tbody>
 			<tr style="background-color:#7fb9c7" ng-repeat="users in $ctrl.verTecList | filter:seach">
 				<td class="text-center">
-					<a ui-sref="dashboard.os.editeteclista({ tecid : users.user })" ui-sref-active="active" onclick="this.disabled=true;" class="btn btn-light">{{users.user}}</a>
+					<a ui-sref="dashboard.os.editetec({ tecID : users.user })" ui-sref-active="active" onclick="this.disabled=true;" class="btn btn-light">{{users.user}}</a>
                 </td>
                 <td class="text-center">
-                    <button type="button" class="btn btn-light round-0" disabled>
+                    <button type="button" class="btn btn-light rounded-0" disabled>
                         <span ng-if="users.ativo == 1">SIM</span>
                         <span ng-if="users.ativo != 1">Não</span>
                     </button>
                 </td>
                 <td class="text-center">
-                    <button type="button" class="btn btn-light round-0">
+                    <button type="button" class="btn btn-light rounded-0" disabled>
                         {{users.grupo}}
                     </button>
                 </td>			
