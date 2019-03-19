@@ -20,7 +20,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
             },
             {   // direrionamento grupos
                 name: 'dashboard', /* dashboard */
-                url: '', 
+                url: '',
                 //component: 'dashboard'
                 templateProvider: roleContextHelperProvider.templateProvider({
                     "admin": '/app/views/app.php?v=dashboardadmin',
@@ -87,7 +87,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
                 data: { nome: "Descrição" }
             },
             {   // Criação de Um Novo Técnico
-                name: 'dashboard.os.criartec', 
+                name: 'dashboard.os.criartec',
                 url: 'criartec',
                 component: 'criartec',
                 data: { title: 'Criar Técnico', nome: 'Criar Técnico' },
@@ -98,7 +98,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
                 component: 'editeteclista',
                 data: {title: 'Lista de Técnicos', nome: 'Lista de Técnicos'},
                 resolve: { verTecList: function(OrdemService) { return OrdemService.getTecList(); } }
-            }, 
+            },
             {
                 name: 'dashboard.os.editetec',
                 url: 'editetec/{tecID}',
@@ -110,7 +110,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
                 name: 'dashboard.os.ver',
                 url: 'ver-os', /* direção para lista das ordens de servicos */
                 data: { title: 'Ordens de Serviço', nome : "S. Ordem de Serviço" },
-                component: 'ver' 
+                component: 'ver'
             },// Ordens de Serviço Enviadas lista enviar - admin, resp, secr (coord)
             {
                 name: 'dashboard.os.ver.enviadavernova',
@@ -302,7 +302,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
                 url: 'info-os-solic-andameto/{osID}',
                 component: 'infosolicandamento',
                 resolve: { osid: function(OrdemService, $transition$) { return OrdemService.getOSInfoSolicAndamento($transition$.params().osID) } }
-            }, 
+            },
             {
                 name: 'dashboard.os.ver.solicverespera',
                 url: '',
@@ -314,7 +314,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
                 url: 'info-os-solic-espera/{osID}',
                 component: 'infosolicespera',
                 resolve: { osid: function(OrdemService, $transition$) { return OrdemService.getOSInfoSolicEspera($transition$.params().osID) } }
-            }, 
+            },
             {
                 name: 'dashboard.os.ver.solicverencerrada',
                 url: '',
@@ -627,8 +627,8 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
                 url: 'info-editada-tec-encerrada/{osID}',
                 component: 'infoeditadalaudotecencerrada',
                 resolve: { osid: function(OrdemService, $transition$) { return OrdemService.getOSInfoEditadaLaudoTecEncerrada($transition$.params().osID) } }
-            },// ---- Fim 
-            {  // Antigas 
+            },// ---- Fim
+            {  // Antigas
                 name: 'dashboard.os.verosinfo', /* editada */
              url: 'info/{osID}', /* número de id da ordem de serviço handler */
              component: 'verOsInfo',
@@ -657,25 +657,25 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
              url: 'info/{osID}', /* número de id da ordem de serviço handler */
              component: 'verOsInfoTecnico',
              data: {nome: "Ver OS"},
-             resolve: { osid: function(OrdemService, $transition$) { return OrdemService.getOrdem($transition$.params().osID) } } 
+             resolve: { osid: function(OrdemService, $transition$) { return OrdemService.getOrdem($transition$.params().osID) } }
             }, // ver informação da ordem de serviço tecnico
             { name: 'dashboard.os.verosinfotecniconovas',
              url: 'info-novas/{osID}', /* número de id da ordem de serviço handler */
              component: 'verOsInfoTecnicoNovas',
              data: {nome: "Ver OS Nova"},
-             resolve: { osid: function(OrdemService, $transition$) { return OrdemService.getTecnicoNew($transition$.params().osID) } } 
+             resolve: { osid: function(OrdemService, $transition$) { return OrdemService.getTecnicoNew($transition$.params().osID) } }
             },
             { name: 'dashboard.os.verosinfotecnicoandamento',
              url: 'info-andamento/{osID}', /* número de id da ordem de serviço handler */
              component: 'verOsInfoTecnicoAndamento',
              data:{nome: 'Ver OS Andamento'},
-             resolve: { osid: function(OrdemService, $transition$) { return OrdemService.getTecnicoRun($transition$.params().osID) } } 
+             resolve: { osid: function(OrdemService, $transition$) { return OrdemService.getTecnicoRun($transition$.params().osID) } }
             },
             { name: 'dashboard.os.verosinfotecnicoencerrada',
              url: 'info-encerrada/{osID}', /* número de id da ordem de serviço handler */
              component: 'verOsInfoTecnicoEncerrada',
              data: {nome: 'ver OS Encerrada'},
-             resolve: { osid: function(OrdemService, $transition$) { return OrdemService.getTecnicoEnd($transition$.params().osID) } } 
+             resolve: { osid: function(OrdemService, $transition$) { return OrdemService.getTecnicoEnd($transition$.params().osID) } }
             }, // fim info ordem de serviço - ver ordens de serviço tecnico
             { name: 'dashboard.os.ver.ostecniconovas',
              url: '', /* número de id da ordem de serviço handler */
@@ -687,12 +687,12 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
              url: '-andamento', /* número de id da ordem de serviço handler */
              component: 'verOsTecnicoAndamento',
              data: { nome: "Ver OS Andamento"},
-             resolve: { verOs: function(OrdemService) { return OrdemService.getOSTecnicoRun(); } } 
+             resolve: { verOs: function(OrdemService) { return OrdemService.getOSTecnicoRun(); } }
             },
             { name: 'dashboard.os.ver.ostecnicoencerrada',
              url: '-encerrada', /* número de id da ordem de serviço handler */
              component: 'verOsTecnicoEncerrada',
-             data: {nome : 'Ver OS Encerrada'}, 
+             data: {nome : 'Ver OS Encerrada'},
              resolve: { verOs: function(OrdemService) { return OrdemService.getOSTecnicoEnd(); } }
             },
             { name: 'dashboard.os.verosfile', //#
@@ -704,44 +704,44 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
             { name: 'dashboard.os.verosedit', //#
              url: 'info/{osID}/edit', /* número de id da ordem de serviço e com capacidade de edição para ordem de serviços com status 'nova' */
              component: 'verOsedit',
-             data: {nome : "Editar OS {{osID}}"}, 
+             data: {nome : "Editar OS {{osID}}"},
              resolve: { osid: function(OrdemService, $transition$) { return OrdemService.getNew($transition$.params().osID) } }
-            },            
+            },
             { name: 'dashboard.os.ver.emAnd', //#
              url: '-andamento',  /* ver ordens de serviço */
              component: 'verOsAndamento',
              data: { nome : 'ver OS Andamento'},
-             resolve: { verOs: function(OrdemService) { return OrdemService.getOSRun(); } } 
+             resolve: { verOs: function(OrdemService) { return OrdemService.getOSRun(); } }
             },
             { name: 'dashboard.os.ver.novas', //#
              url: '-nova',  /* ver ordens de serviço */
              component: 'verOsNovas',
              data: {nome: 'Ver OS Novas'},
-             resolve: { verOs: function(OrdemService) { return OrdemService.getOSNew(); } } 
+             resolve: { verOs: function(OrdemService) { return OrdemService.getOSNew(); } }
             },
             { name: 'dashboard.os.ver.encerr', //#
              url: '-encerrada',  /* ver ordens de serviço */
              component: 'verOsEncerrada',
              data: { nome : 'ver OS Encerrada'},
-             resolve: { verOs: function(OrdemService) { return OrdemService.getOSEnd(); } } 
+             resolve: { verOs: function(OrdemService) { return OrdemService.getOSEnd(); } }
             },
             { name: 'dashboard.os.ver.os.todas',
              url: 'info/{osID}', /* handler não mais utilizado */
              component: 'verOsid',
              data: { nome : 'ver todas OS'},
-             resolve: { osid: function(verOs, $stateParams) { return verOs.find(function(osid) { return osid.id === $stateParams.osID; }); } } 
+             resolve: { osid: function(verOs, $stateParams) { return verOs.find(function(osid) { return osid.id === $stateParams.osID; }); } }
             },
             { name: 'dashboard.os.ver.osCoord',
              url: '-coordenacao', /* ver-coordenacao handler */
-             component: 'verOsCoord' 
+             component: 'verOsCoord'
             },
             { name: 'dashboard.os.ver.osSetor',
              url: '-setor',  /* ver-setor handler */
-             component: 'verOsSetor' 
+             component: 'verOsSetor'
             },
             { name: 'dashboard.os.ver.osAdmin',
              url: '-feitas', /* ver-feitas handler */
-             component: 'verOsAdmin' 
+             component: 'verOsAdmin'
             },
             { name: 'dashboard.os.ver.osSolicitante',
              url: '-solicitadas', /* ver-solicitadas handler */
@@ -754,14 +754,14 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
              data: { nome: 'ver OS Comentada'}
             }, // Fim ---
             { name: 'dashboard.sobre', // Criar sobres diferentes para cada tipo de grupo
-             url: '/sobre', 
-             data: { title: 'SOBRE CBPF/OS', nome: 'Sobre'}, 
-             component: 'sobre' 
+             url: '/sobre',
+             data: { title: 'SOBRE CBPF/OS', nome: 'Sobre'},
+             component: 'sobre'
             },
             { name: 'dashboard.contato',
-             url: '/contato', 
-             data: { title: 'CONTATO CBPF/OS', nome: "Contato"}, 
-             component: 'contato' 
+             url: '/contato',
+             data: { title: 'CONTATO CBPF/OS', nome: "Contato"},
+             component: 'contato'
             }
         ];
         //teste OK!
@@ -911,7 +911,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
 })
 .directive("popOver", function () {
     return {
-        restrict: 'A',        
+        restrict: 'A',
         link: function (scope, element, attrs) {
             var options;
             options = {
@@ -936,18 +936,18 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
             });
         }
     }
-    
+
 })
 .directive("fileDownload", function ($parse) { // teste de directive com attribute name functionando
     return {
-        restrict: 'A', 
+        restrict: 'A',
         scope: {
             fileDownload: '='
-        },   
+        },
         link: function(scope, element, attrs) {
             element.on('click', function(e) {
                 e.preventDefault();
-                scope.$apply(function() {                    
+                scope.$apply(function() {
                     location.assign(window.location.origin + "/app/data/app.php?d=downloadFile&file=" + scope.fileDownload);
                 });
             });
@@ -978,7 +978,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
 .directive('ngSetorsolic', function (CoordService) { // não funcional
     return {
         link: function(scope, element, attrs) {
-            CoordService.getSetorbycoordSolic(scope);          
+            CoordService.getSetorbycoordSolic(scope);
         }
     }
 })
@@ -986,14 +986,14 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
     return {
         link: function(scope, element, attrs) {
             element.bind('click', function () {
-                $state.reload();               
+                $state.reload();
             });
         }
     }
 })
 .directive('laudoTecnico', function (CoordService, toaster, $state) {
     console.log('laudo-tecnico');
-    
+
     return {
         restrict: 'A',
         scope: {
@@ -1012,7 +1012,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
                     // var idos = scope.idos;
                     // var idtec = scope.idtec;
                     // var setor = scope.setor;
-                    // var area = scope.area;                   
+                    // var area = scope.area;
 
                     if (scope.laudo != undefined && scope.topico != undefined) {
                         var obj = {id: scope.idos, idtec: scope.idtec, setor: scope.setor, area: scope.area, topico: scope.topico, laudo: scope.laudo};
@@ -1052,15 +1052,15 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
                         CoordService.changeStatusAndamento({id: scope.idos, setor: scope.setor, area: scope.area});
                     });
                 }
-                
+
             });
-                        
+
         }
     }
 })
 .directive('lastLaudo', function (toaster, CoordService) {
-    return {                        
-        link: function (scope, element, attrs) {  
+    return {
+        link: function (scope, element, attrs) {
             var promise = CoordService.lastLaudoById(scope.$ctrl.osid.id_os);
             promise.then(function (laudos) {
                 scope.laudos = laudos;
@@ -1079,7 +1079,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
             // scope.$watch("laudosetor", function (s) {
             //     setor = s;
             //     if (check == true && setor != undefined) {
-            //         CoordService.getAreabysetor(setor, scope);                               
+            //         CoordService.getAreabysetor(setor, scope);
             //     } else {
             //         scope.areadados = "";
             //     }
@@ -1090,14 +1090,14 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
             //     if (check == true && setor != undefined && area != undefined) {
             //         console.log("Setor: " + setor + ".Area: " + area);
             //     }
-            // });     
-            
+            // });
+
         }
     }
 })
 .directive('laudoSelectSetor', function (CoordService) {
     return {
-        link: function (scope, element, attr) {            
+        link: function (scope, element, attr) {
             // element.on("click", function (e) {
             //     e.preventDefault();
             //     console.log("click");
@@ -1105,9 +1105,9 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
             //     if (setor == undefined) {
             //         scope.areadados = "";
             //     } else {
-            //         CoordService.getAreabysetor(setor, scope); 
-            //     } 
-                               
+            //         CoordService.getAreabysetor(setor, scope);
+            //     }
+
             // });
             element.on("change", function (e) {
                 e.preventDefault();
@@ -1116,8 +1116,8 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
                 if (setor == undefined) {
                     scope.areadados = "";
                 } else {
-                    CoordService.getAreabysetor(setor, scope); 
-                } 
+                    CoordService.getAreabysetor(setor, scope);
+                }
             });
             element.on("focus", function (e) {
                 e.preventDefault();
@@ -1144,22 +1144,22 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
             scope.$watch('confcheck', function (r) {
                 if (r == true) {
                     element.on('click', function (e) {
-                        e.preventDefault();                                  
+                        e.preventDefault();
                         if (scope.changesetor != undefined && scope.changearea != undefined && scope.motivo != undefined && scope.idos != undefined) {
                             CoordService.mudarLaudoDestino({id: scope.idos, setor: scope.setor, area: scope.area, changesetor: scope.changesetor, changearea: scope.changearea,motivo: scope.motivo}); // aplicar o direcionamento se erro for falso na resposta
                         } else {
                             alert("Preencha os campos");
-                        }               
+                        }
                     });
                 }
             });
-            
+
         }
     }
 })
 .directive('laudoEncerra', function (toaster, CoordService) {
     console.log("laudo-encerra");
-    
+
     return {
         restrict: 'A',
         scope: {
@@ -1178,12 +1178,12 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
                         // console.log(id);
 
                         var obj = {id: scope.idos, setor: scope.setor, area: scope.area};
-                        
-                        CoordService.encerraOS(obj);                    
+
+                        CoordService.encerraOS(obj);
                     });
-                }             
+                }
             });
-                       
+
         }
     }
 })
@@ -1199,7 +1199,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
             motivo: '=',
             confcheck: '='
         },
-        link: function (scope, element, attrs) { 
+        link: function (scope, element, attrs) {
             scope.$watch('confcheck', function (r) {
                 if (r == true) {
                     element.on('click', function (e) {
@@ -1210,18 +1210,18 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
                         // var texto = scope.resposta;
                         if (scope.idos != undefined && scope.motivo != undefined && scope.motivo != "") {
                             var obj = {id: scope.idos, setor: scope.setor, area: scope.area, motivo: scope.motivo};
-                            CoordService.renovarOS(obj);                                      
+                            CoordService.renovarOS(obj);
                         } else {
                             if (scope.motivo != "") {
                                 alert("Preencha o motivo da renovação desta Ordem de Serviço.");
                             } else {
                                 alert("Falha, tente denovo");
-                            }                            
+                            }
                         }
                     });
                 }
-            });                     
-            
+            });
+
         }
     }
 })
@@ -1269,7 +1269,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
                         // var texto = scope.resposta;
                         // console.log(id);
                         // console.log(texto);
-                        
+
                         if (scope.idos != undefined && scope.resposta != undefined && scope.resposta != "") {
                             CoordService.esperaOs({id: scope.idos, setor: scope.setor, area: scope.area, texto: scope.resposta});
                         } else {
@@ -1311,7 +1311,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
                     })
                 }
             });
-            
+
         }
     }
 })
@@ -1327,17 +1327,17 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
             CoordService.clearNotification(s.id);
         }
     }
-    
+
 })
 .directive("coordCarrega", function (CoordService) {
     console.log("carrega-coord");
     return {
         link: function (scope, element, attr) {
             CoordService.getCoord(scope);
-            
+
             // element.on('change', function (e) {
             //     e.preventDefault();
-            //     if (scope.tec.coord) {                    
+            //     if (scope.tec.coord) {
             //     } else {
             //         scope.tec.setor = "";
             //         scope.tec.area = "";
@@ -1345,7 +1345,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
 
             //     if (scope.tec.grupo == "resp") {
             //         scope.tec.area = "";
-            //     } 
+            //     }
             // })
         }
     }
@@ -1356,14 +1356,14 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
         link: function (scope, element, attr) {
             element.on("focus", function (e) {
                 e.preventDefault();
-                e.stopPropagation();               
+                e.stopPropagation();
                 if (scope.tec.coord) {
                     console.log('click-setor');
                     CoordService.getSetorbycoord(scope.tec.coord, scope);
-                }               
+                }
             });
-            
-            
+
+
             // element.on('change', function (e) {
             //     e.preventDefault();
             //     CoordService.getAreabysetor(scope.tec.setor, scope);
@@ -1372,7 +1372,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
             //     } else {
             //         scope.tec.area = "";
             //     }
-                
+
             //     if (scope.tec.grupo == "resp") {
             //         scope.tec.area = "";
             //     }
@@ -1386,10 +1386,10 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
         link: function(scope, element, attr) {
             element.on("focus", function (e) {
                 e.preventDefault();
-                e.stopPropagation();               
+                e.stopPropagation();
                 if (scope.tec.setor) {
                     CoordService.getAreabysetor(scope.tec.setor, scope);
-                }                
+                }
             });
         }
     }
@@ -1402,16 +1402,16 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
             scope.changeCoord = function (coord) {
                 CoordService.getSetorbycoord(scope.tec.coord, scope);
                 scope.tec.setor = "";
-                scope.tec.area = "";                
+                scope.tec.area = "";
             }
             scope.changeSetor = function (setor) {
                 CoordService.getAreabysetor(scope.tec.setor, scope);
                 scope.tec.area = "";
-                
+
             }
         }
     }
-    
+
 })
 //componentes
 .component("login", {templateUrl: "/app/views/login.php", controller: "loginCtrl"})
@@ -1542,7 +1542,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
 })*/
 // views lists
 .component('verOsNovas', {
-    bindings: { verOs: '<' },    
+    bindings: { verOs: '<' },
     templateUrl: '/app/views/ver-os-novas.php',
 })
 .component('verOsAndamento', {
@@ -1551,7 +1551,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
 })
 .component('verOsEncerrada', {
     bindings: { verOs: '<' },
-    templateUrl: '/app/views/ver-os-encerrada.php',    
+    templateUrl: '/app/views/ver-os-encerrada.php',
 })
 .component('verOsTecnicoNovas', {
     bindings: { verOs: '<' },
@@ -1624,8 +1624,8 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
 
 // controles
 .controller("loginCtrl", function($rootScope, $scope, $state, $http, $location, $timeout, ngProgressFactory, loginService) { // mofificar depois
-    $scope.location = $location.path();        
-    
+    $scope.location = $location.path();
+
     $scope.login = function(user) {
         //user['password'] = md5(user['password']);
         loginService.login(user, $scope, $rootScope);
@@ -1641,7 +1641,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
     // body...
     //$scope.ver = "OI!!";
     /* efeito no menu scroll down and up */
-    var prevScrpos = $window.pageYOffset; 
+    var prevScrpos = $window.pageYOffset;
     $window.onscroll = function () {
         var currScrpos = $window.pageYOffset;
         if (prevScrpos > currScrpos) {
@@ -1678,9 +1678,9 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
             } else {
                 $scope.dataNome = nome[0];
             }
-        }        
+        }
     });
-    
+
     //var str = $scope.dataUser.nome;
     //var nome = str.split(" ", 2);
     //$scope.dataNome = nome[0] + " " + nome[1];
@@ -1688,7 +1688,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
     // posso usar isso para atualizar a lista !
     $scope.recarregar = function () {
         $state.reload(); // recarrega o dashboard - já exite um direcvite para isso
-    }        
+    }
     $scope.progressbar = ngProgressFactory.createInstance(); // criar uma barra de carragamento em cima do site em azul
     $scope.progressbar.start();
     $timeout(function() {
@@ -1707,7 +1707,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
     //$scope.files = [];
     $scope.service = {}; // dados guardados em service do scope
     var dados = {}; // dados guardados em dados
-    
+
     //var Descr_Topic = $scope.service.descr_topic;
 
     //if (Descr_Topic != undefined) {
@@ -1715,8 +1715,8 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
     //        toaster.pop("info", "Informação:", "Limite de caracters para o tópico de Descrição", 10000, 'trustedHtml');
     //    }
     //}
-      
-    // função que criar e verifica se os dados estão preenchidos		
+
+    // função que criar e verifica se os dados estão preenchidos
     $scope.criarOS = function(scope) {
         // não enviar com campos faltando, verificar campos abaixo
         // escrever os alertas embaixo dos campos
@@ -1822,7 +1822,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
                 }
                 */
                 if (resp) {
-                    if (resp == "erro") {                        
+                    if (resp == "erro") {
                         if (err > 1) {
                             toaster.pop('info', "Informação:", "Por favor entre em contato para resolução do problema");
                         } else {
@@ -2052,7 +2052,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
             html = html + "<br><b>Tecnico info : &nbsp;</b>";
             html = html + "<div class=\"display-os\"><span><b>Nome:</b> " + "&nbsp;&nbsp;</span></div>";
             html = html + "<div class=\"display-os\"><span><b>Email:</b> " + "&nbsp;&nbsp;</span></div>";
-            html = html + "<div class=\"display-os\"><span><b>Ramal:</b> " + "&nbsp;&nbsp;</span></div>";                
+            html = html + "<div class=\"display-os\"><span><b>Ramal:</b> " + "&nbsp;&nbsp;</span></div>";
             html = html + "<br><b>Topico de Laudo : &nbsp;</b>";
             html = html + "<span>Pequena descrição do laudo para ordem de serviço.</span>";
 
@@ -2082,85 +2082,150 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
         location.assign(origin + '/app/data/downloadFile.php?file=' + file); // verifica o nome do arquivo
     }
 })
-.controller('criartecCtrl', function ($scope, CoordService) {
+.controller('criartecCtrl', function ($scope, CoordService, toaster) {
     CoordService.getCoord($scope);
 
     $scope.changeCoord = function (coord) {
         CoordService.getSetorbycoord($scope.tec.coord, $scope);
         $scope.tec.setor = "";
-        $scope.tec.area = "";                
+        $scope.tec.area = "";
     }
     $scope.changeSetor = function (setor) {
         CoordService.getAreabysetor($scope.tec.setor, $scope);
 
         $scope.tec.area = "";
-        
-    }
-    $scope.copy = function () {
-        console.log($scope.$ctrl.tecid.user);
-        console.log($scope.$ctrl.tecid.nome);
-        console.log($scope.$ctrl.tecid.ala);
-        console.log($scope.$ctrl.tecid.sala);
-        console.log($scope.$ctrl.tecid.ramal);
-        console.log();
 
-        $scope.user = $scope.$ctrl.tecid.user;
-        
-        // angular.copy($scope.$ctrl.tecid, $scope.tec);
-        // angular.copy($scope.$ctrl.tecid.nome, $scope.tec.nome);
-        // angular.copy($scope.$ctrl.tecid.ala, $scope.tec.ala);
-        // angular.copy($scope.$ctrl.tecid.sala, $scope.tec.sala);
-        // angular.copy($scope.$ctrl.tecid.ramal, $scope.tec.ramal);        
     }
 
     $scope.criarUser = function (lista) {
-        console.log(lista);
-        CoordService.criarUser(lista);        
-    }
-    $scope.editeUser = function(lista) {
-        console.log(lista);
-        //CoordService.editeUser(lista);
+      var flag = true;
+      if ($scope.tec) {
+        if ($scope.tec.user) {}
+        else {
+          toaster.pop('warning', "", "preencha o campo de user!", 3000, 'trustedHtml');
+          flag = false;
+        }
+        if ($scope.tec.nome) {}
+        else {
+          toaster.pop('warning', "", "preencha o campo do nome!", 3000, 'trustedHtml');
+          flag = false;
+        }
+        if ($scope.tec.ramal) {}
+        else {
+          toaster.pop('warning', "", "preencha o campo do ramal!", 3000, 'trustedHtml');
+          flag = false;
+        }
+        if ($scope.tec.coord) {}
+        else {
+          toaster.pop('warning', "","preencha o campo da coordenação!", 3000, 'trustedHtml');
+          flag = false;
+        }
+        switch ($scope.tec.grupo) {
+          case 'tec':
+              if ($scope.tec.setor) {}
+              else {
+                toaster.pop('warning', "","preencha o campo do setor!", 3000, 'trustedHtml');
+                flag = false;
+              }
+              if ($scope.tec.area) {}
+              else {
+                toaster.pop('warning', "","preencha o campo da area!", 3000, 'trustedHtml');
+                flag = false;
+              }
+            break;
+          case 'resp':
+            if ($scope.tec.setor) {}
+            else {
+              toaster.pop('warning', "","preencha o campo do setor!", 3000, 'trustedHtml');
+              flag = false;
+            }
+            break;
+
+        }
+        if (flag) {
+          console.log(lista);
+          CoordService.criarUser(lista);
+        }
+      } else {
+        toaster.pop('warning', "", "preencha os campos", 3000, 'trustedHtml');
+      }
+
     }
 })
 .controller('editetecCtrl', function ($scope, CoordService) {
     CoordService.getCoord($scope);
 
     $scope.changeCoord = function (coord) {
-        console.log(coord);
-        
-        CoordService.getSetorbycoord(coord, $scope);
+        $scope.coord = coord;
+        CoordService.getSetorbycoord($scope.coord, $scope);
         $scope.setor = "";
-        $scope.area = "";                
+        $scope.area = "";
     }
     $scope.changeSetor = function (setor) {
-        CoordService.getAreabysetor(setor, $scope);
-
+        $scope.setor = setor;
+        CoordService.getAreabysetor($scope.setor, $scope);
         $scope.area = "";
-        
+    }
+    $scope.changeArea = function (area) {
+        $scope.area = area;
+        console.log($scope.area);
     }
     $scope.copy = function () {
-        console.log($scope.$ctrl.tecid.user);
-        console.log($scope.$ctrl.tecid.nome);
-        console.log($scope.$ctrl.tecid.ala);
-        console.log($scope.$ctrl.tecid.sala);
-        console.log($scope.$ctrl.tecid.ramal);
-        console.log();
-
         $scope.user = $scope.$ctrl.tecid.user;
         $scope.nome = $scope.$ctrl.tecid.nome;
         $scope.ala = $scope.$ctrl.tecid.ala;
         $scope.sala = $scope.$ctrl.tecid.sala;
         $scope.ramal = $scope.$ctrl.tecid.ramal;
-                
-        // angular.copy($scope.$ctrl.tecid.user, $scope.tec);
-        // angular.copy($scope.$ctrl.tecid.nome, $scope.nome);
-        // angular.copy($scope.$ctrl.tecid.ala, $scope.ala);
-        // angular.copy($scope.$ctrl.tecid.sala, $scope.sala);
-        // angular.copy($scope.$ctrl.tecid.ramal, $scope.ramal);        
     }
-    
+
     $scope.editeUser = function(lista) {
-        console.log(lista);
+        var flag = true;
+        if ($scope.user) {}
+        else {
+          alert("preencha o campo de user!");
+          flag = false;
+        }
+        if ($scope.nome) {}
+        else {
+          alert("preencha o campo do nome!");
+          flag = false;
+        }
+        if ($scope.ramal) {}
+        else {
+          alert("preencha o campo do ramal!");
+          flag = false;
+        }
+        if ($scope.coord) {}
+        else {
+          alert("preencha o campo da coordenação!");
+          flag = false;
+        }
+        switch ($scope.grupo) {
+          case 'tec':
+              if ($scope.setor) {}
+              else {
+                alert("preencha o campo do setor!");
+                flag = false;
+              }
+              if ($scope.area) {}
+              else {
+                alert("preencha o campo da area!");
+                flag = false;
+              }
+            break;
+          case 'resp':
+            if ($scope.setor) {}
+            else {
+              alert("preencha o campo do setor!");
+              flag = false;
+            }
+            break;
+
+        }
+        if (flag) {
+          console.log(lista);
+        }
+
         //CoordService.editeUser(lista);
     }
 })
@@ -2217,10 +2282,10 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
     //     //
     //     CoordService.getSetorbycoordSolic(coord, $scope);
     //     console.log("Coordenação incluída!");
-       
+
     // }
-    
-    // $scope.setorByCoordSolic = function(coord) {        
+
+    // $scope.setorByCoordSolic = function(coord) {
     //     CoordService.getSetorbycoordSolic(coord, $scope);
     //     console.log("Coordenação incluída!");
     // }
@@ -2253,9 +2318,9 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
 
     // $scope.setorInput = function(setor) {
     //     //$scope.editService.dest_area = "";
-        
+
     //     CoordService.getAreabysetor(setor, $scope);
-       
+
     // }
 
     // $scope.areaBySetor = function(setor) { // função para encontrar areas pelo setor seleciondo
@@ -2265,7 +2330,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
 
     //     //$scope.showArea = true; // mostra areas
     //     CoordService.getAreabysetor(setor, $scope); // puxa areas
-        
+
     // }
 
     input.onchange = function (e) {
@@ -2276,12 +2341,12 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
             $scope.files = [];
             $scope.files.push(files[0]);
             $scope.progressVisible = false;
-        });        
+        });
     }
 
     $scope.editarOS = function (editOs) {
         console.log(editOs);
-        
+
         $scope.buttonShow = false;
 
         if ($scope.buttonbox) {
@@ -2314,9 +2379,9 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
             //toaster.pop('info', "Informação:", "Ordem de Serviço enviada", 10000, 'trustedHtml');
             $state.go("dashboard.os.ver.os");
             console.log("arquivo não enviado");
-        }  
+        }
 
-        
+
         //console.log($scope.editReturn);
     }
 
@@ -2337,7 +2402,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
     }
 
     console.log($scope.editService);
-    
+
 })
 .controller("testeCtrl", function($scope, CoordService) {
     $scope.enviar = function (arq, nome) {
@@ -2350,7 +2415,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
         //CoordService.downloadFile(file);
         location.assign('http://192.168.4.105/app/data/downloadFile.php?file=' + file);
     }
-    
+
 
     var dropbox = document.getElementById("dropbox");
     var inputfiles = document.getElementById("fileToUpload");
@@ -2443,11 +2508,11 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
             var resolve = $q.defer();
             $http.post("/app/data/app.php?d=dataSetor", { "coord": coord }).then(function(resp) {
                 console.log(resp.data);
-                $scope.setordados = resp.data;                
-                resolve.resolve(resp.data);               
+                $scope.setordados = resp.data;
+                resolve.resolve(resp.data);
             });
 
-            return resolve.promise; 
+            return resolve.promise;
         },
         getAreabysetor: function(setor, $scope) {
             $http.post("/app/data/app.php?d=dataArea", { "setor": setor }).then(function(resp) {
@@ -2515,7 +2580,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
                         $scope.progressVisible = false;
                         toaster.pop('info', "", "O envio foi cancelado", 10000, 'trustedHtml');
                     }
-                }     
+                }
             }).then(function(resp) {
                 return resp.data;
             });
@@ -2527,7 +2592,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
                     toaster.pop('error', "", resp.data.message, 10000, 'trustedHtml');
                 } else {
                     toaster.pop('info', "", resp.data.message, 10000, 'trustedHtml');
-                }                
+                }
             });
         },
         enviarArq : function($file, $nome) {
@@ -2581,11 +2646,11 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
                         $scope.progressVisible = false;
                         toaster.pop('info', "", "O envio foi cancelado", 10000, 'trustedHtml');
                     }
-                }                
+                }
             }).then (function (resp) {
                 console.log(resp.data);
             });
-        },        
+        },
         postLaudoTecnico: function(obj) {
             console.log(obj); // funcionando OK!
             // console.log(text);
@@ -2629,7 +2694,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
                 console.log(resp.data); //encerrada (error, message)
                 var retorno = resp.data;
                 console.log(retorno);
-                
+
                 if (!retorno['error']) {
                     console.log("OK"); // mudar para redirecionamento
                 }
@@ -2675,9 +2740,9 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
             })
         },
         clearNotification: function (id) {
-            $http.post('/app/data/app.php?d=clear-notification', {'id': id})            
+            $http.post('/app/data/app.php?d=clear-notification', {'id': id})
         }
-    }    
+    }
 })
 .factory('loginService', function($http, $state, $location, sessionService, loginSessionService, toaster) {
     return {
@@ -2686,7 +2751,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
             $http({
                     method: 'POST',
                     url: '/app/acesso/login.php',
-                    data: user 
+                    data: user
                 })
                 .then(function(res) {
                     var uid = res.data.user; // user angular
@@ -2697,7 +2762,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
                         // modificar aqui para um login com sessão em php
                         //sessionService.set('user', uid);
                         loginSessionService.setSession(user['username'], uid, $scope, $rootScope);
-                        // hander de home mudar quando 
+                        // hander de home mudar quando
                         //$location.path('/home');
                         //$state.go('dashboard.os');
                     } else {
@@ -2734,7 +2799,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
                 //console.log(uid);
                 if (uid) {
                     sessionService.set('user', uid);
-                    $state.go('dashboard.os');                        
+                    $state.go('dashboard.os');
                     toaster.pop('success', "", data.message, 10000, 'trustedHtml');
                 } else {
                     //$scope.successLogin = false;
@@ -2765,7 +2830,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
                 resolve.resolve(that.role);
             });
         }
-        return resolve.promise;           
+        return resolve.promise;
     }
 })
 .service('OrdemService', function($http, $q) {
@@ -2802,9 +2867,9 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
     this.ossolicesperalist = null;
     this.ossolicesperaid = null;
     this.ossolicencerradalist = null;
-    this.ossolicencerradaid = null;    
-    
-    var resolveteclist = null, 
+    this.ossolicencerradaid = null;
+
+    var resolveteclist = null,
     resolvetecid = null,
     resolveosenviadanovalist = null,
     resolveosenviadaandamentolist = null,
@@ -2840,14 +2905,14 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
     resolveossolicencerradalist = null,
     resolveossolicencerradaid = null,
     that = this;
-    
+
     this.getTecList = function() {
         resolveteclist = $q.defer();
         $http.get("/app/data/app.php?d=retornateclista")
         .then (function (resp) {
             console.log(resp.data);
             that.listTec = resp.data;
-            resolveteclist.resolve(that.listTec);            
+            resolveteclist.resolve(that.listTec);
         })
         .catch(function (e) {
             console.log("Um erro ocorreu -", e);
@@ -2867,7 +2932,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
         } else {
             return "";
         }
-        
+
     }
     // envidas
     this.getOSEnviadaNova = function() {
@@ -2876,7 +2941,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
         .then (function (resp) {
             console.log(resp.data);
             that.osenviadanovalist = resp.data;
-            resolveosenviadanovalist.resolve(that.osenviadanovalist);            
+            resolveosenviadanovalist.resolve(that.osenviadanovalist);
         })
         .catch(function (e) {
             console.log("Um erro ocorreu -", e);
@@ -2904,7 +2969,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
         .then (function (resp) {
             console.log(resp.data);
             that.osenviadaandamentolist = resp.data;
-            resolveosenviadaandamentolist.resolve(that.osenviadaandamentolist);            
+            resolveosenviadaandamentolist.resolve(that.osenviadaandamentolist);
         })
         .catch(function (e) {
             console.log("Um erro ocorreu -", e);
@@ -2925,14 +2990,14 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
             return ""
         }
     }
-    
+
     this.getOSEnviadaEspera = function() {
         resolveosenviadaesperalist = $q.defer();
         $http.get("/app/data/app.php?d=retornaosenviadaesperalista")
         .then (function (resp) {
             console.log(resp.data);
             that.osenviadaesperalist = resp.data;
-            resolveosenviadaesperalist.resolve(that.osenviadaesperalist);            
+            resolveosenviadaesperalist.resolve(that.osenviadaesperalist);
         })
         .catch(function (e) {
             console.log("Um erro ocorreu -", e);
@@ -2958,11 +3023,11 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
         .then (function (resp) {
             console.log(resp.data);
             that.osenviadaencerradalist = resp.data;
-            resolveosenviadaencerradalist.resolve(that.osenviadaencerradalist);            
+            resolveosenviadaencerradalist.resolve(that.osenviadaencerradalist);
         })
         .catch (function (e) {
             console.log("Um erro ocorreu -", e);
-            throw e;           
+            throw e;
         })
         return resolveosenviadaencerradalist.promise;
     }
@@ -2984,7 +3049,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
         .then (function (resp) {
             console.log(resp.data);
             that.osrecebidanovalist = resp.data;
-            resolveosrecebidanovalist.resolve(that.osrecebidanovalist);            
+            resolveosrecebidanovalist.resolve(that.osrecebidanovalist);
         })
         .catch(function (e) {
             console.log("Um erro ocorreu -", e);
@@ -3012,7 +3077,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
         .then (function (resp) {
             console.log(resp.data);
             that.osrecebidaandamentolist = resp.data;
-            resolveosrecebidaandamentolist.resolve(that.osrecebidaandamentolist);            
+            resolveosrecebidaandamentolist.resolve(that.osrecebidaandamentolist);
         })
         .catch(function (e) {
             console.log("Um erro ocorreu -", e);
@@ -3027,7 +3092,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
         if (resolveosrecebidaandamentolist != null) {
             resolveosrecebidaandamentoid = $q.defer();
             console.log(that.osrecebidaandamentolist);
-            
+
             that.osrecebidaandamentoid = that.osrecebidaandamentolist.find(function (ordem) {return ordem.id_os === id;});
             resolveosrecebidaandamentoid.resolve(that.osrecebidaandamentoid);
             return resolveosrecebidaandamentoid.promise;
@@ -3036,16 +3101,16 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
             that.oseditadalaudoandamentoid = that.oseditadalaudoandamentolist.find(function (ordem) {return ordem.id_os === id;});
             resolveoseditadalaudoandamentoid.resolve(that.oseditadalaudoandamentoid);
             return resolveoseditadalaudoandamentoid.promise;
-        } 
+        }
     }
-    
+
     this.getOSRecebidaEspera = function() {
         resolveosrecebidaesperalist = $q.defer();
         $http.get("/app/data/app.php?d=retornaosrecebidaesperalista")
         .then (function (resp) {
             console.log(resp.data);
             that.osrecebidaesperalist = resp.data;
-            resolveosrecebidaesperalist.resolve(that.osrecebidaesperalist);            
+            resolveosrecebidaesperalist.resolve(that.osrecebidaesperalist);
         })
         .catch(function (e) {
             console.log("Um erro ocorreu -", e);
@@ -3058,10 +3123,10 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
         //resolvetecid = $q.defer();
         //$http.post("/app/data/app.php?d=retornatecid", {'id' : id}).then (function (resp) {})
         console.log(id);
-        
+
         if (resolveosrecebidaesperalist != null) {
             resolveosrecebidaesperaid = $q.defer();
-            that.osrecebidaesperaid = that.osrecebidaesperalist.find(function (ordem) {return ordem.id_os === id;}); 
+            that.osrecebidaesperaid = that.osrecebidaesperalist.find(function (ordem) {return ordem.id_os === id;});
             resolveosrecebidaesperaid.resolve(that.osrecebidaesperaid );
             return resolveosrecebidaesperaid.promise;
         }
@@ -3073,11 +3138,11 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
         .then (function (resp) {
             console.log(resp.data);
             that.osrecebidaencerradalist = resp.data;
-            resolveosrecebidaencerradalist.resolve(that.osrecebidaencerradalist);            
+            resolveosrecebidaencerradalist.resolve(that.osrecebidaencerradalist);
         })
         .catch (function (e) {
             console.log("Um erro ocorreu -", e);
-            throw e;           
+            throw e;
         })
         return resolveosrecebidaencerradalist.promise;
     }
@@ -3100,7 +3165,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
         .then (function (resp) {
             console.log(resp.data);
             that.ossolicnovalist = resp.data;
-            resolveossolicnovalist.resolve(that.ossolicnovalist);            
+            resolveossolicnovalist.resolve(that.ossolicnovalist);
         })
         .catch(function (e) {
             console.log("Um erro ocorreu -", e);
@@ -3128,7 +3193,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
         .then (function (resp) {
             console.log(resp.data);
             that.ossolicandamentolist = resp.data;
-            resolveossolicandamentolist.resolve(that.ossolicandamentolist);            
+            resolveossolicandamentolist.resolve(that.ossolicandamentolist);
         })
         .catch(function (e) {
             console.log("Um erro ocorreu -", e);
@@ -3149,14 +3214,14 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
             return ""
         }
     }
-    
+
     this.getOSSolicEspera = function() {
         resolveossolicesperalist = $q.defer();
         $http.get("/app/data/app.php?d=retornaossolicesperalista")
         .then (function (resp) {
             console.log(resp.data);
             that.ossolicesperalist = resp.data;
-            resolveossolicesperalist.resolve(that.ossolicesperalist);            
+            resolveossolicesperalist.resolve(that.ossolicesperalist);
         })
         .catch(function (e) {
             console.log("Um erro ocorreu -", e);
@@ -3182,11 +3247,11 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
         .then (function (resp) {
             console.log(resp.data);
             that.ossolicencerradalist = resp.data;
-            resolveossolicencerradalist.resolve(that.ossolicencerradalist);            
+            resolveossolicencerradalist.resolve(that.ossolicencerradalist);
         })
         .catch (function (e) {
             console.log("Um erro ocorreu -", e);
-            throw e;           
+            throw e;
         })
         return resolveossolicencerradalist.promise;
     }
@@ -3209,7 +3274,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
         .then (function (resp) {
             console.log(resp.data);
             that.oseditadalaudonovalist = resp.data;
-            resolveoseditadalaudonovalist.resolve(that.oseditadalaudonovalist);            
+            resolveoseditadalaudonovalist.resolve(that.oseditadalaudonovalist);
         })
         .catch(function (e) {
             console.log("Um erro ocorreu -", e);
@@ -3237,7 +3302,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
         .then (function (resp) {
             console.log(resp.data);
             that.oseditadalaudoandamentolist = resp.data;
-            resolveoseditadalaudoandamentolist.resolve(that.oseditadalaudoandamentolist);            
+            resolveoseditadalaudoandamentolist.resolve(that.oseditadalaudoandamentolist);
         })
         .catch(function (e) {
             console.log("Um erro ocorreu -", e);
@@ -3258,14 +3323,14 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
             return "[]";
         }
     }
-    
+
     this.getOSEditadaLaudoEspera = function() {
         resolveoseditadalaudoesperalist = $q.defer();
         $http.get("/app/data/app.php?d=retornaoseditadalaudoesperalista")
         .then (function (resp) {
             console.log(resp.data);
             that.oseditadalaudoesperalist = resp.data;
-            resolveoseditadalaudoesperalist.resolve(that.oseditadalaudoesperalist);            
+            resolveoseditadalaudoesperalist.resolve(that.oseditadalaudoesperalist);
         })
         .catch(function (e) {
             console.log("Um erro ocorreu -", e);
@@ -3291,11 +3356,11 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
         .then (function (resp) {
             console.log(resp.data);
             that.oseditadalaudoencerradalist = resp.data;
-            resolveoseditadalaudoencerradalist.resolve(that.oseditadalaudoencerradalist);            
+            resolveoseditadalaudoencerradalist.resolve(that.oseditadalaudoencerradalist);
         })
         .catch (function (e) {
             console.log("Um erro ocorreu -", e);
-            throw e;           
+            throw e;
         })
         return resolveoseditadalaudoencerradalist.promise;
     }
@@ -3314,7 +3379,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
 
     // var service = {
     //     getOrdensbyCoord: function() { // retorna todas as ordens de serviço (mudar para somente a coordenação)
-            
+
     //         return $http.get("/app/data/verOrdServ.php").then(function(resp) {
     //                 console.log(resp.data);
     //                 //$http.get("/app/data/order-services.json");
@@ -3327,8 +3392,8 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
     //                 },
     //                 function(error2) {
     //                     console.log(error2);
-    //                 });                                               
-    //             });                
+    //                 });
+    //             });
     //     },
     //     getOrdem: function(id) { // pega o id da ordem de serviço
     //         function mathesParam(ordem) {
@@ -3362,7 +3427,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
     //             return resp.data;
     //         });
     //     },
-    //     getRun : function(id) { // pega os ids das ordens de serviços em andamento 
+    //     getRun : function(id) { // pega os ids das ordens de serviços em andamento
     //         function mathesParam(ordem) {
     //             return ordem.id_os === id;
     //         }
@@ -3446,7 +3511,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
     //     //		console.log(resp.data);
     //     //		$scope.ordens = resp.data;
     //     //	});
-    //     //}	
+    //     //}
     // }
 
     // return service;
@@ -3484,7 +3549,7 @@ return {
         get: function(key) {
             return sessionStorage.getItem(key);
         },
-        destroy: function(key) {                
+        destroy: function(key) {
             return sessionStorage.removeItem(key);
         }
     }
