@@ -33,7 +33,7 @@ $User->area = isset($IN['area']) ? $IN['area'] : "";
 $PDO = new CN('localhost', 'cbpf_users');
 $count = $PDO->criarUser($User);
 
-if ($count == 0){
+if ($count == 1){
     echo "Usuário criado!";
 } else {
     echo "Usuário já existe!";

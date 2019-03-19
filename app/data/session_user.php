@@ -9,6 +9,7 @@ use lib\Session\SessionSol;
 $out = array('error' => false);
 $in = json_decode(file_get_contents("php://input"), true);
 $user;
+$userSuper;
 
 $CN = new CN("localhost", "cbpf_users");
 $rwc = $CN->sessionUser($in['user']);
@@ -18,26 +19,29 @@ $saida = array('user' => $in['user']);
 // usuário com grupo
 if ($count > 0 && $rows['ativo'] == 1) {
 	new Session($rows);
+	$out['uid'] = $in['uid'];
 	list($nome, $sobrenome) = explode(" ", $rows['nome']);
-	if ($rows['grupo'] == 'admin' && $rows['S'] == 1) {
-		$out['uid'] = $in['uid'];
-		$out['message'] = "Admintrador:<br />" . $nome . " " . $sobrenome . "<br />logado!";
-	} else {
-		$out['error'] = true;
-		$out['message'] = 'Adminstrador não autorizado!';
-	}
 	switch ($rows['grupo']) {
+		case 'admin':			
 		case 'secr':
-			$out['message'] = "Secretária(o):<br />" . $nome . " " . $sobrenome . "<br />logado!";
+			$userSuper = ($rows['grupo'] == 'admin') ? "Administrador: " : "Secretária(o): ";
+			switch ($rows['S']) {				
+				case 1:										
+					$out['message'] = $userSuper . $nome . " " . $sobrenome . "<br />logado!";
+					break;				
+				default:
+					$out['uid'] = NULL;
+					$out['error'] = true;
+					$out['message'] = $userSuper . 'não autorizado!';
+					break;
+			}			
 			break;
 		
 		case 'resp':			
 		case 'tec':
-			$out['message'] = "Técnico: " . $nome . " " . $sobrenome . "<br />logado!";
-			break;
-
 		case 'sol':
-			$out['message'] = "Solicitante: " . $nome . " " . $sobrenome . "<br />logado!";
+			$user = ($rows['grupo'] == 'sol') ? "Solicitante: " : "Técnico: ";
+			$out['message'] = $user . $nome . " " . $sobrenome . "<br />logado!";
 			break;
 	}
 }

@@ -23,10 +23,10 @@
                         <a ui-sref="dashboard.os.criaros" ui-sref-active="active">Criar OS</a>
                     </li>
                     <li>
-                        <a ui-sref="dashboard.os.criartec" ui-sref-active="active">Criar Técnico</a>
+                        <a ui-sref="dashboard.os.criartec" ui-sref-active="active">Criar Usuário</a>
                     </li>
                     <li>
-                        <a ui-sref="dashboard.os.editeteclista" ui-sref-active="active">Edite Técnico</a>
+                        <a ui-sref="dashboard.os.editeteclista" ui-sref-active="active">Edite Usuário</a>
                     </li>
                 </ul>
             </li>
