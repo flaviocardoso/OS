@@ -12,12 +12,15 @@
         </div>
         <div class="form-group">
             <label for="">Tipo de Técnico</label>
-            <select class="form-control" ng-model="tec.grupo">                
+            <select class="form-control" ng-model="tec.grupo">
+                <option value="admin">Adminstrador Não Confirmado</option>
+                <option value="secr">Secretária Não Confirmado</option>                
                 <option value="tec" selected>Técnico</option>
                 <option value="resp">Responsável</option>
+                <option value="sol">Solicitante</option>
             </select>
         </div>
-        <div class="form-group" ng-if="(tec.grupo == 'resp') || (tec.grupo == 'tec')">
+        <div class="form-group" ng-if="(tec.grupo == 'resp') || (tec.grupo == 'tec') || (tec.grupo == 'admin') || (tec.grupo == 'secr') || (tec.grupo == 'sol') ">
             <label for="">Coordenação</label>
             <select ng-change="changeCoord(tec.coord)" class="form-control" ng-model="tec.coord" ng-options="option.coord as option.coord for option in coorddados" ng-change="setorByCoord(tec.dest_coord)" id="selCoord" class="form-control">
                 <option value=""></option>
