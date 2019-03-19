@@ -2096,9 +2096,72 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
         $scope.tec.area = "";
         
     }
+    $scope.copy = function () {
+        console.log($scope.$ctrl.tecid.user);
+        console.log($scope.$ctrl.tecid.nome);
+        console.log($scope.$ctrl.tecid.ala);
+        console.log($scope.$ctrl.tecid.sala);
+        console.log($scope.$ctrl.tecid.ramal);
+        console.log();
+
+        $scope.user = $scope.$ctrl.tecid.user;
+        
+        // angular.copy($scope.$ctrl.tecid, $scope.tec);
+        // angular.copy($scope.$ctrl.tecid.nome, $scope.tec.nome);
+        // angular.copy($scope.$ctrl.tecid.ala, $scope.tec.ala);
+        // angular.copy($scope.$ctrl.tecid.sala, $scope.tec.sala);
+        // angular.copy($scope.$ctrl.tecid.ramal, $scope.tec.ramal);        
+    }
+
     $scope.criarUser = function (lista) {
         console.log(lista);
         CoordService.criarUser(lista);        
+    }
+    $scope.editeUser = function(lista) {
+        console.log(lista);
+        //CoordService.editeUser(lista);
+    }
+})
+.controller('editetecCtrl', function ($scope, CoordService) {
+    CoordService.getCoord($scope);
+
+    $scope.changeCoord = function (coord) {
+        console.log(coord);
+        
+        CoordService.getSetorbycoord(coord, $scope);
+        $scope.setor = "";
+        $scope.area = "";                
+    }
+    $scope.changeSetor = function (setor) {
+        CoordService.getAreabysetor(setor, $scope);
+
+        $scope.area = "";
+        
+    }
+    $scope.copy = function () {
+        console.log($scope.$ctrl.tecid.user);
+        console.log($scope.$ctrl.tecid.nome);
+        console.log($scope.$ctrl.tecid.ala);
+        console.log($scope.$ctrl.tecid.sala);
+        console.log($scope.$ctrl.tecid.ramal);
+        console.log();
+
+        $scope.user = $scope.$ctrl.tecid.user;
+        $scope.nome = $scope.$ctrl.tecid.nome;
+        $scope.ala = $scope.$ctrl.tecid.ala;
+        $scope.sala = $scope.$ctrl.tecid.sala;
+        $scope.ramal = $scope.$ctrl.tecid.ramal;
+                
+        // angular.copy($scope.$ctrl.tecid.user, $scope.tec);
+        // angular.copy($scope.$ctrl.tecid.nome, $scope.nome);
+        // angular.copy($scope.$ctrl.tecid.ala, $scope.ala);
+        // angular.copy($scope.$ctrl.tecid.sala, $scope.sala);
+        // angular.copy($scope.$ctrl.tecid.ramal, $scope.ramal);        
+    }
+    
+    $scope.editeUser = function(lista) {
+        console.log(lista);
+        //CoordService.editeUser(lista);
     }
 })
 .controller('recebidavernovaCtrl', function () {})
@@ -2798,7 +2861,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
         //$http.post("/app/data/app.php?d=retornatecid", {'id' : id}).then (function (resp) {})
         if (resolveteclist != null) {
             resolvetecid = $q.defer();
-            that.tecid = this.listTec.find(function (user) {return user.user === user;});
+            that.tecid = this.listTec.find(function (users) {return users.user === user;});
             resolvetecid.resolve(that.tecid);
             return resolvetecid.promise;
         } else {
