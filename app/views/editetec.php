@@ -1,9 +1,9 @@
 <div class="navbar w-100 my-1" id="painelmenu">
     <span ui-sref="dashboard.os.editeteclista" class="float-left rounded-circle"><i class="fas fa-angle-left fa-3x"></i></span>
-    <span ui-sref="dashboard.os" class="float-right rounded-circle"><i class="fas fa-times fa-2x"></i></span>    
+    <span ui-sref="dashboard.os" class="float-right rounded-circle"><i class="fas fa-times fa-2x"></i></span>
 </div>
 <div class="card shadow border-dark m-4 my-5 p-0" id="topos">
-    <div class="card-header text-center"><h4>Usuário</h4></div>                    
+    <div class="card-header text-center"><h4>Usuário</h4></div>
     <div class="card-body rounded-0 pt-0 pb-0">
         <div class="row">
             <div class="fontresize border-left-0 border-right-0 col">
@@ -26,7 +26,7 @@
             </div>
         </div>
     </div>
-    <div class="card-header text-center"><h4>Grupo OS info</h4></div>                  
+    <div class="card-header text-center"><h4>Grupo OS info</h4></div>
     <div class="card-body rounded-0 pt-0 pb-0">
         <div class="row">
             <div class="fontresize border-left-0 border-right-0 col">
@@ -74,7 +74,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">                    
+                <div class="modal-body">
                     <form id="criar-form" name="editartec">
                         <div class="form-group">
                             <label for="">User</label>
@@ -88,7 +88,7 @@
                             <label for="">Tipo de Técnico</label>
                             <select class="form-control" ng-model="grupo">
                                 <option value="admin">Adminstrador Não Confirmado</option>
-                                <option value="secr">Secretária Não Confirmado</option>                
+                                <option value="secr">Secretária Não Confirmado</option>
                                 <option value="tec" selected>Técnico</option>
                                 <option value="resp">Responsável</option>
                                 <option value="sol">Solicitante</option>
@@ -97,25 +97,21 @@
                         <div class="form-group" ng-if="(grupo == 'resp') || (grupo == 'tec') || (grupo == 'admin') || (grupo == 'secr') || (grupo == 'sol') ">
                             <label for="">Coordenação</label>
                             <select class="form-control" ng-model="coord" ng-options="option.coord as option.coord for option in coorddados" ng-change="changeCoord(coord)" id="selCoord" class="form-control">
-                                <option value=""></option>
                             </select>
                         </div>
                         <div class="form-group" ng-if="(coord) && (grupo == 'resp')">
                             <label for="">Setor</label>
                             <select ng-change="changeSetor(setor)" class="form-control" multiple ng-model="setor" ng-options="option.setor as option.setor for option in setordados" id="selSetor" class="form-control">
-                                <option value=""></option>            
-                            </select>    
+                            </select>
                         </div>
                         <div class="form-group" ng-if="(coord) && (grupo == 'tec')">
                             <label for="">Setor</label>
                             <select class="form-control" ng-model="setor" ng-options="option.setor as option.setor for option in setordados" ng-change="changeSetor(setor)" id="selSetor" class="form-control">
-                                <option value=""></option>            
-                            </select>    
+                            </select>
                         </div>
                         <div class="form-group" ng-if="(setor) && (grupo == 'tec')">
                             <label for="">Area</label>
-                            <select class="form-control" change-options multiple ng-options="option.valor as option.valor for option in areadados" ng-model="area" id="selArea" class="form-control">
-                                <option value=""></option>            
+                            <select class="form-control" ng-change="changeArea(area)" multiple ng-options="option.valor as option.valor for option in areadados" ng-model="area" id="selArea" class="form-control">
                             </select>
                         </div>
                         <div class="form-group">
@@ -130,14 +126,13 @@
                             <label for="">Ramal</label>
                             <input type="text" name="ramal" ng-model="ramal" class="form-control"/>
                         </div>
-                    </form>                                       
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary" ng-click="editeUser({user, nome, grupo, modelcoord, modelsetor, modelarea, ala, sala, ramal})" onclick="this.disabled=true;" ng-disabled="change.$invalid">Editar</button>
+                    <button type="button" class="btn btn-primary" ng-click="editeUser({user, nome, grupo, coord, setor, area, ala, sala, ramal})">Editar</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-{{tec}}
