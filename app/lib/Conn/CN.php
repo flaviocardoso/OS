@@ -370,17 +370,18 @@ class CN // namespace_class
 		} else {
 			$setor = $User->setor;
 		}
-
+		//var_dump($setor);
 		if (gettype($User->area) == "array") {
 			$area = implode(',', $User->area);
 		} else {
 			$area = $User->area;
 		}
+		//var_dump($area);
 		// trocar posição
 		try
 		{
 			$sql1 = "UPDATE grupoos
-							SET grupo=:grupo, setor=;setor, area=:area
+							SET grupo=:grupo, setor=:setor, area=:area
 							WHERE user=:user";
 
 			$stmt1 = $this->link->prepare($sql1);
