@@ -27,7 +27,7 @@ class CN // namespace_class
     	{
 			$this->link = new \PDO('mysql:host=' . "{$host}" . ';dbname=' . $dbname . ';charset=utf8', "{$username}", "{$password}");
 			// echo $this->get_current_date() . "\n";
-			// echo $this->get_last_year();		  
+			// echo $this->get_last_year();
     	}
     	catch (\PDOException $e)
     	{
@@ -44,23 +44,23 @@ class CN // namespace_class
 
 		try
 		{
-			$sql = "SELECT 
-						US.id_user, 
-						US.ativo, 
-						GR.grupo, 
-						US.user, 
-						GR.S, 
-						US.nome, 
-						US.email, 
-						US.coord, 
-						GR.setor, 
-						GR.area, 
-						US.ala, 
-						US.sala, 
-						US.ramal 
-					FROM users AS US 
-					JOIN grupoos AS GR 
-					ON US.user = GR.user 
+			$sql = "SELECT
+						US.id_user,
+						US.ativo,
+						GR.grupo,
+						US.user,
+						GR.S,
+						US.nome,
+						US.email,
+						US.coord,
+						GR.setor,
+						GR.area,
+						US.ala,
+						US.sala,
+						US.ramal
+					FROM users AS US
+					JOIN grupoos AS GR
+					ON US.user = GR.user
 					WHERE US.user=:user"; // adicionado setor, ala, sala, ramal
 			$stmt = $this->link->prepare($sql);
 			$stmt->bindParam(':user', $user, \PDO::PARAM_STR);
@@ -80,19 +80,19 @@ class CN // namespace_class
 		$rows = array();
 		$count = 0;
 
-		try 
+		try
 		{
-			$sql = "SELECT 
-						id_user, 
-						ativo, 
-						user, 
-						nome, 
-						email, 
-						coord, 
-						ala, 
-						sala, 
-						ramal 
-					FROM users 
+			$sql = "SELECT
+						id_user,
+						ativo,
+						user,
+						nome,
+						email,
+						coord,
+						ala,
+						sala,
+						ramal
+					FROM users
 					WHERE user=:user";
 			$stmt = $this->link->prepare($sql);
 			$stmt->bindParam(':user', $user, \PDO::PARAM_STR);
@@ -136,9 +136,9 @@ class CN // namespace_class
 
 		try
 		{
-			$sql = "SELECT 
+			$sql = "SELECT
 						setor
-					FROM setores 
+					FROM setores
 					WHERE coord=:coord";
 			$stmt = $this->link->prepare($sql);
 			$stmt->bindParam(':coord', $coord, \PDO::PARAM_STR);
@@ -168,14 +168,14 @@ class CN // namespace_class
 		} else {
 			$places = "?";
 			$params = array_merge([$setor]);
-		}		
+		}
 
 		try
 		{
-			$sql = "SELECT 
-						valor 
-					FROM areas 
-					WHERE setor IN ({$places})";			
+			$sql = "SELECT
+						valor
+					FROM areas
+					WHERE setor IN ({$places})";
 			$stmt = $this->link->prepare($sql);
 			//$stmt->bindParam(':setor', $places, \PDO::PARAM_STR);
 			$stmt->execute($params);
@@ -196,8 +196,8 @@ class CN // namespace_class
 
 		try
 		{
-			$sql = "UPDATE 
-						ordemservice 
+			$sql = "UPDATE
+						ordemservice
 					SET `data_now`=:data_now";
 			$stmt = $this->link->prepare($sql);
 			$stmt->bindParam(":data_now", $data, \PDO::PARAM_STR);
@@ -222,9 +222,9 @@ class CN // namespace_class
 
 		try
 		{
-			$sql = "UPDATE 
-						ordemservice 
-					SET cor_os=:cor_os 
+			$sql = "UPDATE
+						ordemservice
+					SET cor_os=:cor_os
 					WHERE id_os=:id_os";
 			$stmt = $this->link->prepare($sql);
 			$stmt->bindParam(':cor_os', $color, \PDO::PARAM_STR);
@@ -251,10 +251,10 @@ class CN // namespace_class
 
 		try
 		{
-			$sql = "SELECT 
-						`id_os`, 
-						data_in, 
-						`data_up` 
+			$sql = "SELECT
+						`id_os`,
+						data_in,
+						`data_up`
 					FROM `ordemservice`
 					WHERE `status`='NOVA'";
 			$stmt = $this->link->prepare($sql);
@@ -277,11 +277,11 @@ class CN // namespace_class
 
 		try
 		{
-			$sql = "SELECT 
-						`id_os`, 
-						data_in, 
-						`data_up` 
-					FROM `ordemservice` 
+			$sql = "SELECT
+						`id_os`,
+						data_in,
+						`data_up`
+					FROM `ordemservice`
 					WHERE `status`='Andamento'";
 			$stmt = $this->link->prepare($sql);
 			$stmt->execute();
@@ -295,7 +295,7 @@ class CN // namespace_class
 
 		return array('count' => $count, 'rows' => $rows);
 	}
-	// criar técnico
+	// criar user
 	public function criarUser($User) {
 		$count = 0;
 		$count1 = 0;
@@ -303,10 +303,10 @@ class CN // namespace_class
 
 		$data = date('Y-m-d');
 		// arrays enter
-		//$placesholders = implode(',', array_fill(0, count($setor), '?')); 
+		//$placesholders = implode(',', array_fill(0, count($setor), '?'));
 		//$params = array_merge();
 		if (gettype($User->setor) == 'array') {
-			$setor = implode(',', $User->setor);			
+			$setor = implode(',', $User->setor);
 		} else {
 			$setor = $User->setor;
 		}
@@ -316,9 +316,9 @@ class CN // namespace_class
 		} else {
 			$area = $User->area;
 		}
-		// trocar posição 
-		try 
-		{		
+		// trocar posição
+		try
+		{
 			$sql1 = "INSERT INTO grupoos (id_grupo, user, S, grupo, setor, area)";
 			$sql1 = $sql1 . " VALUES (NULL, :user, 0, :grupo, :setor, :area)";
 
@@ -329,7 +329,7 @@ class CN // namespace_class
 			$stmt1->bindParam(':area', $area, \PDO::PARAM_STR);
 
 			$stmt1->execute();
-			$count1 = $stmt1->rowCount();			
+			$count1 = $stmt1->rowCount();
 
 			if ($count1 == 1) { // trocar posição começar pelo grupo primeiro
 				$sql = "INSERT INTO users (id_user, ativo, user, nome, email, ramal, coord, ala, sala, data_criacao)";
@@ -345,7 +345,68 @@ class CN // namespace_class
 				$stmt->bindParam(':data', $data, \PDO::PARAM_STR);
 				$stmt->execute();
 				$count = $stmt->rowCount();
-			}			
+			}
+		}
+		catch (\PDOException $e)
+		{
+			print 'Erro' . $e->getMessage() . '<br>';
+		}
+
+		return $count1;
+	}
+
+	// edite user
+	public function editeUser($User) {
+		$count = 0;
+		$count1 = 0;
+		$array = array();
+
+		//$data = date('Y-m-d');
+		// arrays enter
+		//$placesholders = implode(',', array_fill(0, count($setor), '?'));
+		//$params = array_merge();
+		if (gettype($User->setor) == 'array') {
+			$setor = implode(',', $User->setor);
+		} else {
+			$setor = $User->setor;
+		}
+
+		if (gettype($User->area) == "array") {
+			$area = implode(',', $User->area);
+		} else {
+			$area = $User->area;
+		}
+		// trocar posição
+		try
+		{
+			$sql1 = "UPDATE grupoos
+							SET grupo=:grupo, setor=;setor, area=:area
+							WHERE user=:user";
+
+			$stmt1 = $this->link->prepare($sql1);
+			$stmt1->bindParam(':grupo', $User->grupo, \PDO::PARAM_STR);
+			$stmt1->bindParam(':setor', $setor, \PDO::PARAM_STR);
+			$stmt1->bindParam(':area', $area, \PDO::PARAM_STR);
+			$stmt1->bindParam(':user', $User->user, \PDO::PARAM_STR);
+
+			$stmt1->execute();
+			$count1 = $stmt1->rowCount();
+
+			if ($count1 == 1) { // trocar posição começar pelo grupo primeiro
+				$sql = "UPDATE users
+							SET nome=:nome, ramal=:ramal, coord=:coord, ala=:ala, sala=:sala
+							WHERE user=:user";
+				$stmt = $this->link->prepare($sql);
+				$stmt->bindParam(':nome', $User->nome, \PDO::PARAM_STR);
+				$stmt->bindParam(':ramal', $User->ramal, \PDO::PARAM_STR);
+				$stmt->bindParam(':coord', $User->coord, \PDO::PARAM_STR);
+				$stmt->bindParam(':ala', $User->ala, \PDO::PARAM_STR);
+				$stmt->bindParam(':sala', $User->sala, \PDO::PARAM_STR);
+				$stmt->bindParam(':user', $User->user, \PDO::PARAM_STR);
+				//$stmt->bindParam(':data', $data, \PDO::PARAM_STR);
+				$stmt->execute();
+				$count = $stmt->rowCount();
+			}
 		}
 		catch (\PDOException $e)
 		{
@@ -362,20 +423,20 @@ class CN // namespace_class
 
 		try
 		{
-			$sql = "SELECT 
-						US.ativo, 
-						US.user, 
-						US.nome, 
-						US.email, 
-						GR.grupo, 
-						US.coord, 
-						GR.setor, 
-						GR.area, 
-						US.ramal, 
-						US.ala, 
-						US.sala 
-					FROM users AS US 
-					JOIN grupoos AS GR 
+			$sql = "SELECT
+						US.ativo,
+						US.user,
+						US.nome,
+						US.email,
+						GR.grupo,
+						US.coord,
+						GR.setor,
+						GR.area,
+						US.ramal,
+						US.ala,
+						US.sala
+					FROM users AS US
+					JOIN grupoos AS GR
 					ON US.user=GR.user
 					WHERE GR.S=0";
 			$stmt = $this->link->prepare($sql);
@@ -454,7 +515,7 @@ class CN // namespace_class
 			$sql = $sql . " `status`='NOVA', `sol_ala`=:sol_ala, `sol_sala`=:sol_sala, `sol_ramal`=:sol_ramal, ";
 			$sql = $sql . " `dest_coord`=:dest_coord, `dest_setor`=:dest_setor, `dest_area`=:dest_area, ";
 			$sql = $sql . " `file`=:file, `descr_topic`=:descr_topic, `descr`=:descr WHERE `id_os`=:id_os";
-			$stmt = $this->link->prepare($sql);			
+			$stmt = $this->link->prepare($sql);
 			// $stmt->bindParam(':solicitante', $OS->solicitante, \PDO::PARAM_STR);
 			// $stmt->bindParam(':sol_email', $OS->sol_email, \PDO::PARAM_STR);
 			// $stmt->bindParam(':sol_coord', $OS->sol_coord, \PDO::PARAM_STR);
@@ -464,7 +525,7 @@ class CN // namespace_class
 			$stmt->bindParam(':data_up', $date, \PDO::PARAM_STR);
 			$stmt->bindParam(':sol_ala', $OS->sol_ala, \PDO::PARAM_STR);
 			$stmt->bindParam(':sol_sala', $OS->sol_sala, \PDO::PARAM_STR);
-			$stmt->bindParam(':sol_ramal', $OS->sol_ramal, \PDO::PARAM_STR);			
+			$stmt->bindParam(':sol_ramal', $OS->sol_ramal, \PDO::PARAM_STR);
 			$stmt->bindParam(':dest_coord', $OS->dest_coord, \PDO::PARAM_STR);
 			$stmt->bindParam(':dest_setor', $OS->dest_setor, \PDO::PARAM_STR);
 			$stmt->bindParam(':dest_area', $OS->dest_area, \PDO::PARAM_STR);
@@ -664,7 +725,7 @@ class CN // namespace_class
 		//var_dump($row);
 		return array('count' => $count, 'rows' => $row);
 	}
-	
+
 	public function enviadaOSandamento($OS)
 	{
 		$row = array();
@@ -686,7 +747,7 @@ class CN // namespace_class
 
 		return array('count' => $count, 'rows' => $row);
 	}
-	
+
 	public function enviadaOSespera($OS)
 	{
 		$row = array();
@@ -756,7 +817,7 @@ class CN // namespace_class
 
 		return array('count' => $count, 'rows' => $row);
 	}
-	
+
 	public function recebidaOSandamento($OS)
 	{
 		$row = array();
@@ -778,7 +839,7 @@ class CN // namespace_class
 
 		return array('count' => $count, 'rows' => $row);
 	}
-	
+
 	public function recebidaOSespera($OS)
 	{
 		$row = array();
@@ -850,7 +911,7 @@ class CN // namespace_class
 
 		return array('count' => $count, 'rows' => $row);
 	}
-	
+
 	public function solicOSandamento($OS)
 	{
 		$row = array();
@@ -873,7 +934,7 @@ class CN // namespace_class
 
 		return array('count' => $count, 'rows' => $row);
 	}
-	
+
 	public function solicOSespera($OS)
 	{
 		$row = array();
@@ -1062,7 +1123,7 @@ class CN // namespace_class
 		$count = 0;
 		$count_and = 0;
 		// juntanto tabelas ordemservice e tecnico
-		// verifivar se o id está em andamento, se não está ficar em loop	
+		// verifivar se o id está em andamento, se não está ficar em loop
 
 		try
 		{
@@ -1089,7 +1150,7 @@ class CN // namespace_class
 		$count = 0;
 
 		do {
-			try 
+			try
 			{
 				$sql="SELECT OS.id_os, (SELECT COUNT(TE.M) FROM tecnico AS TE WHERE TE.id_os=OS.id_os AND TE.M='S') AS M, OS.n_os, OS.status, OS.solicitante, OS.sol_email, OS.sol_coord, OS.sol_setor, OS.sol_ala, OS.sol_sala, OS.sol_ramal, OS.data_in, OS.data_up, OS.dest_coord, OS.dest_setor, OS.dest_area, OS.file, OS.descr_topic, OS.descr, LA.id_tecnico, LA.user_tec, LA.status_tec, LA.tecnico, LA.tec_email, LA.laudo_topic, LA.laudo, LA.tec_ala, LA.tec_sala, LA.tec_ramal FROM `ordemservice` AS OS JOIN (SELECT * FROM tecnico WHERE id_tecnico in (SELECT MAX(id_tecnico) FROM tecnico WHERE status_tec='ANDAMENTO' GROUP BY id_os) ORDER BY id_tecnico) AS LA ON OS.id_os = LA.id_os WHERE status='ANDAMENTO' AND dest_coord=:dest_coord AND dest_setor=:dest_setor AND OS.id_os=:id_os ORDER BY id_tecnico";
 				$stmt = $this->link->prepare($sql);
@@ -1206,7 +1267,7 @@ class CN // namespace_class
 		catch (\PDOException $e)
 		{
 			print 'Erro' . $e->getMessage() . "<br/>";
-		}		
+		}
 
 		return array('count' => $count1);
 	}
@@ -1290,7 +1351,7 @@ class CN // namespace_class
 			$stmt0->bindParam(':tec_data', $data, \PDO::PARAM_STR);
 
 			$stmt0->execute();
-			$count0 = $stmt0->rowCount();			
+			$count0 = $stmt0->rowCount();
 
 			if ($count0 > 0) { // muda para uma nova ordem de serviço
 				$sql = "UPDATE ordemservice SET cor_os=:cor_os, status='NOVA', dest_setor=:dest_setor, dest_area=:dest_area, data_up=:data_up WHERE id_os=:id_os";
@@ -1305,7 +1366,7 @@ class CN // namespace_class
 				$count = $stmt->rowCount();
 			}
 
-			
+
 		}
 		catch (\PDOException $e) {
 			print 'Erro' . $e->getMessage() . "<br/>";
@@ -1344,7 +1405,7 @@ class CN // namespace_class
 			$stmt0->bindParam(':tec_data', $data, \PDO::PARAM_STR);
 
 			$stmt0->execute();
-			$count0 = $stmt0->rowCount();					
+			$count0 = $stmt0->rowCount();
 
 			if ($count0 > 0) { // encerra a ordem de serviço em andamento
 				$sql = "UPDATE ordemservice SET cor_os=:cor_os, status='ENCERRADA', data_up=:data_up WHERE id_os=:id_os";
@@ -1356,7 +1417,7 @@ class CN // namespace_class
 
 				$count = $stmt->rowCount();
 			}
-			
+
 		}
 		catch (\PDOException $e)
 		{
@@ -1451,7 +1512,7 @@ class CN // namespace_class
 			if ($count0 > 0) { // muda para nova a ordem de serviço
 				$sql = "UPDATE ordemservice SET cor_os=:cor_os, status='ANDAMENTO', data_up=:data_up WHERE id_os=:id_os";
 				$stmt = $this->link->prepare($sql);
-				$stmt->bindParam(':cor_os', $cor, \PDO::PARAM_STR);				
+				$stmt->bindParam(':cor_os', $cor, \PDO::PARAM_STR);
 				$stmt->bindParam(':data_up', $data, \PDO::PARAM_STR);
 				$stmt->bindParam(':id_os', $OSLaudo->id_os, \PDO::PARAM_INT);
 
@@ -1501,7 +1562,7 @@ class CN // namespace_class
 			if ($count0 > 0) { // muda para nova a ordem de serviço
 				$sql = "UPDATE ordemservice SET cor_os=:cor_os, status='ESPERA', data_up=:data_up WHERE id_os=:id_os";
 				$stmt = $this->link->prepare($sql);
-				$stmt->bindParam(':cor_os', $cor, \PDO::PARAM_STR);				
+				$stmt->bindParam(':cor_os', $cor, \PDO::PARAM_STR);
 				$stmt->bindParam(':data_up', $data, \PDO::PARAM_STR);
 				$stmt->bindParam(':id_os', $OSLaudo->id_os, \PDO::PARAM_INT);
 
@@ -1518,14 +1579,14 @@ class CN // namespace_class
 	}
 	// Ok funcionado
 	public function tirarNotifica($id) {
-		$count = 0;		
+		$count = 0;
 
 		try {
 			$sql = "UPDATE tecnico SET M='N' WHERE id_os=:id_os AND M='S'";
 			$stmt = $this->link->prepare($sql);
 			$stmt->bindParam(':id_os', $id, \PDO::PARAM_INT);
 			$stmt->execute();
-			$count = $stmt->rowCount();			
+			$count = $stmt->rowCount();
 		}
 		catch (\PDOException $e)
 		{
