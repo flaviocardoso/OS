@@ -30,11 +30,25 @@ $User->setor = isset($IN['setor']) ? $IN['setor'] : "";
 $User->area = isset($IN['area']) ? $IN['area'] : "";
 
 $PDO = new CN('localhost', 'cbpf_users');
-$count = $PDO->editeUser($User);
+$r = $PDO->editeUser($User);
 
-if ($count == 1){
+switch ($r['user']) {
+  case 1:
     echo "Usuário editado!";
-} else {
+    break;
+
+  case 0:
     echo "Usuário não pode ser editado!";
+    break;
+}
+
+switch ($r['grupo']) {
+  case 1:
+    echo "<br />Grupo editado";
+    break;
+
+  case 0:
+    echo "<br />Grupo não editado editado";
+    break;
 }
 ?>
