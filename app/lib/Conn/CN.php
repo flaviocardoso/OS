@@ -378,6 +378,7 @@ class CN // namespace_class
 		}
 		//var_dump($area);
 		// trocar posição
+		//var_dump($User);
 		try
 		{
 			$sql1 = "UPDATE grupoos
@@ -392,29 +393,27 @@ class CN // namespace_class
 
 			$stmt1->execute();
 			$count1 = $stmt1->rowCount();
-
-			if ($count1 == 1) { // trocar posição começar pelo grupo primeiro
-				$sql = "UPDATE users
-							SET nome=:nome, ramal=:ramal, coord=:coord, ala=:ala, sala=:sala
-							WHERE user=:user";
-				$stmt = $this->link->prepare($sql);
-				$stmt->bindParam(':nome', $User->nome, \PDO::PARAM_STR);
-				$stmt->bindParam(':ramal', $User->ramal, \PDO::PARAM_STR);
-				$stmt->bindParam(':coord', $User->coord, \PDO::PARAM_STR);
-				$stmt->bindParam(':ala', $User->ala, \PDO::PARAM_STR);
-				$stmt->bindParam(':sala', $User->sala, \PDO::PARAM_STR);
-				$stmt->bindParam(':user', $User->user, \PDO::PARAM_STR);
-				//$stmt->bindParam(':data', $data, \PDO::PARAM_STR);
-				$stmt->execute();
-				$count = $stmt->rowCount();
-			}
+			// trocar posição começar pelo grupo primeiro
+			$sql = "UPDATE users
+						SET nome=:nome, ramal=:ramal, coord=:coord, ala=:ala, sala=:sala
+						WHERE user=:user";
+			$stmt = $this->link->prepare($sql);
+			$stmt->bindParam(':nome', $User->nome, \PDO::PARAM_STR);
+			$stmt->bindParam(':ramal', $User->ramal, \PDO::PARAM_STR);
+			$stmt->bindParam(':coord', $User->coord, \PDO::PARAM_STR);
+			$stmt->bindParam(':ala', $User->ala, \PDO::PARAM_STR);
+			$stmt->bindParam(':sala', $User->sala, \PDO::PARAM_STR);
+			$stmt->bindParam(':user', $User->user, \PDO::PARAM_STR);
+			//$stmt->bindParam(':data', $data, \PDO::PARAM_STR);
+			$stmt->execute();
+			$count = $stmt->rowCount();
 		}
 		catch (\PDOException $e)
 		{
 			print 'Erro' . $e->getMessage() . '<br>';
 		}
 
-		return $count1;
+		return array('grupo' => $count1, 'user' => $count);
 	}
 
 	public function getUsers()
