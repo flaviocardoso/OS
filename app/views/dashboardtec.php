@@ -15,65 +15,61 @@
             <a href="http://labweb.cbpf.br//principal.php"><h3>Ordem de Serviço</h3></a>
         </div>
         <ul class="list-unstyled components">
-            <p>Menu</p>
-            <li>
-                <a href="" data-target="#adminSubmenu" data-toggle="collapse" class="btn-success" aria-expanded="true">Técnico</a>
-                <ul class="collapse list-unstyled" id="adminSubmenu">
+            <!-- grupo tecnico -->
+            <p>Técnico</p>
+            <li> <!-- mudar para modo técnico -->
+                <a href="" data-target="#AdminRecebida" data-toggle="collapse" class="btn btn-success" aria-expanded="false">Recebidas</a>
+                <ul class="collapse list-unstyled components" id="AdminRecebida">
                     <li>
-                        <a ui-sref="dashboard.os.criar" ui-sref-active="active">Criar Ordem de Serviço Para Coordenações</a>
+                        <a ui-sref="dashboard.os.ver.recebidavernova" ui-sref-active="active">Nova</a>
                     </li>
                     <li>
-                        <a ui-sref="dashboard.os.ver.novas" ui-sref-active="active">Ver Novas Ordens de Serviço</a>
+                        <a ui-sref="dashboard.os.ver.recebidaverandamento" ui-sref-active="active">Andamento</a>
                     </li>
                     <li>
-                        <a ui-sref="dashboard.os.ver.emAnd" ui-sref-active="active">Ver Ordens de Serviço Andamento</a>
+                        <a ui-sref="dashboard.os.ver.recebidaverespera" ui-sref-active="active">Espera</a>
                     </li>
                     <li>
-                        <a ui-sref="dashboard.os.ver.encerr" ui-sref-active="active">Ver Ordens de Serviço Encerradas</a>
+                        <a ui-sref="dashboard.os.ver.recebidaverencerrada" ui-sref-active="active">Encerrada</a>
                     </li>
-                    <!-- <li>
-                        <a  ui-sref="dashboard.os.ver.osCoord" ui-sref-active="active">Ver Ordens de Serviço em sua Coordenação</a>
-                    </li>
-                    <li>
-                        <a  ui-sref="dashboard.os.ver.osSetor" ui-sref-active="active">Ver Ordens de Serviço no seu setor e na sua Coordenação</a>
-                    </li>
-                    <li>
-                        <a  ui-sref="dashboard.os.ver.osAdmin" ui-sref-active="active">Ver Ordens de Serviço feitas pelo Adminstração</a>
-                    </li>
-                    <li>
-                        <a  ui-sref="dashboard.os.teste" ui-sref-active="active">Teste</a>
-                    </li> -->
                 </ul>
             </li>
             <li>
-                <a href="" data-target="#tecnicoSubmenu" data-toggle="collapse" class="btn-success" aria-expanded="false">Tecnico</a>
-                <ul class="collapse list-unstyled" id="tecnicoSubmenu">
-                    <!-- <li>
-                        <a ui-sref="dashboard.os.ver.os" ui-sref-active="active">Ver Todas Ordens de Serviço</a>
-                    </li> -->
+                <a href="" data-target="#AdminOSEditada" data-toggle="collapse" class="btn btn-success" aria-expanded="false">Último laudo feito</a>
+                <ul class="collapse list-unstyled components" id="AdminOSEditada">
                     <li>
-                        <a ui-sref="dashboard.os.ver.ostecniconovas" ui-sref-active="active">Ver Novas Ordens de Serviço</a>
+                        <a ui-sref="dashboard.os.ver.editadalaudovernova" ui-sref-active="active">Nova</a>
                     </li>
                     <li>
-                        <a ui-sref="dashboard.os.ver.ostecnicoandamento" ui-sref-active="active">Ver Ordens de Serviço Andamento</a>
+                        <a ui-sref="dashboard.os.ver.editadalaudoverandamento" ui-sref-active="active">Andamento</a>
                     </li>
                     <li>
-                        <a ui-sref="dashboard.os.ver.ostecnicoencerrada" ui-sref-active="active">Ver Ordens de Serviço Encerradas</a>
-                    </li>
-                    <!-- <li>
-                        <a ui-sref="dashboard.os.ver.osCoord" ui-sref-active="active">Ver Ordens de Serviço na Coordenação</a>
+                        <a ui-sref="dashboard.os.ver.editadalaudoverespera" ui-sref-active="active">Espera</a>
                     </li>
                     <li>
-                        <a  ui-sref="dashboard.os.ver.osSetor" ui-sref-active="active">Ver Ordens de Serviço no seu Setor e na sua Coordenação</a>
+                        <a ui-sref="dashboard.os.ver.editadalaudoverencerrada" ui-sref-active="active">Encerrada</a>
                     </li>
-                    <li>
-                        <a  ui-sref="dashboard.os.ver.osSolicitante" ui-sref-active="active">Ver Ordens de Serviço do Solicitadas</a>
-                    </li>
-                    <li>
-                        <a  ui-sref="dashboard.os.ver.osTecnico" ui-sref-active="active">Ver Ordens de Serviço editada pelo Tecnico</a>
-                    </li> -->
                 </ul>
             </li>
+            <p>Solicitante</p>
+            <li>
+                <a href="" data-target="#AdminOSSolicitante" data-toggle="collapse" class="btn btn-success" aria-expanded="false">Acompanhar</a>
+                <ul class="collapse list-unstyled components" id="AdminOSSolicitante">
+                    <li>
+                        <a ui-sref="dashboard.os.ver.solicvernova" ui-sref-active="active">Nova</a>
+                    </li>
+                    <li>
+                        <a ui-sref="dashboard.os.ver.solicverandamento" ui-sref-active="active">Andamento</a>
+                    </li>
+                    <li>
+                        <a ui-sref="dashboard.os.ver.solicverespera" ui-sref-active="active">Espera</a>
+                    </li>
+                    <li>
+                        <a ui-sref="dashboard.os.ver.solicverencerrada" ui-sref-active="active">Encerrada</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
         </ul>
         <ul class="list-unstyled CTAs">
             <li>
@@ -82,7 +78,7 @@
             <li>
                 <a ui-sref="dashboard.contato" ui-sref-active="active" class="btn btn-success">CONTANTO</a>
             </li>
-        </ul>                        
+        </ul>
     </nav>
     <nav style="padding-left: 4px; padding-right: 4px;" id="navmenu" class="navbar navbar1 navbar-expand-lg navbar-light bg-light">
         	<div style="padding-left: 0px; padding-right: 0px;" class="container-fluid">
@@ -102,10 +98,10 @@
             		<a ui-sref=".sobre" ui-sref-active="active" class="dropdown-item">Sobre</a>
                     <a ui-sref=".contato" ui-sref-active="active" class="dropdown-item">Contato</a>
                     <div class="dropdown-divider"></div>
-            		<button class="dropdown-item btn btn-danger" ng-click="logout()">Logout</button>            
+            		<button class="dropdown-item btn btn-danger" ng-click="logout()">Logout</button>
         		</div>
-    		</div>         
-		</nav> 
+    		</div>
+		</nav>
     <!-- Page Content  -->
     <div id="content">
     <!-- impedido de usar o ng-if só permitido em caso de recarregamento de página. navbar: sticky-top, fixed-bottom, fixed-top -->
@@ -126,16 +122,16 @@
             		<a ui-sref=".os" ui-sref-active="active" class="dropdown-item">Principal</a>
             		<a ui-sref=".sobre" ui-sref-active="active" class="dropdown-item">Sobre</a>
             		<a ui-sref=".contato" ui-sref-active="active" class="dropdown-item">Contato</a>
-            		<button class="dropdown-item btn btn-danger" ng-click="logout()">Logout</button>            
+            		<button class="dropdown-item btn btn-danger" ng-click="logout()">Logout</button>
         		</div>
-    		</div>         
+    		</div>
 		</nav>     -->
 		<div class="view-animate-container">
             <ui-view></ui-view>
     		<!-- <div ui-view class="view-animate"></div> -->
 		</div>
 	</div>
-    
+
 </div>
 <div class="overlay" remove-class-menu></div>
 <!-- <script type="text/javascript">
