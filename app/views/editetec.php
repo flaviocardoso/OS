@@ -78,7 +78,7 @@
                     <form id="criar-form" name="editartec">
                         <div class="form-group">
                             <label for="">User</label>
-                            <input type="text" name="user" ng-model="user" class="form-control" required>
+                            <input type="text" name="user" ng-model="user" class="form-control" readonly>
                         </div>
                         <div class="form-group">
                             <label for="">Nome</label>
