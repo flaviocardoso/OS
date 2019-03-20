@@ -2224,6 +2224,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
         }
         if (flag) {
           console.log(lista);
+          CoordService.editeUser(lista);
         }
 
         //CoordService.editeUser(lista);
@@ -2539,6 +2540,13 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
         },
         criarUser: function(data) {
             $http.post("/app/data/app.php?d=criarUserOS", data)
+            .then(function (resp) {
+                console.log(resp.data);
+                toaster.pop('info', "", resp.data, 10000, 'trustedHtml');
+            });
+        },
+        editeUser: function(data) {
+            $http.post("/app/data/app.php?d=editeUserOS", data)
             .then(function (resp) {
                 console.log(resp.data);
                 toaster.pop('info', "", resp.data, 10000, 'trustedHtml');
