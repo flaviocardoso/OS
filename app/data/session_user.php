@@ -45,7 +45,7 @@ if ($count > 0 && $rows['ativo'] == 1) {
 			$out['message'] = $user . $nome . " " . $sobrenome . "<br />logado!";
 			break;
 	}
-	if (flag) {
+	if ($flag) {
 		new Session($rows);
 	}
 }
