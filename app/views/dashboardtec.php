@@ -12,7 +12,7 @@
             <i class="fas fa-arrow-left"></i>
         </div>
         <div class="sidebar-header">
-            <a href="http://labweb.cbpf.br//principal.php"><h3>Ordem de Serviço</h3></a>
+            <a href="http://localhost/principal.php"><h3>Ordem de Serviço</h3></a>
         </div>
         <ul class="list-unstyled components">
             <!-- grupo tecnico -->
@@ -21,16 +21,16 @@
                 <a href="" data-target="#AdminRecebida" data-toggle="collapse" class="btn btn-success" aria-expanded="false">Recebidas</a>
                 <ul class="collapse list-unstyled components" id="AdminRecebida">
                     <li>
-                        <a ui-sref="dashboard.os.ver.recebidavernova" ui-sref-active="active">Nova</a>
+                        <a ui-sref="dashboard.os.ver.recebidavertecnova" ui-sref-active="active">Nova</a>
                     </li>
                     <li>
-                        <a ui-sref="dashboard.os.ver.recebidaverandamento" ui-sref-active="active">Andamento</a>
+                        <a ui-sref="dashboard.os.ver.recebidavertecandamento" ui-sref-active="active">Andamento</a>
                     </li>
                     <li>
-                        <a ui-sref="dashboard.os.ver.recebidaverespera" ui-sref-active="active">Espera</a>
+                        <a ui-sref="dashboard.os.ver.recebidavertecespera" ui-sref-active="active">Espera</a>
                     </li>
                     <li>
-                        <a ui-sref="dashboard.os.ver.recebidaverencerrada" ui-sref-active="active">Encerrada</a>
+                        <a ui-sref="dashboard.os.ver.recebidavertecencerrada" ui-sref-active="active">Encerrada</a>
                     </li>
                 </ul>
             </li>
@@ -38,16 +38,16 @@
                 <a href="" data-target="#AdminOSEditada" data-toggle="collapse" class="btn btn-success" aria-expanded="false">Último laudo feito</a>
                 <ul class="collapse list-unstyled components" id="AdminOSEditada">
                     <li>
-                        <a ui-sref="dashboard.os.ver.editadalaudovernova" ui-sref-active="active">Nova</a>
+                        <a ui-sref="dashboard.os.ver.editadalaudovertecnova" ui-sref-active="active">Nova</a>
                     </li>
                     <li>
-                        <a ui-sref="dashboard.os.ver.editadalaudoverandamento" ui-sref-active="active">Andamento</a>
+                        <a ui-sref="dashboard.os.ver.editadalaudovertecandamento" ui-sref-active="active">Andamento</a>
                     </li>
                     <li>
-                        <a ui-sref="dashboard.os.ver.editadalaudoverespera" ui-sref-active="active">Espera</a>
+                        <a ui-sref="dashboard.os.ver.editadalaudovertecespera" ui-sref-active="active">Espera</a>
                     </li>
                     <li>
-                        <a ui-sref="dashboard.os.ver.editadalaudoverencerrada" ui-sref-active="active">Encerrada</a>
+                        <a ui-sref="dashboard.os.ver.editadalaudovertecencerrada" ui-sref-active="active">Encerrada</a>
                     </li>
                 </ul>
             </li>

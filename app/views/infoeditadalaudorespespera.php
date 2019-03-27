@@ -1,7 +1,7 @@
 <div class="navbar w-100 my-1" id="painelmenu">
-    <span ui-sref="dashboard.os.ver.editadalaudoverespera" class="float-left rounded-circle"><i class="fas fa-angle-left fa-3x"></i></span>
+    <span ui-sref="dashboard.os.ver.editadalaudoverrespespera" class="float-left rounded-circle"><i class="fas fa-angle-left fa-3x"></i></span>
     <span class="float-none rounded-circle" ng-recarregar><i class="fas fa-redo fa-2x"></i></span>
-    <span ui-sref="dashboard.os" class="float-right rounded-circle"><i class="fas fa-times fa-2x"></i></span>    
+    <span ui-sref="dashboard.os" class="float-right rounded-circle"><i class="fas fa-times fa-2x"></i></span>
 </div>
 <div class="card shadow border-dark m-4 my-5 p-0" id="topos">
     <div class="card-header text-center"><h4>ORDEM DE SERVIÇO</h4></div>
@@ -19,7 +19,7 @@
                     <th scope="row"><span class="fontresize">{{$ctrl.osid.status}}</span></th>
                 </tr>
             </tbody>
-        </table>               
+        </table>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -46,7 +46,7 @@
                         <div class="row">
                             <div class="col fontresize"><i class="fa fa-calendar-alt"></i> <span>{{$ctrl.osid.data_in}}</span> </div>
                             <div class="col fontresize"><i class="fa fa-clock"></i> <span>{{$ctrl.osid.hora_in}}</span></div>
-                        </div>                
+                        </div>
                     </th>
                     <th scope="row">
                         <div class="row">
@@ -55,11 +55,11 @@
                         </div>
                     </th>
                 </tr>
-        </table>      
+        </table>
         <div class="card">
             <div class="card-header text-center">
-                SOLICITANTE                    
-            </div>                
+                SOLICITANTE
+            </div>
             <div class="card-body rounded-0 pt-0 pb-0">
                 <div class="row">
                     <div class="fontresize border-left-0 border-right-0 col">
@@ -78,7 +78,7 @@
                         <h5 class="card-title border-bottom">SALA</h5>{{$ctrl.osid.sol_sala}}
                     </div>
                 </div>
-            </div>                
+            </div>
         </div>
         <div class="card">
             <div class="card-header text-center">
@@ -91,7 +91,7 @@
             </div>
             <div class="card-footer">
                 <div id="anexofile">
-                    Anexo: 
+                    Anexo:
                     <span ng-show="$ctrl.osid.file">
                         <span file-download="$ctrl.osid.file" class="btn btn-link"> CLIQUE PARA DOWNLOAD</span>
                     </span>
@@ -100,61 +100,19 @@
                     </span>
                 </div>
                 <div id="downloados">
-                    Ordem de Servico: 
-                    <span class="btn btn-link"> GERAR AQUIVO</span>                    
+                    Ordem de Servico:
+                    <span class="btn btn-link"> GERAR AQUIVO</span>
                 </div>
             </div>
-        </div>        
+        </div>
     </div>
     <div class="card-footer">
-        <div class="accordion text-center">
-            <button class="btn btn-link btn-block" type="button" data-toggle="collapse" data-target="#collapseActions" aria-expanded="false" aria-controls="collapseActions">
-                <span>CLIQUE PARA AÇÕES</span>
-            </button>
-        </div>
-        <div class="collapse" id="collapseActions">
-            <div class="row">
-                <div class="col mx-auto py-2 text-center">
-                    <button laudo-select class="btn btn-block" type="button" data-toggle="modal" data-target="#ativarorderservice">TIRAR DA ESPERA</button>
-                </div>
-                <div class="w-100"></div>                
-            </div>
-        </div>
+
     </div>
-    
+
 </div>
 <div class="painel-mudar">
-    <div class="modal fade" id="ativarorderservice" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tirar da Espera</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form name="tira" novalidate>
-                    <div class="form-group">
-                        <label>Você quer tirar a Ordem de Serviço da Espera?</label>
-                    </div>
-                    <div class="form-group">
-                        <textarea ng-model="motivotiraesp" class="form-control"></textarea>
-                        <small class="form-text text-muted">Motivo para tirar Ordem de Serviço da Espera</small>
-                    </div>
-                    <div class="form-group">
-                        <small id="tiraesperaHelp" class="form-text text-muted">Confirme</small>
-                        <input type="checkbox" ng-model="tiraesperaOrdem" id="idTiraespera" required>
-                        <label for="idTiraEspera">SIM</label>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secundary" data-dismiss="modal">NÃO</button>
-                <button type="button" class="btn btn-primary" laudo-ativa idos="$ctrl.osid.id_os" setor="$ctrl.osid.dest_setor" area="$ctrl.osid.dest_area" resposta="motivotiraesp" confchecktiraespera="tiraesperaOrdem" onclick="this.disabled=true" ng-disabled="tira.$invalid">OK</button>
-            </div>
-        </div>
-    </div>    
+
 </div>
 <div class="painel-tecnico pr-4 pl-4" last-laudo ng-model="$ctrl.osid.id_os">
     <div id="laudo">
@@ -169,15 +127,15 @@
                     <div class="col">
                         <span style="font-size:.6rem" ng-if="l.M == 'S'" class="bagge badge-pill badge-primary align-middle"></span>
                         <span style="font-size: 1rem; padding-bottom: 2px" class="badge badge-light text-capitalize align-bottom">{{l.tecnico}}</span>
-                        <span style="font-size: 1rem"><li class="badge badge-pill badge-info align-middle">{{l.grupo}}</li></span> 
-                    </div>                   
+                        <span style="font-size: 1rem"><li class="badge badge-pill badge-info align-middle">{{l.grupo}}</li></span>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col">
                         <span><i class="fa fa-calendar-alt"></i><span style="font-size: 1rem" class="badge badge-light">{{l.data}}</span></span>
                         <span><i class="fa fa-clock"></i><span style="font-size: 1rem" class="badge badge-light">{{l.hora}}</span></span>
-                    </div>                    
-                </div>                       
+                    </div>
+                </div>
             </div>
             <div class="card-body text-secondary">
                 <h5 class="card-title"><span>{{l.laudo_topic}}</span></h5>

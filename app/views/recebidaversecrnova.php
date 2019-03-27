@@ -11,20 +11,20 @@
 	<table class="table" style="overscroll-behavior-x: contain;">
 		<thead class="thead-dark">
 			<tr>
-				<th scope="col" class="text-center">protocolo</th>				
+				<th scope="col" class="text-center">protocolo</th>
 				<th scope="col" class="text-center">Status/Info</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr style="background-color:{{ordem.cor_os}}" ng-repeat="ordem in $ctrl.verOs | filter:seach | filter: {status : 'NOVA'}">
 				<td class="text-center">
-					<a ui-sref="dashboard.os.inforecebidavernova({ osID : ordem.id_os })" ui-sref-active="active" onclick="this.disabled=true;" class="btn btn-light">{{ordem.n_os}}</a>
-				</td>				
+					<a ui-sref="dashboard.os.inforecebidaversecrnova({ osID : ordem.id_os })" ui-sref-active="active" onclick="this.disabled=true;" class="btn btn-light">{{ordem.n_os}}</a>
+				</td>
 				<td class="text-center"><button type="button" class="btn btn-light" pop-over placement="left" trigger="focus" content="
-  <b>Número :</b> {{ordem.n_os}}<br><hr>  
-  <b>Criação :</b>  
+  <b>Número :</b> {{ordem.n_os}}<br><hr>
+  <b>Criação :</b>
 {{ordem.data_in}} <hr>
-  <b>Modicação : </b>  
+  <b>Modicação : </b>
 {{ordem.data_up}} <hr>
   <b>Solicitante info : </b><br>
   <b>Nome: </b> {{ordem.solicitante}}<br>

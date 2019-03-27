@@ -553,7 +553,28 @@ class CN // namespace_class
 
 		try
 		{
-			$sql = "SELECT id_os, n_os, cor_os, status, solicitante, sol_email, sol_coord, sol_setor, sol_ala, sol_sala, sol_ramal, data_in, data_up, dest_coord, dest_setor, dest_area, file, descr_topic, descr FROM `ordemservice` WHERE dest_coord=:dest_coord";
+			$sql = "SELECT
+									id_os,
+									n_os,
+									cor_os,
+									status,
+									solicitante,
+									sol_email,
+									sol_coord,
+									sol_setor,
+									sol_ala,
+									sol_sala,
+									sol_ramal,
+									data_in,
+									data_up,
+									dest_coord,
+									dest_setor,
+									dest_area,
+									file,
+									descr_topic,
+									descr
+								FROM `ordemservice`
+								WHERE dest_coord=:dest_coord";
 			$stmt = $this->link->prepare($sql);
 			$stmt->bindParam(':dest_coord', $OS->dest_coord, \PDO::PARAM_STR);
 			$stmt->execute();
@@ -575,7 +596,28 @@ class CN // namespace_class
 		// sem necessidade de juntar tabelas para novas ordens de serviço
 		try
 		{
-			$sql = "SELECT id_os, n_os, cor_os, status, solicitante, sol_email, sol_coord, sol_setor, sol_ala, sol_sala, sol_ramal, data_in, data_up, dest_coord, dest_setor, dest_area, file, descr_topic, descr FROM `ordemservice` WHERE status='NOVA' AND dest_coord=:dest_coord";
+			$sql = "SELECT
+								id_os,
+								n_os,
+								cor_os,
+								status,
+								solicitante,
+								sol_email,
+								sol_coord,
+								sol_setor,
+								sol_ala,
+								sol_sala,
+								sol_ramal,
+								data_in,
+								data_up,
+								dest_coord,
+								dest_setor,
+								dest_area,
+								file,
+								descr_topic,
+								descr
+							FROM `ordemservice`
+							WHERE status='NOVA' AND dest_coord=:dest_coord";
 			$stmt = $this->link->prepare($sql);
 			$stmt->bindParam(':dest_coord', $OS->dest_coord, \PDO::PARAM_STR);
 			$stmt->execute();
@@ -597,7 +639,27 @@ class CN // namespace_class
 		// sem necessidade de juntar tabelas para novas ordens de serviço
 		try
 		{
-			$sql = "SELECT id_os, n_os, status, solicitante, sol_email, sol_coord, sol_setor, sol_ala, sol_sala, sol_ramal, data_in, data_up, dest_coord, dest_setor, dest_area, file, descr_topic, descr FROM `ordemservice` WHERE status='NOVA' AND dest_coord=:dest_coord AND id_os=:id_os";
+			$sql = "SELECT
+								id_os,
+								n_os,
+								status,
+								solicitante,
+								sol_email,
+								sol_coord,
+								sol_setor,
+								sol_ala,
+								sol_sala,
+								sol_ramal,
+								data_in,
+								data_up,
+								dest_coord,
+								dest_setor,
+								dest_area,
+								file,
+								descr_topic,
+								descr
+							FROM `ordemservice`
+							WHERE status='NOVA' AND dest_coord=:dest_coord AND id_os=:id_os";
 			$stmt = $this->link->prepare($sql);
 			$stmt->bindParam(':dest_coord', $OS->dest_coord, \PDO::PARAM_STR);
 			$stmt->bindParam(':id_os', $OS->id_os, \PDO::PARAM_INT);
@@ -803,7 +865,32 @@ class CN // namespace_class
 		// sem necessidade de juntar tabelas para novas ordens de serviço
 		try
 		{
-			$sql = "SELECT OS.id_os, (SELECT COUNT(TE.M) FROM tecnico AS TE WHERE TE.id_os=OS.id_os AND TE.M='S') AS M, OS.n_os, OS.cor_os, OS.status, OS.solicitante, OS.sol_email, OS.sol_coord, OS.sol_setor, OS.sol_ala, OS.sol_sala, OS.sol_ramal, OS.data_in, OS.data_up, OS.dest_coord, OS.dest_setor, OS.dest_area, OS.file, OS.descr_topic, OS.descr FROM ordemservice AS OS WHERE OS.status='NOVA' AND OS.dest_coord=:dest_coord";
+			$sql = "SELECT
+								OS.id_os,
+								(SELECT
+									COUNT(TE.M)
+								FROM tecnico AS TE
+								WHERE TE.id_os=OS.id_os AND TE.M='S') AS M,
+								OS.n_os,
+								OS.cor_os,
+								OS.status,
+								OS.solicitante,
+								OS.sol_email,
+								OS.sol_coord,
+								OS.sol_setor,
+								OS.sol_ala,
+								OS.sol_sala,
+								OS.sol_ramal,
+								OS.data_in,
+								OS.data_up,
+								OS.dest_coord,
+								OS.dest_setor,
+								OS.dest_area,
+								OS.file,
+								OS.descr_topic,
+								OS.descr
+							FROM ordemservice AS OS
+							WHERE OS.status='NOVA' AND OS.dest_coord=:dest_coord";
 			$stmt = $this->link->prepare($sql);
 			$stmt->bindParam(':dest_coord', $OS->dest_coord, \PDO::PARAM_STR);
 			$stmt->execute();
@@ -825,7 +912,47 @@ class CN // namespace_class
 		// sem necessidade de juntar tabelas para novas ordens de serviço
 		try
 		{
-			$sql = "SELECT OS.id_os, (SELECT COUNT(TE.M) FROM tecnico AS TE WHERE TE.id_os=OS.id_os AND TE.M='S') AS M, OS.n_os, OS.cor_os, OS.status, OS.solicitante, OS.sol_email, OS.sol_coord, OS.sol_setor, OS.sol_ala, OS.sol_sala, OS.sol_ramal, OS.data_in, OS.data_up, OS.dest_coord, OS.dest_setor, OS.dest_area, OS.file, OS.descr_topic, OS.descr, LA.id_tecnico, LA.user_tec, LA.tecnico, LA.tec_email, LA.laudo_topic, LA.laudo, LA.tec_ala, LA.tec_sala, LA.tec_ramal FROM `ordemservice` AS OS JOIN (SELECT * FROM tecnico WHERE id_tecnico in (SELECT MAX(id_tecnico) FROM tecnico GROUP BY id_os) ORDER BY id_tecnico) AS LA ON OS.id_os = LA.id_os WHERE OS.status='ANDAMENTO' AND OS.dest_coord=:dest_coord";
+			$sql = "SELECT
+								OS.id_os,
+								(SELECT
+									COUNT(TE.M)
+								FROM tecnico AS TE
+								WHERE TE.id_os=OS.id_os AND TE.M='S') AS M,
+								OS.n_os,
+								OS.cor_os,
+								OS.status,
+								OS.solicitante,
+								OS.sol_email,
+								OS.sol_coord,
+								OS.sol_setor,
+								OS.sol_ala,
+								OS.sol_sala,
+								OS.sol_ramal,
+								OS.data_in,
+								OS.data_up,
+								OS.dest_coord,
+								OS.dest_setor,
+								OS.dest_area,
+								OS.file,
+								OS.descr_topic,
+								OS.descr,
+								LA.id_tecnico,
+								LA.user_tec,
+								LA.tecnico,
+								LA.tec_email,
+								LA.laudo_topic,
+								LA.laudo,
+								LA.tec_ala,
+								LA.tec_sala,
+								LA.tec_ramal
+							FROM `ordemservice` AS OS
+							JOIN (
+								SELECT * FROM tecnico WHERE id_tecnico in (
+									SELECT MAX(id_tecnico
+									) FROM tecnico GROUP BY id_os
+								) ORDER BY id_tecnico
+							) AS LA ON OS.id_os = LA.id_os
+							WHERE OS.status='ANDAMENTO' AND OS.dest_coord=:dest_coord";
 			$stmt = $this->link->prepare($sql);
 			$stmt->bindParam(':dest_coord', $OS->dest_coord, \PDO::PARAM_STR);
 			$stmt->execute();
@@ -847,7 +974,47 @@ class CN // namespace_class
 		// sem necessidade de juntar tabelas para novas ordens de serviço
 		try
 		{
-			$sql = "SELECT OS.id_os, (SELECT COUNT(TE.M) FROM tecnico AS TE WHERE TE.id_os=OS.id_os AND TE.M='S') AS M, OS.n_os, OS.cor_os, OS.status, OS.solicitante, OS.sol_email, OS.sol_coord, OS.sol_setor, OS.sol_ala, OS.sol_sala, OS.sol_ramal, OS.data_in, OS.data_up, OS.dest_coord, OS.dest_setor, OS.dest_area, OS.file, OS.descr_topic, OS.descr, LA.id_tecnico, LA.user_tec, LA.tecnico, LA.tec_email, LA.laudo_topic, LA.laudo, LA.tec_ala, LA.tec_sala, LA.tec_ramal FROM `ordemservice` AS OS JOIN (SELECT * FROM tecnico WHERE id_tecnico in (SELECT MAX(id_tecnico) FROM tecnico GROUP BY id_os) ORDER BY id_tecnico) AS LA ON OS.id_os = LA.id_os WHERE OS.status='ESPERA' AND OS.dest_coord=:dest_coord";
+			$sql = "SELECT
+								OS.id_os,
+								(
+									SELECT COUNT(TE.M)
+									FROM tecnico AS TE
+									WHERE TE.id_os=OS.id_os AND TE.M='S'
+								) AS M,
+								OS.n_os,
+								OS.cor_os,
+								OS.status,
+								OS.solicitante,
+								OS.sol_email,
+								OS.sol_coord,
+								OS.sol_setor,
+								OS.sol_ala,
+								OS.sol_sala,
+								OS.sol_ramal,
+								OS.data_in,
+								OS.data_up,
+								OS.dest_coord,
+								OS.dest_setor,
+								OS.dest_area,
+								OS.file,
+								OS.descr_topic,
+								OS.descr,
+								LA.id_tecnico,
+								LA.user_tec,
+								LA.tecnico,
+								LA.tec_email,
+								LA.laudo_topic,
+								LA.laudo,
+								LA.tec_ala,
+								LA.tec_sala,
+								LA.tec_ramal
+							FROM `ordemservice` AS OS
+							JOIN (
+								SELECT * FROM tecnico WHERE id_tecnico in (
+									SELECT MAX(id_tecnico) FROM tecnico GROUP BY id_os
+								) ORDER BY id_tecnico
+							) AS LA ON OS.id_os = LA.id_os
+							WHERE OS.status='ESPERA' AND OS.dest_coord=:dest_coord";
 			$stmt = $this->link->prepare($sql);
 			$stmt->bindParam(':dest_coord', $OS->dest_coord, \PDO::PARAM_STR);
 			$stmt->execute();
@@ -871,12 +1038,646 @@ class CN // namespace_class
 		// sem necessidade de juntar tabelas para novas ordens de serviço
 		try
 		{
-			$sql = "SELECT OS.id_os, (SELECT COUNT(TE.M) FROM tecnico AS TE WHERE TE.id_os=OS.id_os AND TE.M='S') AS M, OS.n_os, OS.cor_os, OS.status, OS.solicitante, OS.sol_email, OS.sol_coord, OS.sol_setor, OS.sol_ala, OS.sol_sala, OS.sol_ramal, OS.data_in, OS.data_up, OS.dest_coord, OS.dest_setor, OS.dest_area, OS.file, OS.descr_topic, OS.descr, LA.id_tecnico, LA.user_tec, LA.tecnico, LA.tec_email, LA.laudo_topic, LA.laudo, LA.tec_ala, LA.tec_sala, LA.tec_ramal FROM `ordemservice` AS OS JOIN (SELECT * FROM tecnico WHERE id_tecnico in (SELECT MAX(id_tecnico) FROM tecnico GROUP BY id_os) ORDER BY id_tecnico) AS LA ON OS.id_os = LA.id_os WHERE OS.status='ENCERRADA' AND OS.dest_coord=:dest_coord AND YEAR(OS.data_up) IN (:current, :last)";
+			$sql = "SELECT
+								OS.id_os,
+								(
+									SELECT COUNT(TE.M)
+									FROM tecnico AS TE
+									WHERE TE.id_os=OS.id_os AND TE.M='S'
+								) AS M,
+								OS.n_os,
+								OS.cor_os,
+								OS.status,
+								OS.solicitante,
+								OS.sol_email,
+								OS.sol_coord,
+								OS.sol_setor,
+								OS.sol_ala,
+								OS.sol_sala,
+								OS.sol_ramal,
+								OS.data_in,
+								OS.data_up,
+								OS.dest_coord,
+								OS.dest_setor,
+								OS.dest_area,
+								OS.file,
+								OS.descr_topic,
+								OS.descr,
+								LA.id_tecnico,
+								LA.user_tec,
+								LA.tecnico,
+								LA.tec_email,
+								LA.laudo_topic,
+								LA.laudo,
+								LA.tec_ala,
+								LA.tec_sala,
+								LA.tec_ramal
+							FROM `ordemservice` AS OS
+							JOIN (
+								SELECT * FROM tecnico
+								WHERE id_tecnico in (
+									SELECT MAX(id_tecnico) FROM tecnico GROUP BY id_os
+								) ORDER BY id_tecnico
+							) AS LA ON OS.id_os = LA.id_os
+							WHERE OS.status='ENCERRADA' AND OS.dest_coord=:dest_coord AND YEAR(OS.data_up) IN (:current, :last)";
 			$stmt = $this->link->prepare($sql);
 			$stmt->bindParam(':dest_coord', $OS->dest_coord, \PDO::PARAM_STR);
 			$stmt->bindParam(':current', $current ,\PDO::PARAM_STR);
 			$stmt->bindParam(':last', $last,\PDO::PARAM_STR);
 			$stmt->execute();
+			$count = $stmt->rowCount();
+			$row = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+		}
+		catch (\PDOException $e)
+		{
+			print 'Erro' . $e->getMessage() . "<br/>";
+		}
+
+		return array('count' => $count, 'rows' => $row);
+	}
+
+	// resp ordens de serviços recebidas
+	public function recebidaOSRespnova($OS)
+	{
+		$row = array();
+		$count = 0;
+		// sem necessidade de juntar tabelas para novas ordens de serviço
+		// $params = array_merge([valor], $setor, [valor2]);
+		$coord = $OS->dest_coord;
+		$setor = $OS->dest_setor;
+
+		if (gettype($setor) == "array") {
+			$places = implode(',', array_fill(0, count($setor), '?'));
+			//$places = implode(', ', $setor);
+			//echo $places;
+			// $params = array_merge([valor], $setor, [valor2]);
+			$params = array_merge([$coord], $setor);
+		} else {
+			$places = "?";
+			$params = array_merge([$coord],[$setor]);
+		}
+
+		try
+		{
+			$sql = "SELECT
+								OS.id_os,
+								(SELECT
+									COUNT(TE.M)
+								FROM tecnico AS TE
+								WHERE TE.id_os=OS.id_os AND TE.M='S') AS M,
+								OS.n_os,
+								OS.cor_os,
+								OS.status,
+								OS.solicitante,
+								OS.sol_email,
+								OS.sol_coord,
+								OS.sol_setor,
+								OS.sol_ala,
+								OS.sol_sala,
+								OS.sol_ramal,
+								OS.data_in,
+								OS.data_up,
+								OS.dest_coord,
+								OS.dest_setor,
+								OS.dest_area,
+								OS.file,
+								OS.descr_topic,
+								OS.descr
+							FROM ordemservice AS OS
+							WHERE OS.status='NOVA' AND OS.dest_coord=? AND OS.dest_setor IN ({$places})";
+			$stmt = $this->link->prepare($sql);
+			//$stmt->bindParam(':dest_coord', $OS->dest_coord, \PDO::PARAM_STR);
+			$stmt->execute($params);
+			$count = $stmt->rowCount();
+			$row = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+		}
+		catch (\PDOException $e)
+		{
+			print 'Erro' . $e->getMessage() . "<br/>";
+		}
+
+		return array('count' => $count, 'rows' => $row);
+	}
+
+	public function recebidaOSRespandamento($OS)
+	{
+		$row = array();
+		$count = 0;
+		// sem necessidade de juntar tabelas para novas ordens de serviço
+		$coord = $OS->dest_coord;
+		$setor = $OS->dest_setor;
+
+		if (gettype($setor) == "array") {
+			$places = implode(',', array_fill(0, count($setor), '?'));
+			//$places = implode(', ', $setor);
+			//echo $places;
+			// $params = array_merge([valor], $setor, [valor2]);
+			$params = array_merge([$coord], $setor);
+		} else {
+			$places = "?";
+			$params = array_merge([$coord],[$setor]);
+		}
+
+		try
+		{
+			$sql = "SELECT
+								OS.id_os,
+								(SELECT
+									COUNT(TE.M)
+								FROM tecnico AS TE
+								WHERE TE.id_os=OS.id_os AND TE.M='S') AS M,
+								OS.n_os,
+								OS.cor_os,
+								OS.status,
+								OS.solicitante,
+								OS.sol_email,
+								OS.sol_coord,
+								OS.sol_setor,
+								OS.sol_ala,
+								OS.sol_sala,
+								OS.sol_ramal,
+								OS.data_in,
+								OS.data_up,
+								OS.dest_coord,
+								OS.dest_setor,
+								OS.dest_area,
+								OS.file,
+								OS.descr_topic,
+								OS.descr,
+								LA.id_tecnico,
+								LA.user_tec,
+								LA.tecnico,
+								LA.tec_email,
+								LA.laudo_topic,
+								LA.laudo,
+								LA.tec_ala,
+								LA.tec_sala,
+								LA.tec_ramal
+							FROM `ordemservice` AS OS
+							JOIN (
+								SELECT * FROM tecnico WHERE id_tecnico in (
+									SELECT MAX(id_tecnico
+									) FROM tecnico GROUP BY id_os
+								) ORDER BY id_tecnico
+							) AS LA ON OS.id_os = LA.id_os
+							WHERE OS.status='ANDAMENTO' AND OS.dest_coord=? AND OS.dest_setor IN ({$places})";
+			$stmt = $this->link->prepare($sql);
+			//$stmt->bindParam(':dest_coord', $OS->dest_coord, \PDO::PARAM_STR);
+			$stmt->execute($params);
+			$count = $stmt->rowCount();
+			$row = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+		}
+		catch (\PDOException $e)
+		{
+			print 'Erro' . $e->getMessage() . "<br/>";
+		}
+
+		return array('count' => $count, 'rows' => $row);
+	}
+
+	public function recebidaOSRespespera($OS)
+	{
+		$row = array();
+		$count = 0;
+		// sem necessidade de juntar tabelas para novas ordens de serviço
+
+		$coord = $OS->dest_coord;
+		$setor = $OS->dest_setor;
+
+		if (gettype($setor) == "array") {
+			$places = implode(',', array_fill(0, count($setor), '?'));
+			//$places = implode(', ', $setor);
+			//echo $places;
+			// $params = array_merge([valor], $setor, [valor2]);
+			$params = array_merge([$coord], $setor);
+		} else {
+			$places = "?";
+			$params = array_merge([$coord],[$setor]);
+		}
+
+		try
+		{
+			$sql = "SELECT
+								OS.id_os,
+								(
+									SELECT COUNT(TE.M)
+									FROM tecnico AS TE
+									WHERE TE.id_os=OS.id_os AND TE.M='S'
+								) AS M,
+								OS.n_os,
+								OS.cor_os,
+								OS.status,
+								OS.solicitante,
+								OS.sol_email,
+								OS.sol_coord,
+								OS.sol_setor,
+								OS.sol_ala,
+								OS.sol_sala,
+								OS.sol_ramal,
+								OS.data_in,
+								OS.data_up,
+								OS.dest_coord,
+								OS.dest_setor,
+								OS.dest_area,
+								OS.file,
+								OS.descr_topic,
+								OS.descr,
+								LA.id_tecnico,
+								LA.user_tec,
+								LA.tecnico,
+								LA.tec_email,
+								LA.laudo_topic,
+								LA.laudo,
+								LA.tec_ala,
+								LA.tec_sala,
+								LA.tec_ramal
+							FROM `ordemservice` AS OS
+							JOIN (
+								SELECT * FROM tecnico WHERE id_tecnico in (
+									SELECT MAX(id_tecnico) FROM tecnico GROUP BY id_os
+								) ORDER BY id_tecnico
+							) AS LA ON OS.id_os = LA.id_os
+							WHERE OS.status='ESPERA' AND OS.dest_coord=? AND OS.dest_setor IN ({$places})";
+			$stmt = $this->link->prepare($sql);
+			//$stmt->bindParam(':dest_coord', $OS->dest_coord, \PDO::PARAM_STR);
+			$stmt->execute($params);
+			$count = $stmt->rowCount();
+			$row = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+		}
+		catch (\PDOException $e)
+		{
+			print 'Erro' . $e->getMessage() . "<br/>";
+		}
+
+		return array('count' => $count, 'rows' => $row);
+	}
+
+	public function recebidaOSRespencerrada($OS)
+	{
+		$row = array();
+		$count = 0;
+		$current = $this->get_current_year();
+		$last = $this->get_last_year();
+		// sem necessidade de juntar tabelas para novas ordens de serviço
+
+		$coord = $OS->dest_coord;
+		$setor = $OS->dest_setor;
+
+		if (gettype($setor) == "array") {
+			$places = implode(',', array_fill(0, count($setor), '?'));
+			//$places = implode(', ', $setor);
+			//echo $places;
+			// $params = array_merge([valor], $setor, [valor2]);
+			$params = array_merge([$coord], $setor, [$current], [$last]);
+		} else {
+			$places = "?";
+			$params = array_merge([$coord],[$setor], [$current], [$last]);
+		}
+
+		try
+		{
+			$sql = "SELECT
+								OS.id_os,
+								(
+									SELECT COUNT(TE.M)
+									FROM tecnico AS TE
+									WHERE TE.id_os=OS.id_os AND TE.M='S'
+								) AS M,
+								OS.n_os,
+								OS.cor_os,
+								OS.status,
+								OS.solicitante,
+								OS.sol_email,
+								OS.sol_coord,
+								OS.sol_setor,
+								OS.sol_ala,
+								OS.sol_sala,
+								OS.sol_ramal,
+								OS.data_in,
+								OS.data_up,
+								OS.dest_coord,
+								OS.dest_setor,
+								OS.dest_area,
+								OS.file,
+								OS.descr_topic,
+								OS.descr,
+								LA.id_tecnico,
+								LA.user_tec,
+								LA.tecnico,
+								LA.tec_email,
+								LA.laudo_topic,
+								LA.laudo,
+								LA.tec_ala,
+								LA.tec_sala,
+								LA.tec_ramal
+							FROM `ordemservice` AS OS
+							JOIN (
+								SELECT * FROM tecnico
+								WHERE id_tecnico in (
+									SELECT MAX(id_tecnico) FROM tecnico GROUP BY id_os
+								) ORDER BY id_tecnico
+							) AS LA ON OS.id_os = LA.id_os
+							WHERE OS.status='ENCERRADA' AND OS.dest_coord=? AND OS.dest_setor IN ({$places}) AND YEAR(OS.data_up) IN (?, ?)";
+			$stmt = $this->link->prepare($sql);
+			//$stmt->bindParam(':dest_coord', $OS->dest_coord, \PDO::PARAM_STR);
+			//$stmt->bindParam(':current', $current ,\PDO::PARAM_STR);
+			//$stmt->bindParam(':last', $last,\PDO::PARAM_STR);
+			$stmt->execute($params);
+			$count = $stmt->rowCount();
+			$row = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+		}
+		catch (\PDOException $e)
+		{
+			print 'Erro' . $e->getMessage() . "<br/>";
+		}
+
+		return array('count' => $count, 'rows' => $row);
+	}
+
+	// tec ordens de serviços recebidas
+	public function recebidaOSTecnova($OS)
+	{
+		$row = array();
+		$count = 0;
+		// sem necessidade de juntar tabelas para novas ordens de serviço
+		$coord = $OS->dest_coord;
+		$setor = $OS->dest_setor;
+		$area = $OS->dest_area;
+
+		if (gettype($area) == "array") {
+			$places = implode(',', array_fill(0, count($area), '?'));
+			//$places = implode(', ', $setor);
+			//echo $places;
+			// $params = array_merge([valor], $setor, [valor2]);
+			$params = array_merge([$coord], [$setor], $area);
+		} else {
+			$places = "?";
+			$params = array_merge([$coord],[$setor], [$area]);
+		}
+		try
+		{
+			$sql = "SELECT
+								OS.id_os,
+								(SELECT
+									COUNT(TE.M)
+								FROM tecnico AS TE
+								WHERE TE.id_os=OS.id_os AND TE.M='S') AS M,
+								OS.n_os,
+								OS.cor_os,
+								OS.status,
+								OS.solicitante,
+								OS.sol_email,
+								OS.sol_coord,
+								OS.sol_setor,
+								OS.sol_ala,
+								OS.sol_sala,
+								OS.sol_ramal,
+								OS.data_in,
+								OS.data_up,
+								OS.dest_coord,
+								OS.dest_setor,
+								OS.dest_area,
+								OS.file,
+								OS.descr_topic,
+								OS.descr
+							FROM ordemservice AS OS
+							WHERE OS.status='NOVA' AND OS.dest_coord=? AND OS.dest_setor=? AND OS.dest_area IN ({$places})";
+			$stmt = $this->link->prepare($sql);
+			//$stmt->bindParam(':dest_coord', $OS->dest_coord, \PDO::PARAM_STR);
+			$stmt->execute($params);
+			$count = $stmt->rowCount();
+			$row = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+		}
+		catch (\PDOException $e)
+		{
+			print 'Erro' . $e->getMessage() . "<br/>";
+		}
+
+		return array('count' => $count, 'rows' => $row);
+	}
+
+	public function recebidaOSTecandamento($OS)
+	{
+		$row = array();
+		$count = 0;
+		// sem necessidade de juntar tabelas para novas ordens de serviço
+		$coord = $OS->dest_coord;
+		$setor = $OS->dest_setor;
+		$area = $OS->dest_area;
+
+		if (gettype($area) == "array") {
+			$places = implode(',', array_fill(0, count($area), '?'));
+			//$places = implode(', ', $setor);
+			//echo $places;
+			// $params = array_merge([valor], $setor, [valor2]);
+			$params = array_merge([$coord], [$setor], $area);
+		} else {
+			$places = "?";
+			$params = array_merge([$coord],[$setor], [$area]);
+		}
+		try
+		{
+			$sql = "SELECT
+								OS.id_os,
+								(SELECT
+									COUNT(TE.M)
+								FROM tecnico AS TE
+								WHERE TE.id_os=OS.id_os AND TE.M='S') AS M,
+								OS.n_os,
+								OS.cor_os,
+								OS.status,
+								OS.solicitante,
+								OS.sol_email,
+								OS.sol_coord,
+								OS.sol_setor,
+								OS.sol_ala,
+								OS.sol_sala,
+								OS.sol_ramal,
+								OS.data_in,
+								OS.data_up,
+								OS.dest_coord,
+								OS.dest_setor,
+								OS.dest_area,
+								OS.file,
+								OS.descr_topic,
+								OS.descr,
+								LA.id_tecnico,
+								LA.user_tec,
+								LA.tecnico,
+								LA.tec_email,
+								LA.laudo_topic,
+								LA.laudo,
+								LA.tec_ala,
+								LA.tec_sala,
+								LA.tec_ramal
+							FROM `ordemservice` AS OS
+							JOIN (
+								SELECT * FROM tecnico WHERE id_tecnico in (
+									SELECT MAX(id_tecnico
+									) FROM tecnico GROUP BY id_os
+								) ORDER BY id_tecnico
+							) AS LA ON OS.id_os = LA.id_os
+							WHERE OS.status='ANDAMENTO' AND OS.dest_coord=? AND OS.dest_setor=? AND OS.dest_area IN ({$places})";
+			$stmt = $this->link->prepare($sql);
+			//$stmt->bindParam(':dest_coord', $OS->dest_coord, \PDO::PARAM_STR);
+			$stmt->execute($params);
+			$count = $stmt->rowCount();
+			$row = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+		}
+		catch (\PDOException $e)
+		{
+			print 'Erro' . $e->getMessage() . "<br/>";
+		}
+
+		return array('count' => $count, 'rows' => $row);
+	}
+
+	public function recebidaOSTecespera($OS)
+	{
+		$row = array();
+		$count = 0;
+		// sem necessidade de juntar tabelas para novas ordens de serviço
+		$coord = $OS->dest_coord;
+		$setor = $OS->dest_setor;
+		$area = $OS->dest_area;
+
+		if (gettype($area) == "array") {
+			$places = implode(',', array_fill(0, count($area), '?'));
+			//$places = implode(', ', $setor);
+			//echo $places;
+			// $params = array_merge([valor], $setor, [valor2]);
+			$params = array_merge([$coord], [$setor], $area);
+		} else {
+			$places = "?";
+			$params = array_merge([$coord],[$setor], [$area]);
+		}
+		try
+		{
+			$sql = "SELECT
+								OS.id_os,
+								(
+									SELECT COUNT(TE.M)
+									FROM tecnico AS TE
+									WHERE TE.id_os=OS.id_os AND TE.M='S'
+								) AS M,
+								OS.n_os,
+								OS.cor_os,
+								OS.status,
+								OS.solicitante,
+								OS.sol_email,
+								OS.sol_coord,
+								OS.sol_setor,
+								OS.sol_ala,
+								OS.sol_sala,
+								OS.sol_ramal,
+								OS.data_in,
+								OS.data_up,
+								OS.dest_coord,
+								OS.dest_setor,
+								OS.dest_area,
+								OS.file,
+								OS.descr_topic,
+								OS.descr,
+								LA.id_tecnico,
+								LA.user_tec,
+								LA.tecnico,
+								LA.tec_email,
+								LA.laudo_topic,
+								LA.laudo,
+								LA.tec_ala,
+								LA.tec_sala,
+								LA.tec_ramal
+							FROM `ordemservice` AS OS
+							JOIN (
+								SELECT * FROM tecnico WHERE id_tecnico in (
+									SELECT MAX(id_tecnico) FROM tecnico GROUP BY id_os
+								) ORDER BY id_tecnico
+							) AS LA ON OS.id_os = LA.id_os
+							WHERE OS.status='ESPERA' AND OS.dest_coord=? AND OS.dest_setor=? AND OS.dest_area IN ({$places})";
+			$stmt = $this->link->prepare($sql);
+			//$stmt->bindParam(':dest_coord', $OS->dest_coord, \PDO::PARAM_STR);
+			$stmt->execute($params);
+			$count = $stmt->rowCount();
+			$row = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+		}
+		catch (\PDOException $e)
+		{
+			print 'Erro' . $e->getMessage() . "<br/>";
+		}
+
+		return array('count' => $count, 'rows' => $row);
+	}
+
+	public function recebidaOSTecencerrada($OS)
+	{
+		$row = array();
+		$count = 0;
+		$current = $this->get_current_year();
+		$last = $this->get_last_year();
+		// sem necessidade de juntar tabelas para novas ordens de serviço
+		$coord = $OS->dest_coord;
+		$setor = $OS->dest_setor;
+		$area = $OS->dest_area;
+
+		if (gettype($area) == "array") {
+			$places = implode(',', array_fill(0, count($area), '?'));
+			//$places = implode(', ', $setor);
+			//echo $places;
+			// $params = array_merge([valor], $setor, [valor2]);
+			$params = array_merge([$coord], [$setor], $area, [$current], [$last]);
+		} else {
+			$places = "?";
+			$params = array_merge([$coord],[$setor], [$area], [$current], [$last]);
+		}
+		try
+		{
+			$sql = "SELECT
+								OS.id_os,
+								(
+									SELECT COUNT(TE.M)
+									FROM tecnico AS TE
+									WHERE TE.id_os=OS.id_os AND TE.M='S'
+								) AS M,
+								OS.n_os,
+								OS.cor_os,
+								OS.status,
+								OS.solicitante,
+								OS.sol_email,
+								OS.sol_coord,
+								OS.sol_setor,
+								OS.sol_ala,
+								OS.sol_sala,
+								OS.sol_ramal,
+								OS.data_in,
+								OS.data_up,
+								OS.dest_coord,
+								OS.dest_setor,
+								OS.dest_area,
+								OS.file,
+								OS.descr_topic,
+								OS.descr,
+								LA.id_tecnico,
+								LA.user_tec,
+								LA.tecnico,
+								LA.tec_email,
+								LA.laudo_topic,
+								LA.laudo,
+								LA.tec_ala,
+								LA.tec_sala,
+								LA.tec_ramal
+							FROM `ordemservice` AS OS
+							JOIN (
+								SELECT * FROM tecnico
+								WHERE id_tecnico in (
+									SELECT MAX(id_tecnico) FROM tecnico GROUP BY id_os
+								) ORDER BY id_tecnico
+							) AS LA ON OS.id_os = LA.id_os
+							WHERE OS.status='ENCERRADA' AND OS.dest_coord=? AND OS.dest_setor=? AND OS.dest_area IN ({$places}) AND YEAR(OS.data_up) IN (?, ?)";
+			$stmt = $this->link->prepare($sql);
+			//$stmt->bindParam(':dest_coord', $OS->dest_coord, \PDO::PARAM_STR);
+			//$stmt->bindParam(':current', $current ,\PDO::PARAM_STR);
+			//$stmt->bindParam(':last', $last,\PDO::PARAM_STR);
+			$stmt->execute($params);
 			$count = $stmt->rowCount();
 			$row = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 		}
@@ -987,7 +1788,53 @@ class CN // namespace_class
 		// juntanto tabelas ordemservice e tecnico
 		try
 		{
-			$sql="SELECT OS.id_os, (SELECT COUNT(TE.M) FROM tecnico AS TE WHERE TE.id_os=OS.id_os AND TE.M='S') AS M, OS.n_os, OS.cor_os, OS.status, OS.solicitante, OS.sol_email, OS.sol_coord, OS.sol_setor, OS.sol_ala, OS.sol_sala, OS.sol_ramal, OS.data_in, OS.data_up, OS.dest_coord, OS.dest_setor, OS.dest_area, OS.file, OS.descr_topic, OS.descr, LA.id_tecnico, LA.user_tec, LA.tecnico, LA.tec_email, LA.laudo_topic, LA.laudo, LA.tec_ala, LA.tec_sala, LA.tec_ramal FROM `ordemservice` AS OS JOIN (SELECT * FROM tecnico WHERE id_tecnico in (SELECT MAX(id_tecnico) FROM tecnico GROUP BY id_os) ORDER BY id_tecnico) AS LA ON OS.id_os = LA.id_os WHERE OS.status='NOVA' AND LA.user_tec=:user_tec ORDER BY id_tecnico";
+			$sql="SELECT
+							OS.id_os,
+							(
+								SELECT COUNT(TE.M)
+								FROM tecnico AS TE
+								WHERE TE.id_os=OS.id_os AND TE.M='S'
+							) AS M,
+							OS.n_os,
+							OS.cor_os,
+							OS.status,
+							OS.solicitante,
+							OS.sol_email,
+							OS.sol_coord,
+							OS.sol_setor,
+							OS.sol_ala,
+							OS.sol_sala,
+							OS.sol_ramal,
+							OS.data_in,
+							OS.data_up,
+							OS.dest_coord,
+							OS.dest_setor,
+							OS.dest_area,
+							OS.file,
+							OS.descr_topic,
+							OS.descr,
+							LA.id_tecnico,
+							LA.user_tec,
+							LA.tecnico,
+							LA.tec_email,
+							LA.laudo_topic,
+							LA.laudo,
+							LA.tec_ala,
+							LA.tec_sala,
+							LA.tec_ramal
+						FROM `ordemservice` AS OS
+						JOIN
+						(
+							SELECT * FROM tecnico
+							WHERE id_tecnico in
+							(
+								SELECT MAX(id_tecnico)
+								FROM tecnico
+								GROUP BY id_os
+							) ORDER BY id_tecnico
+						) AS LA
+						ON OS.id_os = LA.id_os
+						WHERE OS.status='NOVA' AND LA.user_tec=:user_tec ORDER BY id_tecnico";
 			$stmt = $this->link->prepare($sql);
 			$stmt->bindParam(':user_tec', $OS->user, \PDO::PARAM_STR);
 			$stmt->execute();

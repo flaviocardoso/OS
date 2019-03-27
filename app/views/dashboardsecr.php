@@ -41,16 +41,16 @@
                     <a href="" data-target="#AdminRecebida" data-toggle="collapse" class="btn btn-success" aria-expanded="false">Recebidas</a>
                     <ul class="collapse list-unstyled components" id="AdminRecebida">
                         <li>
-                            <a ui-sref="dashboard.os.ver.recebidavernova" ui-sref-active="active">Nova</a>
+                            <a ui-sref="dashboard.os.ver.recebidaversecrnova" ui-sref-active="active">Nova</a>
                         </li>
                         <li>
-                            <a ui-sref="dashboard.os.ver.recebidaverandamento" ui-sref-active="active">Andamento</a>
+                            <a ui-sref="dashboard.os.ver.recebidaversecrandamento" ui-sref-active="active">Andamento</a>
                         </li>
                         <li>
-                            <a ui-sref="dashboard.os.ver.recebidaverespera" ui-sref-active="active">Espera</a>
+                            <a ui-sref="dashboard.os.ver.recebidaversecrespera" ui-sref-active="active">Espera</a>
                         </li>
                         <li>
-                            <a ui-sref="dashboard.os.ver.recebidaverencerrada" ui-sref-active="active">Encerrada</a>
+                            <a ui-sref="dashboard.os.ver.recebidaversecrencerrada" ui-sref-active="active">Encerrada</a>
                         </li>
                     </ul>
                 </ul>

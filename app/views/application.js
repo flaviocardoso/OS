@@ -604,7 +604,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
               url: 'info-editada-tec-nova/{osID}',
               component: 'infoeditadalaudotecnova',
               data: {title: 'Informação Novas', nome: 'Informação Novas'},
-              resolve: {osid: function(OrdemService, $transition$) { return OrdemService.getOSInfoEditadaLaudoTecNova($transition$.params().osID)}}
+              resolve: {osid: function(OrdemService, $transition$) { return OrdemService.getOsInfoEditadaLaudoTecNova($transition$.params().osID)}}
             },
             {
                 name: 'dashboard.os.ver.editadalaudovertecandamento',
@@ -2305,15 +2305,15 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
 .controller('editadalaudovertecnovaCtrl', function () {})
 .controller('editadalaudovertecandamentoCtrl', function () {})
 .controller('editadalaudovertecesperaCtrl', function () {})
-.controller('editadalaudovertecencerradaCtrl', function () {})
-.controller('infoeditadalaudorespnovaCtrl', function () {})
-.controller('infoeditadalaudorespandamentoCtrl', function () {})
-.controller('infoeditadalaudorespesperaCtrl', function () {})
-.controller('infoeditadalaudorespencerradaCtrl', function () {})
-.controller('infoeditadalaudotecnovaCtrl', function () {})
-.controller('infoeditadalaudotecandamentoCtrl', function () {})
-.controller('infoeditadalaudotecesperaCtrl', function () {})
-.controller('infoeditadalaudotecencerradaCtrl', function () {})
+.controller('infoeditadalaudovertecencerradaCtrl', function () {})
+.controller('infoeditadalaudoverrespnovaCtrl', function () {})
+.controller('infoeditadalaudoverrespandamentoCtrl', function () {})
+.controller('infoeditadalaudoverrespesperaCtrl', function () {})
+.controller('infoeditadalaudoverrespencerradaCtrl', function () {})
+.controller('infoeditadalaudovertecnovaCtrl', function () {})
+.controller('infoeditadalaudovertecandamentoCtrl', function () {})
+.controller('infoeditadalaudovertecesperaCtrl', function () {})
+.controller('infoeditadalaudovertecencerradaCtrl', function () {})
 .controller('verOseditCtrl', function ($scope, $state, CoordService, toaster) { // 03/02
     // controle da página de edição de novas ordem de serviços
     //$scope.$ctrl.osid = {};

@@ -18,20 +18,20 @@
 		<tbody>
 			<tr style="background-color:{{ordem.cor_os}}" ng-repeat="ordem in $ctrl.verOs | filter: { solicitante : seach.solicitante} | filter: {data_in : seach.data_in} | filter: {data_up : seach.data_up} | filter: {sol_coord : seach.sol_coord || undefined} | filter: {sol_setor : seach.sol_setor || undefined} | filter: {dest_area : seach.dest_area || undefined} | filter:  {tecnico : seach.tecnico}| filter: {status : 'ENCERRADA'}">
 				<td class="text-center">
-					<a ui-sref="dashboard.os.inforecebidaverencerrada({ osID : ordem.id_os })" ui-sref-active="active" onclick="this.disabled=true;" class="btn btn-light">{{ordem.n_os}}</a>
+					<a ui-sref="dashboard.os.inforecebidavertecencerrada({ osID : ordem.id_os })" ui-sref-active="active" onclick="this.disabled=true;" class="btn btn-light">{{ordem.n_os}}</a>
 				</td>
 				<td class="text-center">
 					<button type="button" class="btn btn-light" pop-over placement="left" trigger="focus" content="
-  <b>Número :</b> {{ordem.n_os}}<br><hr>  
-  <b>Criação :</b>  
+  <b>Número :</b> {{ordem.n_os}}<br><hr>
+  <b>Criação :</b>
 {{ordem.data_in}} <hr>
-  <b>Modicação : </b>  
+  <b>Modicação : </b>
 {{ordem.data_up}} <hr>
   <b>Solicitante info : </b><br>
   <b>Nome: </b> {{ordem.solicitante}}<br>
   <b>Email: </b> {{ordem.sol_email}}<br>
   <b>Ramal: </b> <td>{{ordem.sol_ramal}}</td> <br>
-  <b>Topico de Descrição : </b>  {{ordem.descr_topic}}<hr>  
+  <b>Topico de Descrição : </b>  {{ordem.descr_topic}}<hr>
   <b>Tecnico info : </b><br>
   <b>Nome: </b> {{ordem.tecnico}} <br>
   <b>Email: </b> {{ordem.tec_email}}<br>
