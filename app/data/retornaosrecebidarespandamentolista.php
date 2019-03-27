@@ -24,8 +24,9 @@ $dbname = "cbpf_os";
 
 $OS = new OS();
 $OS->dest_coord = $_SESSION['user_coord'];
+$OS->dest_setor = $_SESSION['user_setor'];
 $PDO = new CN($host, $dbname);
-$data_os = $PDO->recebidaOSandamento($OS);
+$data_os = $PDO->recebidaOSRespandamento($OS);
 $count = $data_os['count'];
 $rows = $data_os['rows'];
 $row = [];
@@ -45,7 +46,7 @@ for ($i = 0; $i < $count; $i++) {
 		else {
 			$row[$i][$key] = $value;
 		}
-	}	
+	}
 }
 
 echo json_encode($row);
