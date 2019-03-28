@@ -2446,6 +2446,7 @@ class CN // namespace_class
 
 	public function registroViews($OS) {
 		$data = date('Y-m-d H:i:s');
+		$data_release = date('Y-m-d');
 		$count = 0;
 
 		// $id_os = (string) $OS->id_os;
@@ -2457,7 +2458,8 @@ class CN // namespace_class
 
 		try
 		{
-			$sql = "INSERT INTO `viewsordem` VALUES (NULL, :id_os, :n_os , :user_views, :nome_views, :coord_views, :setor_views, :area_views, :data_views)";
+			$sql = "INSERT INTO `viewsordem` 
+					VALUES (NULL, :id_os, :n_os , :user_views, :nome_views, :coord_views, :setor_views, :area_views, :data_release, :data_views)";
 			$stmt = $this->link->prepare($sql);
 			$stmt->bindParam(':id_os', $OS->id_os, \PDO::PARAM_INT);
 			$stmt->bindParam(':n_os', $OS->n_os, \PDO::PARAM_STR);
@@ -2466,6 +2468,7 @@ class CN // namespace_class
 			$stmt->bindParam(':coord_views', $OS->coord_views, \PDO::PARAM_STR);
 			$stmt->bindParam(':setor_views', $OS->setor_views, \PDO::PARAM_STR);
 			$stmt->bindParam(':area_views', $OS->area_views, \PDO::PARAM_STR);
+			$stmt->bindParam(':data_release', $data_release, \PDO::PARAM_STR);
 			$stmt->bindParam(':data_views', $data, \PDO::PARAM_STR);
 
 			$stmt->execute();
