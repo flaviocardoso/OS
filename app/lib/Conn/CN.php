@@ -1177,7 +1177,7 @@ class CN // namespace_class
 			$places = "?";
 			$params = array_merge([$coord],[$setor]);
 		}
-
+		//var_dump($params);
 		try
 		{
 			$sql = "SELECT
@@ -1254,7 +1254,7 @@ class CN // namespace_class
 			$places = "?";
 			$params = array_merge([$coord],[$setor]);
 		}
-
+		//var_dump($params);
 		try
 		{
 			$sql = "SELECT
@@ -1413,6 +1413,7 @@ class CN // namespace_class
 		} else {
 			$places = "?";
 			$params = array_merge([$coord],[$setor], [$area]);
+			//var_dump($params);
 		}
 		try
 		{
