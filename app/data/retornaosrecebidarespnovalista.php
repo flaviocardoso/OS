@@ -25,7 +25,7 @@ $dbname = "cbpf_os";
 
 $OS = new OS();
 $OS->dest_coord = $_SESSION['user_coord'];
-$OS->dest_setor = $_SESSION['user_setor'];
+$OS->dest_setor = explode(",", $_SESSION['user_setor']);
 $PDO = new CN($host, $dbname);
 $data_os = $PDO->recebidaOSRespnova($OS);
 $count = $data_os['count'];
