@@ -16,42 +16,43 @@ if (!isset($_SESSION['user'])) {
 }
 
 use lib\Conn\CN;
+use lib\Modelo\Views;
 
 $out = array("error" => false);
 $in = json_decode(file_get_contents("php://input"), true);
 
 $id_os = $in['id'];
-$n_os = $in['n'];
-
-session_start();
+$n_os = $in['num'];
 $user_views = $_SESSION['user'];
-$nome_views = $_SESSION['user_nome'];
-$coord_views = $_SESSION['user_coord'];
-$setor_views = $_SESSION['user_setor'];
-$area_views = $_SESSION['user_area'];
+$nome_views = $_SESSION['user_nome']; 
+$grupo_views = $_SESSION['user_grupo']; //
+$coord_views = $in['coord'];
+$setor_views = $in['setor'];
+$area_views = $in['area'];
+$status = $in['status']; //
+$pagina = $in['pag']; //
 
 $nome = explode(" ", $nome_views);
 $nome_views = $nome[0] . " " . $nome[1];
 
-include("CN.php");
 $host = "localhost";
 $dbname = "cbpf_os";
 
-$PDO = new CN();
-$PDO->connect($host, $dbname);
+$Views = new Views();
+$Views->id_os = $id_os;
+$Views->n_os = $n_os;
+$Views->user_views = $user_views;
+$Views->nome_views = $nome_views;
+$Views->grupo_views = $grupo_views;
+$Views->status_os = $status;
+$Views->coord_views = $coord_views;
+$Views->setor_views = $setor_views;
+$Views->area_views = $area_views;
+$Views->pagina_views = $pagina;
 
-include("OSModelo.php");
-$OS = new OSClass();
-$OS->id_os = $id_os;
-$OS->n_os = $n_os;
-$OS->user_views = $user_views;
-$OS->nome_views = $nome_views;
-$OS->coord_views = $coord_views;
-$OS->setor_views = $setor_views;
-$OS->area_views = $area_views;
-
-$data = $PDO->registroViews($OS);
-
+$PDO = new CN($host, $dbname);
+$data = $PDO->registroViews($Views);
+// resposta
 if ($data > 0) {
 	$out['message'] = "Novo Visita.";
 } else {

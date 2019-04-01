@@ -2444,11 +2444,11 @@ class CN // namespace_class
 		return $count;
 	}
 
-	public function registroViews($OS) {
+	public function registroViews($Views) {
 		$data = date('Y-m-d H:i:s');
-		$data_release = date('Y-m-d');
+		$data_release = date('Y-m-d'); // ex.: $data_release = date('Y-m-d', mktime(0,0,0,3,30,2019));
 		$count = 0;
-
+		var_dump($Views);
 		// $id_os = (string) $OS->id_os;
 		// $n_os = (int) $OS->n_os;
 		// $user_views = (string) $OS->user_views;
@@ -2459,15 +2459,32 @@ class CN // namespace_class
 		try
 		{
 			$sql = "INSERT INTO `viewsordem` 
-					VALUES (NULL, :id_os, :n_os , :user_views, :nome_views, :coord_views, :setor_views, :area_views, :data_release, :data_views)";
+					VALUES (
+						NULL, 
+						:id_os, 
+						:n_os , 
+						:user_views, 
+						:nome_views, 
+						:grupo_views, 
+						:status_os, 
+						:coord_views, 
+						:setor_views, 
+						:area_views,
+						:pagina_views, 
+						:data_release, 
+						:data_views
+						)";
 			$stmt = $this->link->prepare($sql);
-			$stmt->bindParam(':id_os', $OS->id_os, \PDO::PARAM_INT);
-			$stmt->bindParam(':n_os', $OS->n_os, \PDO::PARAM_STR);
-			$stmt->bindParam(':user_views', $OS->user_views, \PDO::PARAM_STR);
-			$stmt->bindParam(':nome_views', $OS->nome_views, \PDO::PARAM_STR);
-			$stmt->bindParam(':coord_views', $OS->coord_views, \PDO::PARAM_STR);
-			$stmt->bindParam(':setor_views', $OS->setor_views, \PDO::PARAM_STR);
-			$stmt->bindParam(':area_views', $OS->area_views, \PDO::PARAM_STR);
+			$stmt->bindParam(':id_os', $Views->id_os, \PDO::PARAM_INT);
+			$stmt->bindParam(':n_os', $Views->n_os, \PDO::PARAM_STR);
+			$stmt->bindParam(':user_views', $Views->user_views, \PDO::PARAM_STR);
+			$stmt->bindParam(':nome_views', $Views->nome_views, \PDO::PARAM_STR);
+			$stmt->bindParam(':grupo_views', $Views->grupo_views, \PDO::PARAM_STR);
+			$stmt->bindParam(':status_os', $Views->status_os, \PDO::PARAM_STR);
+			$stmt->bindParam(':coord_views', $Views->coord_views, \PDO::PARAM_STR);
+			$stmt->bindParam(':setor_views', $Views->setor_views, \PDO::PARAM_STR);
+			$stmt->bindParam(':area_views', $Views->area_views, \PDO::PARAM_STR);
+			$stmt->bindParam(':pagina_views', $Views->pagina_views, \PDO::PARAM_STR);
 			$stmt->bindParam(':data_release', $data_release, \PDO::PARAM_STR);
 			$stmt->bindParam(':data_views', $data, \PDO::PARAM_STR);
 

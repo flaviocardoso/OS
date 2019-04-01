@@ -3,6 +3,7 @@
     <span class="float-none rounded-circle" ng-recarregar><i class="fas fa-redo fa-2x"></i></span>
     <span ui-sref="dashboard.os" class="float-right rounded-circle"><i class="fas fa-times fa-2x"></i></span>    
 </div>
+<div views-tecnico idos="$ctrl.osid.id_os" num="$ctrl.osid.n_os" status="$ctrl.osid.status" coord="$ctrl.osid.dest_coord" setor="$ctrl.osid.dest_setor" area="$ctrl.osid.dest_area" pag="solic"></div>
 <div class="card shadow border-dark m-4 my-5 p-0" id="topos">
     <div class="card-header text-center"><h4>ORDEM DE SERVIÇO</h4></div>
     <div class="card-body pt-0 pr-0 pl-0">
@@ -101,7 +102,7 @@
                 </div>
                 <div id="downloados">
                     Ordem de Servico: 
-                    <span class="btn btn-link"> GERAR AQUIVO</span>                    
+                    <span class="btn btn-link" gerar-pdf order="$ctrl.osid">GERAR AQUIVO</span>                  
                 </div>
             </div>
         </div>        

@@ -1250,20 +1250,31 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
     return {
         restrict: 'A',
         scope: {
-            order: '='
+            idos: '=',
+            num: '=',
+            status: '=',
+            coord: '=',
+            setor: '=',
+            area: '=',
+            pag: '='            
         },
         link: function (scope, element, attrs) {
-            element.on('click', function (e) {
-                e.preventDefault()
-                var ordem = scope.order;
-                var id = ordem.id_os;
-                var n = ordem.n_os;
-                if (id != undefined && n != undefined) {
-                    CoordService.parseViews(id, n);
-                } else {
-                    alert("Falha, tente denovo")
-                }
-            });
+            
+            // var ordem = scope.order;
+            var id = scope.idos;
+            var num = scope.num;
+            var status = scope.status;
+            var coord = scope.coord;
+            var setor = scope.setor;
+            var area = scope.area;
+            var pag = attrs.pag;
+            if (id != undefined && num != undefined && status != undefined) {
+                var obj = {'id': id, 'num': num, 'status': status, 'coord': coord, 'setor': setor, 'area': area, 'pag': pag};
+                CoordService.parseViews(obj);
+            } else {
+                alert("Falha, tente denovo")
+            }
+            
         }
     }
 })
@@ -1432,6 +1443,20 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
         }
     }
 
+})
+.directive("gerarPdf", function (CoordService) {
+    return {
+        scope: {
+            order: '='
+        },
+        link: function (scope, element, attr) {
+            element.on("click", function () {
+                console.log("Click");
+
+                CoordService.gerarPdf(scope.order);                
+            });
+        }
+    }
 })
 //componentes
 .component("login", {templateUrl: "/app/views/login.php", controller: "loginCtrl"})
@@ -2777,11 +2802,10 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
                 }
             });
         },
-        parseViews : function (id, n) {
-            $http.post("/app/data/app.php?d=insert-views-novas-os", {'id': id, 'n': n}).then (function (resp) { // 31/01/2019 - nome do script para views nova ordem de serviço
+        parseViews : function (obj) {
+            $http.post("/app/data/app.php?d=insert-views-novas-os", obj).then (function (resp) { // 31/01/2019 - nome do script para views nova ordem de serviço
                 console.log(resp.data);
-                var retorno = resp.data;
-                console.log(retorno);
+                var retorno = resp.data;;
                 if (!retorno['error']) {
                     console.log("OK"); // mudar para redirecionamento
                 }
@@ -2809,6 +2833,42 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
         },
         clearNotification: function (id) {
             $http.post('/app/data/app.php?d=clear-notification', {'id': id})
+        },
+        gerarPdf: function (order) {
+            $http.post('/app/data/app.php?d=downloadphp', {'order': order}, {
+                responseType: 'arraybuffer'
+            })
+            .then(function (resp) {
+                console.log(resp.data);
+
+                var headers = resp.headers();
+
+                console.log(headers);
+                
+                var contentType = headers['content-type'];
+
+                var blob = new Blob([resp.data], {type: contentType});
+                var loaded = 0;
+                var url = window.URL.createObjectURL(blob);
+                
+                var linkElement = document.createElement('a');
+                try {                    
+                    var url = window.URL.createObjectURL(blob);                    
+                    linkElement.setAttribute('href', url);
+                    linkElement.setAttribute("target", "_blank");
+                    linkElement.setAttribute('download', "gerar-automatico.php");                    
+                    
+                    var click = new MouseEvent('click', {
+                        "view" : window,
+                        "bubbles" : true,
+                        "cancelable" : false
+                    });
+
+                    linkElement.dispatchEvent(click); 
+                }catch (ex) {
+                    console.log(ex);
+                }
+            })
         }
     }
 })
