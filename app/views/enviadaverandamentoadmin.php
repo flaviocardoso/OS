@@ -73,8 +73,8 @@
 		<tbody>
 			<tr style="background-color:{{ordem.cor_os}}" ng-repeat="ordem in $ctrl.verOs | filter: { solicitante : seach.solicitante} | filter: {data_in : seach.data_in} | filter: {data_up : seach.data_up} | filter: {dest_coord : seach.dest_coord || undefined} | filter: {dest_setor : seach.dest_setor || undefined} | filter: {dest_area : seach.dest_area || undefined} | filter:  {tecnico : seach.tecnico} | filter: {status : 'ANDAMENTO'}">
 				<td class="text-center">
-					<a ui-sref="dashboard.os.infosolicandamento({ osID : ordem.id_os })" ui-sref-active="active" onclick="this.disabled=true;" class="btn btn-light">{{ordem.n_os}}</a>
-				</td>				
+					<a ui-sref="dashboard.os.infoenviadaverandamentoadmin({ osID : ordem.id_os })" ui-sref-active="active" onclick="this.disabled=true;" class="btn btn-light">{{ordem.n_os}}</a>
+				</td>
 				<td class="text-center">
 					<button type="button" class="btn btn-light" pop-over placement="left" trigger="focus" content="
   <b>Número :</b> {{ordem.n_os}}<br><hr>  

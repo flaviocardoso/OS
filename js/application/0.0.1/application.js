@@ -111,6 +111,62 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
                 url: 'ver-os', /* direção para lista das ordens de servicos */
                 data: { title: 'Ordens de Serviço', nome : "S. Ordem de Serviço" },
                 component: 'ver'
+            },// Ordens de Serviço Enviadas lista enviar - admin (todas)
+            {
+                name: 'dashboard.os.ver.enviadavernovaadmin',
+                url: '',
+                component: 'enviadavernovaadmin',
+                data: {title: 'Nova', nome: 'Nova'},
+                resolve: { verOs: function(OrdemService) { return OrdemService.getOSEnviadaNovaAdmin(); } }
+            },
+            {
+                name: 'dashboard.os.ver.enviadaverandamentoadmin',
+                url: '',
+                component: 'enviadaverandamentoadmin',
+                data: {title: 'Andamento', nome: 'Andamento'},
+                resolve: { verOs: function(OrdemService) { return OrdemService.getOSEnviadaAndamentoAdmin(); } }
+            },
+            {
+                name: 'dashboard.os.ver.enviadaveresperaadmin',
+                url: '',
+                component: 'enviadaveresperaadmin',
+                data: {title: 'Espera', nome: 'Espera'},
+                resolve: { verOs: function(OrdemService) { return OrdemService.getOSEnviadaEsperaAdmin(); } }
+            },
+            {
+                name: 'dashboard.os.ver.enviadaverencerradaadmin',
+                url: '',
+                component: 'enviadaverencerradaadmin',
+                data: {title: 'Encerrada', nome: 'Encerrada'},
+                resolve: { verOs: function(OrdemService) { return OrdemService.getOSEnviadaEncerradaAdmin(); } }
+            }, // Informação Enviadas das Ordens de Serviço - admin (todas)
+            {
+                name: 'dashboard.os.infoenviadavernovaadmin',
+                url: 'info-enviada-nova/{osID}',
+                component: 'infoenviadavernovaadmin',
+                data: {title: 'Informação Nova', nome: 'Informação Nova'},
+                resolve: { osid: function(OrdemService, $transition$) { return OrdemService.getOSInfoEnviadaNovaAdmin($transition$.params().osID) } }
+            },
+            {
+                name: 'dashboard.os.infoenviadaverandamentoadmin',
+                url: 'info-enviada-andamento/{osID}',
+                component: 'infoenviadaverandamentoadmin',
+                data: {title: 'Informação Andamento', nome: 'Informação Andamento'},
+                resolve: { osid: function(OrdemService, $transition$) { return OrdemService.getOSInfoEnviadaAndamentoAdmin($transition$.params().osID) } }
+            },
+            {
+                name: 'dashboard.os.infoenviadaveresperaadmin',
+                url: 'info-enviada-espera/{osID}',
+                component: 'infoenviadaveresperaadmin',
+                data: {title: 'Informação Espera', nome: 'Informação Espera'},
+                resolve: { osid: function(OrdemService, $transition$) { return OrdemService.getOSInfoEnviadaEsperadaAdmin($transition$.params().osID) } }
+            },
+            {
+                name: 'dashboard.os.infoenviadaverencerradaadmin',
+                url: 'info-enviada-encerrada/{osID}',
+                component: 'infoenviadaverencerradaadmin',
+                data: {title: 'Informação Encerrada', nome: 'Informação Encerrada'},
+                resolve: { osid: function(OrdemService, $transition$) { return OrdemService.getOSInfoEnviadaEncerradaAdmin($transition$.params().osID) } }
             },// Ordens de Serviço Enviadas lista enviar - admin, resp, secr (coord)
             {
                 name: 'dashboard.os.ver.enviadavernova',
@@ -1002,6 +1058,69 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
         }
     }
 })
+.directive('ngCoordAdmin', function (CoordService) {
+    console.log("admin coord");
+    return {
+        link: function (scope, element, attr) {
+            CoordService.getCoord(scope);
+        }
+    }
+})
+.directive('ngSetorAdmin', function (CoordService) {
+    console.log("admin setor");
+    return {
+        link: function (scope, element, attr) {
+            scope.$watch("seach.dest_coord", function (e) {
+                if (e != undefined) {CoordService.getSetorbycoord(e, scope)}
+                else {
+                    if (scope.setordados != undefined) {
+                        scope.setordados = "";
+                        scope.areadados = "";
+                    }
+                }
+            })
+        }
+    }
+})
+.directive('ngAreaAdmin', function (CoordService) {
+    console.log("admin area");
+    return {
+        link: function (scope, element, attr) {
+            scope.$watch("seach.dest_setor", function (e) {
+                if (e != undefined) {CoordService.getAreabysetor(e, scope)}
+                else {
+                    if (scope.areadados != undefined) {
+                        scope.areadados = "";
+                    }
+                }
+            })
+        }
+    }
+})
+.directive('ngSetor', function (CoordService) {
+    console.log("setor");
+    return {
+        link: function (scope, element, attr) {
+            CoordService.getSetorbycoord("", scope);
+        }
+    }
+    
+})
+.directive('ngArea', function (CoordService) {
+    console.log("area");
+    return {
+        link: function (scope, element, attr) {
+            scope.$watch("seach.dest_setor", function (e) {
+                if (e != undefined) {CoordService.getAreabysetor(e, scope);}
+                else {
+                    if (scope.areadados != undefined) {
+                        scope.areadados = "";
+                    }
+                }
+            })
+        }
+    }
+})
 .directive('ngRecarregar', function ($state) {
     return {
         link: function(scope, element, attrs) {
@@ -1470,6 +1589,16 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
 .component("editeteclista", {templateUrl: "/app/views/app.php?v=editeteclista", controller: "editeteclistaCtrl", bindings: { verTecList: '<' }})
 .component("editetec", {templateUrl: "/app/views/app.php?v=editetec", controller: "editetecCtrl", bindings: { tecid: '<' }})
 .component("ver", {templateUrl: "/app/views/app.php?v=ver", controller: "verCtrl"})
+
+.component("enviadavernovaadmin", {templateUrl: "/app/views/app.php?v=enviadavernovaadmin", controller: "enviadavernovaCtrl", bindings: { verOs: '<' }})
+.component("enviadaverandamentoadmin", {templateUrl: "/app/views/app.php?v=enviadaverandamentoadmin", controller: "enviadaverandamentoCtrl", bindings: { verOs: '<' }})
+.component("enviadaveresperaadmin", {templateUrl: "/app/views/app.php?v=enviadaveresperaadmin", controller: "enviadaveresperaCtrl", bindings: { verOs: '<' }})
+.component("enviadaverencerradaadmin", {templateUrl: "/app/views/app.php?v=enviadaverencerradaadmin", controller: "enviadaverencerradaCtrl", bindings: { verOs: '<' }})
+.component("infoenviadavernovaadmin", {templateUrl: "/app/views/app.php?v=infoenviadavernovaadmin", controller: "infoenviadavernovaCtrl", bindings: { osid: '<' }})
+.component("infoenviadaverandamentoadmin", {templateUrl: "/app/views/app.php?v=infoenviadaverandamentoadmin", controller: "infoenviadaverandamentoCtrl", bindings: { osid: '<' }})
+.component("infoenviadaveresperaadmin", {templateUrl: "/app/views/app.php?v=infoenviadaveresperaadmin", controller: "infoenviadaveresperaCtrl", bindings: { osid: '<' }})
+.component("infoenviadaverencerradaadmin", {templateUrl: "/app/views/app.php?v=infoenviadaverencerradaadmin", controller: "infoenviadaverencerradaCtrl", bindings: { osid: '<' }})
+
 .component("enviadavernova", {templateUrl: "/app/views/app.php?v=enviadavernova", controller: "enviadavernovaCtrl", bindings: { verOs: '<' }})
 .component("enviadaverandamento", {templateUrl: "/app/views/app.php?v=enviadaverandamento", controller: "enviadaverandamentoCtrl", bindings: { verOs: '<' }})
 .component("enviadaverespera", {templateUrl: "/app/views/app.php?v=enviadaverespera", controller: "enviadaveresperaCtrl", bindings: { verOs: '<' }})
@@ -2856,7 +2985,7 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
                     var url = window.URL.createObjectURL(blob);                    
                     linkElement.setAttribute('href', url);
                     linkElement.setAttribute("target", "_blank");
-                    linkElement.setAttribute('download', "gerar-automatico.php");                    
+                    linkElement.setAttribute('download', "gerar-automatico.pdf");                    
                     
                     var click = new MouseEvent('click', {
                         "view" : window,
@@ -2972,6 +3101,14 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
     this.osenviadaandamentoid = null;
     this.osenviadaesperaid = null;
     this.osenviadaencerradaid = null;
+    this.osenviadanovaadminlist = null;
+    this.osenviadaandamentoadminlist = null;
+    this.osenviadaesperaadminlist = null;
+    this.osenviadaencerradaadminlist = null;
+    this.osenviadanovaadminid = null;
+    this.osenviadaandamentoadminid = null;
+    this.osenviadaesperaadminid = null;
+    this.osenviadaencerradaadminid = null;
     this.osrecebidanovalist = null;
     this.osrecebidandamentolist = null;
     this.osrecebidaesperalist = null;
@@ -3047,6 +3184,14 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
     resolveosenviadaandamentoid = null,
     resolveosenviadaesperaid = null,
     resolveosenviadaencerradaid = null,
+    resolveosenviadanovaadminlist = null,
+    resolveosenviadaandamentoadminlist = null,
+    resolveosenviadaesperaadminlist = null,
+    resolveosenviadaencerradaadminlist = null,
+    resolveosenviadanovaadminid = null,
+    resolveosenviadaandamentoadminid = null,
+    resolveosenviadaesperaadminid = null,
+    resolveosenviadaencerradaadminid = null,
     resolveteclist = null,
     resolveosrecebidanovalist = null,
     resolveosrecebidaandamentolist = null,
@@ -3141,6 +3286,114 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
             return "";
         }
 
+    }
+    // envidas admin
+    this.getOSEnviadaNovaAdmin = function() {
+        resolveosenviadanovaadminlist = $q.defer();
+        $http.get("/app/data/app.php?d=retornaosenviadanovaadminlista")
+        .then (function (resp) {
+            console.log(resp.data);
+            that.osenviadanovaadminlist = resp.data;
+            resolveosenviadanovaadminlist.resolve(that.osenviadanovaadminlist);
+        })
+        .catch(function (e) {
+            console.log("Um erro ocorreu -", e);
+            throw e;
+        })
+        return resolveosenviadanovaadminlist.promise;
+    }
+
+    this.getOSInfoEnviadaNovaAdmin = function(id) {
+        //resolvetecid = $q.defer();
+        //$http.post("/app/data/app.php?d=retornatecid", {'id' : id}).then (function (resp) {})
+        if (resolveosenviadanovaadminlist != null) {
+            resolveosenviadanovaadminid = $q.defer();
+            that.osenviadanovaadminid = that.osenviadanovaadminlist.find(function (ordem) {return ordem.id_os === id;});
+            resolveosenviadanovaadminid.resolve(that.osenviadanovaadminid);
+            return resolveosenviadanovaadminid.promise;
+        } else {
+            return "";
+        }
+    }
+
+    this.getOSEnviadaAndamentoAdmin = function() {
+        resolveosenviadaandamentoadminlist = $q.defer();
+        $http.get("/app/data/app.php?d=retornaosenviadaandamentoadminlista")
+        .then (function (resp) {
+            console.log(resp.data);
+            that.osenviadaandamentoadminlist = resp.data;
+            resolveosenviadaandamentoadminlist.resolve(that.osenviadaandamentoadminlist);
+        })
+        .catch(function (e) {
+            console.log("Um erro ocorreu -", e);
+            throw e;
+        })
+        return resolveosenviadaandamentoadminlist.promise;
+    }
+
+    this.getOSInfoEnviadaAndamentoAdmin = function(id) {
+        //resolvetecid = $q.defer();
+        //$http.post("/app/data/app.php?d=retornatecid", {'id' : id}).then (function (resp) {})
+        if (resolveosenviadaandamentoadminlist != null) {
+            resolveosenviadaandamentoadminid = $q.defer();
+            that.osenviadaandamentoadminid = that.osenviadaandamentoadminlist.find(function (ordem) {return ordem.id_os === id;});
+            resolveosenviadaandamentoadminid.resolve(that.osenviadaandamentoadminid);
+            return resolveosenviadaandamentoadminid.promise;
+        } else {
+            return ""
+        }
+    }
+
+    this.getOSEnviadaEsperaAdmin = function() {
+        resolveosenviadaesperaadminlist = $q.defer();
+        $http.get("/app/data/app.php?d=retornaosenviadaesperaadminlista")
+        .then (function (resp) {
+            console.log(resp.data);
+            that.osenviadaesperaadminlist = resp.data;
+            resolveosenviadaesperaadminlist.resolve(that.osenviadaesperaadminlist);
+        })
+        .catch(function (e) {
+            console.log("Um erro ocorreu -", e);
+            throw e;
+        })
+        return resolveosenviadaesperaadminlist.promise;
+    }
+
+    this.getOSInfoEnviadaEsperadaAdmin = function(id) {
+        //resolvetecid = $q.defer();
+        //$http.post("/app/data/app.php?d=retornatecid", {'id' : id}).then (function (resp) {})
+        if (resolveosenviadaesperaadminlist != null) {
+            resolveosenviadaesperaadminid = $q.defer();
+            that.osenviadaesperaadminid = that.osenviadaesperaadminlist.find(function (ordem) {return ordem.id_os === id;});
+            resolveosenviadaesperaadminid.resolve(that.osenviadaesperaadminid );
+            return resolveosenviadaesperaadminid.promise;
+        }
+    }
+
+    this.getOSEnviadaEncerradaAdmin = function() {
+        resolveosenviadaencerradaadminlist = $q.defer();
+        $http.get("/app/data/app.php?d=retornaosenviadaencerradaadminlista")
+        .then (function (resp) {
+            console.log(resp.data);
+            that.osenviadaencerradaadminlist = resp.data;
+            resolveosenviadaencerradaadminlist.resolve(that.osenviadaencerradaadminlist);
+        })
+        .catch (function (e) {
+            console.log("Um erro ocorreu -", e);
+            throw e;
+        })
+        return resolveosenviadaencerradaadminlist.promise;
+    }
+
+    this.getOSInfoEnviadaEncerradaAdmin = function(id) {
+        //resolvetecid = $q.defer();
+        //$http.post("/app/data/app.php?d=retornatecid", {'id' : id}).then (function (resp) {})
+        if (resolveosenviadaencerradaadminlist != null) {
+            resolveosenviadaencerradaadminid = $q.defer();
+            that.osenviadaencerradaadminid = that.osenviadaencerradaadminlist.find(function (ordem) {return ordem.id_os === id;});
+            resolveosenviadaencerradaadminid.resolve(that.osenviadaencerradaadminid);
+            return resolveosenviadaencerradaadminid.promise;
+        }
     }
     // envidas
     this.getOSEnviadaNova = function() {

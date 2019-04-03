@@ -63,20 +63,19 @@
 	</button> -->
 </div>
 <div>
-	<table class="table table-striped" style="overscroll-behavior-x: contain;">
+	<table class="table" style="overscroll-behavior-x: contain;">
 		<thead class="thead-dark">
 			<tr>
-				<th scope="col" class="text-center">protocolo</th>
+				<th scope="col" class="text-center">protocolo</th>				
 				<th scope="col" class="text-center">Status/Info</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr style="background-color:{{ordem.cor_os}}" ng-repeat="ordem in $ctrl.verOs | filter: { solicitante : seach.solicitante} | filter: {data_in : seach.data_in} | filter: {data_up : seach.data_up} | filter: {dest_coord : seach.dest_coord || undefined} | filter: {dest_setor : seach.dest_setor || undefined} | filter: {dest_area : seach.dest_area || undefined} | filter:  {tecnico : seach.tecnico} | filter: {status : 'ANDAMENTO'}">
+			<tr style="background-color:{{ordem.cor_os}}" ng-repeat="ordem in $ctrl.verOs | filter: { solicitante : seach.solicitante} | filter: {data_in : seach.data_in} | filter: {data_up : seach.data_up} | filter: {dest_coord : seach.dest_coord || undefined} | filter: {dest_setor : seach.dest_setor || undefined} | filter: {dest_area : seach.dest_area || undefined} | filter:  {tecnico : seach.tecnico} | filter: {status : 'NOVA'}">
 				<td class="text-center">
-					<a ui-sref="dashboard.os.infosolicandamento({ osID : ordem.id_os })" ui-sref-active="active" onclick="this.disabled=true;" class="btn btn-light">{{ordem.n_os}}</a>
+					<a ui-sref="dashboard.os.infoenviadavernovaadmin({ osID : ordem.id_os })" ui-sref-active="active" onclick="this.disabled=true;" class="btn btn-light">{{ordem.n_os}}</a>
 				</td>				
-				<td class="text-center">
-					<button type="button" class="btn btn-light" pop-over placement="left" trigger="focus" content="
+				<td class="text-center"><button type="button" class="btn btn-light" pop-over placement="left" trigger="focus" content="
   <b>Número :</b> {{ordem.n_os}}<br><hr>  
   <b>Criação :</b>  
 {{ordem.data_in}} <hr>
@@ -86,14 +85,8 @@
   <b>Nome: </b> {{ordem.solicitante}}<br>
   <b>Email: </b> {{ordem.sol_email}}<br>
   <b>Ramal: </b> <td>{{ordem.sol_ramal}}</td> <br>
-  <b>Topico de Descrição : </b>  {{ordem.descr_topic}}<hr>  
-  <b>Tecnico info : </b><br>
-  <b>Nome: </b> {{ordem.tecnico}} <br>
-  <b>Email: </b> {{ordem.tec_email}}<br>
-  <b>Ramal:</b> {{ordem.tec_ramal}}<br>
-  <b>Topico de Laudo :</b> {{ordem.laudo_topic}}<br>
-  "><span ng-if="ordem.M > 0" class="badge badge-warning">{{ordem.M}}</span> {{ordem.status}}</button>
-				</td>
+  <b>Topico de Descrição : </b>  {{ordem.descr_topic}}
+  "><span ng-if="ordem.M > 0" class="badge badge-warning">{{ordem.M}}</span> {{ordem.status}}</button></td>
 			</tr>
 		</tbody>
 	</table>

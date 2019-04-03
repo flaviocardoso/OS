@@ -23,9 +23,10 @@ $host = "localhost";
 $dbname = "cbpf_os";
 
 $OS = new OS();
-//$OS->dest_coord = $_SESSION['user_coord'];
+//$OS->sol_coord = $_SESSION['user_coord'];
+
 $PDO = new CN($host, $dbname);
-$data_os = $PDO->recebidaOSandamentoAdmin();
+$data_os = $PDO->enviadaOSandamentoAdmin();
 $count = $data_os['count'];
 $rows = $data_os['rows'];
 $row = [];
@@ -33,12 +34,12 @@ $row = [];
 for ($i = 0; $i < $count; $i++) {
 	foreach ($rows[$i] as $key => $value) {
 		if ($key == 'data_up') {
-			$data = new DateTime($value);
+			$data = new \DateTime($value);
 			$row[$i][$key] = $data->format('d/m/Y');
 			$row[$i]['hora_up'] = $data->format('H:i:s');
 		}
 		elseif ($key == 'data_in') {
-			$data = new DateTime($value);
+			$data = new \DateTime($value);
 			$row[$i][$key] = $data->format('d/m/Y');
 			$row[$i]['hora_in'] = $data->format('H:i:s');
 		}

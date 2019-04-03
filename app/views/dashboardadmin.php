@@ -36,16 +36,16 @@
                     <a href="" data-target="#AdminEnviada" data-toggle="collapse" class="btn btn-success" aria-expanded="false">Enviadas</a>
                     <ul class="collapse list-unstyled components" id="AdminEnviada">
                         <li>
-                            <a ui-sref="dashboard.os.ver.enviadavernova" ui-sref-active="active">Nova</a>
+                            <a ui-sref="dashboard.os.ver.enviadavernovaadmin" ui-sref-active="active">Nova</a>
                         </li>
                         <li>
-                            <a ui-sref="dashboard.os.ver.enviadaverandamento" ui-sref-active="active">Andamento</a>
+                            <a ui-sref="dashboard.os.ver.enviadaverandamentoadmin" ui-sref-active="active">Andamento</a>
                         </li>
                         <li>
-                            <a ui-sref="dashboard.os.ver.enviadaverespera" ui-sref-active="active">Espera</a>
+                            <a ui-sref="dashboard.os.ver.enviadaveresperaadmin" ui-sref-active="active">Espera</a>
                         </li>
                         <li>
-                            <a ui-sref="dashboard.os.ver.enviadaverencerrada" ui-sref-active="active">Encerrada</a>
+                            <a ui-sref="dashboard.os.ver.enviadaverencerradaadmin" ui-sref-active="active">Encerrada</a>
                         </li> 
                     </ul>
                     <a href="" data-target="#AdminRecebida" data-toggle="collapse" class="btn btn-success" aria-expanded="false">Recebidas</a>

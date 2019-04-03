@@ -22,8 +22,8 @@ $path_files = "/anexos/";//"/ang3/arquivos/";
 $path = $path_root . $path_files;
 
 $file = $_REQUEST['file'];
-
-$path_tmp = "/home/anexos/anexos/";
+// mudar pasta de anexo de acordo com server
+$path_tmp = "/home/flavio/anexos/";
 
 if (file_exists($path_tmp . $file)) {
     //echo 'existe';

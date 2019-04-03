@@ -229,7 +229,7 @@ litlle menu
 /*-------------------------------------------------
     MENSAGE TOAST OS
 --------------------------------------------------- */
-
+/*
 @media only screen and (min-width: 320px) {
     div.display-os {
         display: -webkit-inline-box;
@@ -242,7 +242,7 @@ litlle menu
         font-size: 4vw;
     }
 }
-
+*/
 
 /*-------------------------------------------------
     INFO OS
@@ -367,7 +367,7 @@ Especial formato input, select, textarea
     top: 0;
     left: 0;
     z-index: 1;
-    padding: 8px 12px;
+    padding: 10px 14px;
     outline: 0;
 }
 

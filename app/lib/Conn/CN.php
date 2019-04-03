@@ -764,7 +764,100 @@ class CN // namespace_class
 
 		return array('count' => $count, 'row' => $row);
 	}
-	// admin ordens de serviços enviadas
+	// (admin todas) ordens de serviços enviadas
+	public function enviadaOSnovaAdmin()
+	{
+		$row = array(); //var_dump($OS);
+		$count = 0; //var_dump($OS->solic_coord);
+		// sem necessidade de juntar tabelas para novas ordens de serviço
+		try
+		{
+			$sql = "SELECT OS.id_os, (SELECT COUNT(TE.M) FROM tecnico AS TE WHERE TE.id_os=OS.id_os AND TE.M='S') AS M, OS.n_os, OS.cor_os, OS.status, OS.solicitante, OS.sol_email, OS.sol_coord, OS.sol_setor, OS.sol_ala, OS.sol_sala, OS.sol_ramal, OS.data_in, OS.data_up, OS.dest_coord, OS.dest_setor, OS.dest_area, OS.file, OS.descr_topic, OS.descr FROM ordemservice AS OS WHERE OS.status='NOVA' ";
+			$stmt = $this->link->prepare($sql);
+			//$stmt->bindParam(':sol_coord', $OS->sol_coord, \PDO::PARAM_STR);
+			$stmt->execute();
+			$count = $stmt->rowCount();
+			$row = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+		}
+		catch (\PDOException $e)
+		{
+			print 'Erro' . $e->getMessage() . "<br/>";
+		}
+		//var_dump($OS->sol_coord);
+		//var_dump($row);
+		return array('count' => $count, 'rows' => $row);
+	}
+
+	public function enviadaOSandamentoAdmin()
+	{
+		$row = array();
+		$count = 0;
+		// sem necessidade de juntar tabelas para novas ordens de serviço
+		try
+		{
+			$sql = "SELECT OS.id_os, (SELECT COUNT(TE.M) FROM tecnico AS TE WHERE TE.id_os=OS.id_os AND TE.M='S') AS M, OS.n_os, OS.cor_os, OS.status, OS.solicitante, OS.sol_email, OS.sol_coord, OS.sol_setor, OS.sol_ala, OS.sol_sala, OS.sol_ramal, OS.data_in, OS.data_up, OS.dest_coord, OS.dest_setor, OS.dest_area, OS.file, OS.descr_topic, OS.descr, LA.id_tecnico, LA.user_tec, LA.tecnico, LA.tec_email, LA.laudo_topic, LA.laudo, LA.tec_ala, LA.tec_sala, LA.tec_ramal FROM `ordemservice` AS OS JOIN (SELECT * FROM tecnico WHERE id_tecnico in (SELECT MAX(id_tecnico) FROM tecnico GROUP BY id_os) ORDER BY id_tecnico) AS LA ON OS.id_os = LA.id_os WHERE OS.status='ANDAMENTO' ";
+			$stmt = $this->link->prepare($sql);
+			//$stmt->bindParam(':sol_coord', $OS->sol_coord, \PDO::PARAM_STR);
+			$stmt->execute();
+			$count = $stmt->rowCount();
+			$row = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+		}
+		catch (\PDOException $e)
+		{
+			print 'Erro' . $e->getMessage() . "<br/>";
+		}
+
+		return array('count' => $count, 'rows' => $row);
+	}
+
+	public function enviadaOSesperaAdmin()
+	{
+		$row = array();
+		$count = 0;
+		// sem necessidade de juntar tabelas para novas ordens de serviço
+		try
+		{
+			$sql = "SELECT OS.id_os, (SELECT COUNT(TE.M) FROM tecnico AS TE WHERE TE.id_os=OS.id_os AND TE.M='S') AS M, OS.n_os, OS.cor_os, OS.status, OS.solicitante, OS.sol_email, OS.sol_coord, OS.sol_setor, OS.sol_ala, OS.sol_sala, OS.sol_ramal, OS.data_in, OS.data_up, OS.dest_coord, OS.dest_setor, OS.dest_area, OS.file, OS.descr_topic, OS.descr, LA.id_tecnico, LA.user_tec, LA.tecnico, LA.tec_email, LA.laudo_topic, LA.laudo, LA.tec_ala, LA.tec_sala, LA.tec_ramal FROM `ordemservice` AS OS JOIN (SELECT * FROM tecnico WHERE id_tecnico in (SELECT MAX(id_tecnico) FROM tecnico GROUP BY id_os) ORDER BY id_tecnico) AS LA ON OS.id_os = LA.id_os WHERE OS.status='ESPERA' ";
+			$stmt = $this->link->prepare($sql);
+			//$stmt->bindParam(':sol_coord', $OS->sol_coord, \PDO::PARAM_STR);
+			$stmt->execute();
+			$count = $stmt->rowCount();
+			$row = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+		}
+		catch (\PDOException $e)
+		{
+			print 'Erro' . $e->getMessage() . "<br/>";
+		}
+
+		return array('count' => $count, 'rows' => $row);
+	}
+
+	public function enviadaOSencerradaAdmin()
+	{
+		$row = array();
+		$count = 0;
+		$current = $this->get_current_year();
+		$last = $this->get_last_year();
+		// sem necessidade de juntar tabelas para novas ordens de serviço
+		try
+		{
+			$sql = "SELECT OS.id_os, (SELECT COUNT(TE.M) FROM tecnico AS TE WHERE TE.id_os=OS.id_os AND TE.M='S') AS M, OS.n_os, OS.cor_os, OS.status, OS.solicitante, OS.sol_email, OS.sol_coord, OS.sol_setor, OS.sol_ala, OS.sol_sala, OS.sol_ramal, OS.data_in, OS.data_up, OS.dest_coord, OS.dest_setor, OS.dest_area, OS.file, OS.descr_topic, OS.descr, LA.id_tecnico, LA.user_tec, LA.tecnico, LA.tec_email, LA.laudo_topic, LA.laudo, LA.tec_ala, LA.tec_sala, LA.tec_ramal FROM `ordemservice` AS OS JOIN (SELECT * FROM tecnico WHERE id_tecnico in (SELECT MAX(id_tecnico) FROM tecnico GROUP BY id_os) ORDER BY id_tecnico) AS LA ON OS.id_os = LA.id_os WHERE OS.status='ENCERRADA' AND YEAR(OS.data_up) IN (:current, :last)";
+			$stmt = $this->link->prepare($sql);
+			//$stmt->bindParam(':sol_coord', $OS->sol_coord, \PDO::PARAM_STR);
+			$stmt->bindParam(':current', $current, \PDO::PARAM_STR);
+			$stmt->bindParam(':last', $last , \PDO::PARAM_STR);
+			$stmt->execute();
+			$count = $stmt->rowCount();
+			$row = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+		}
+		catch (\PDOException $e)
+		{
+			print 'Erro' . $e->getMessage() . "<br/>";
+		}
+
+		return array('count' => $count, 'rows' => $row);
+	}
+	// (admin coord) ordens de serviços enviadas
 	public function enviadaOSnova($OS)
 	{
 		$row = array(); //var_dump($OS);
@@ -857,7 +950,245 @@ class CN // namespace_class
 
 		return array('count' => $count, 'rows' => $row);
 	}
-	// admin ordens de serviços recebidas
+	// (admin todas) ordens de serviços recebidas
+	public function recebidaOSnovaAdmin()
+	{
+		$row = array();
+		$count = 0;
+		// sem necessidade de juntar tabelas para novas ordens de serviço
+		try
+		{
+			$sql = "SELECT
+								OS.id_os,
+								(SELECT
+									COUNT(TE.M)
+								FROM tecnico AS TE
+								WHERE TE.id_os=OS.id_os AND TE.M='S') AS M,
+								OS.n_os,
+								OS.cor_os,
+								OS.status,
+								OS.solicitante,
+								OS.sol_email,
+								OS.sol_coord,
+								OS.sol_setor,
+								OS.sol_ala,
+								OS.sol_sala,
+								OS.sol_ramal,
+								OS.data_in,
+								OS.data_up,
+								OS.dest_coord,
+								OS.dest_setor,
+								OS.dest_area,
+								OS.file,
+								OS.descr_topic,
+								OS.descr
+							FROM ordemservice AS OS
+							WHERE OS.status='NOVA' ";
+			$stmt = $this->link->prepare($sql);
+			//$stmt->bindParam(':dest_coord', $OS->dest_coord, \PDO::PARAM_STR);
+			$stmt->execute();
+			$count = $stmt->rowCount();
+			$row = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+		}
+		catch (\PDOException $e)
+		{
+			print 'Erro' . $e->getMessage() . "<br/>";
+		}
+
+		return array('count' => $count, 'rows' => $row);
+	}
+
+	public function recebidaOSandamentoAdmin()
+	{
+		$row = array();
+		$count = 0;
+		// sem necessidade de juntar tabelas para novas ordens de serviço
+		try
+		{
+			$sql = "SELECT
+								OS.id_os,
+								(SELECT
+									COUNT(TE.M)
+								FROM tecnico AS TE
+								WHERE TE.id_os=OS.id_os AND TE.M='S') AS M,
+								OS.n_os,
+								OS.cor_os,
+								OS.status,
+								OS.solicitante,
+								OS.sol_email,
+								OS.sol_coord,
+								OS.sol_setor,
+								OS.sol_ala,
+								OS.sol_sala,
+								OS.sol_ramal,
+								OS.data_in,
+								OS.data_up,
+								OS.dest_coord,
+								OS.dest_setor,
+								OS.dest_area,
+								OS.file,
+								OS.descr_topic,
+								OS.descr,
+								LA.id_tecnico,
+								LA.user_tec,
+								LA.tecnico,
+								LA.tec_email,
+								LA.laudo_topic,
+								LA.laudo,
+								LA.tec_ala,
+								LA.tec_sala,
+								LA.tec_ramal
+							FROM `ordemservice` AS OS
+							JOIN (
+								SELECT * FROM tecnico WHERE id_tecnico in (
+									SELECT MAX(id_tecnico
+									) FROM tecnico GROUP BY id_os
+								) ORDER BY id_tecnico
+							) AS LA ON OS.id_os = LA.id_os
+							WHERE OS.status='ANDAMENTO' ";
+			$stmt = $this->link->prepare($sql);
+			//$stmt->bindParam(':dest_coord', $OS->dest_coord, \PDO::PARAM_STR);
+			$stmt->execute();
+			$count = $stmt->rowCount();
+			$row = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+		}
+		catch (\PDOException $e)
+		{
+			print 'Erro' . $e->getMessage() . "<br/>";
+		}
+
+		return array('count' => $count, 'rows' => $row);
+	}
+
+	public function recebidaOSesperaAdmin()
+	{
+		$row = array();
+		$count = 0;
+		// sem necessidade de juntar tabelas para novas ordens de serviço
+		try
+		{
+			$sql = "SELECT
+								OS.id_os,
+								(
+									SELECT COUNT(TE.M)
+									FROM tecnico AS TE
+									WHERE TE.id_os=OS.id_os AND TE.M='S'
+								) AS M,
+								OS.n_os,
+								OS.cor_os,
+								OS.status,
+								OS.solicitante,
+								OS.sol_email,
+								OS.sol_coord,
+								OS.sol_setor,
+								OS.sol_ala,
+								OS.sol_sala,
+								OS.sol_ramal,
+								OS.data_in,
+								OS.data_up,
+								OS.dest_coord,
+								OS.dest_setor,
+								OS.dest_area,
+								OS.file,
+								OS.descr_topic,
+								OS.descr,
+								LA.id_tecnico,
+								LA.user_tec,
+								LA.tecnico,
+								LA.tec_email,
+								LA.laudo_topic,
+								LA.laudo,
+								LA.tec_ala,
+								LA.tec_sala,
+								LA.tec_ramal
+							FROM `ordemservice` AS OS
+							JOIN (
+								SELECT * FROM tecnico WHERE id_tecnico in (
+									SELECT MAX(id_tecnico) FROM tecnico GROUP BY id_os
+								) ORDER BY id_tecnico
+							) AS LA ON OS.id_os = LA.id_os
+							WHERE OS.status='ESPERA' ";
+			$stmt = $this->link->prepare($sql);
+			// $stmt->bindParam(':dest_coord', $OS->dest_coord, \PDO::PARAM_STR);
+			$stmt->execute();
+			$count = $stmt->rowCount();
+			$row = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+		}
+		catch (\PDOException $e)
+		{
+			print 'Erro' . $e->getMessage() . "<br/>";
+		}
+
+		return array('count' => $count, 'rows' => $row);
+	}
+
+	public function recebidaOSencerradaAdmin()
+	{
+		$row = array();
+		$count = 0;
+		$current = $this->get_current_year();
+		$last = $this->get_last_year();
+		// sem necessidade de juntar tabelas para novas ordens de serviço
+		try
+		{
+			$sql = "SELECT
+								OS.id_os,
+								(
+									SELECT COUNT(TE.M)
+									FROM tecnico AS TE
+									WHERE TE.id_os=OS.id_os AND TE.M='S'
+								) AS M,
+								OS.n_os,
+								OS.cor_os,
+								OS.status,
+								OS.solicitante,
+								OS.sol_email,
+								OS.sol_coord,
+								OS.sol_setor,
+								OS.sol_ala,
+								OS.sol_sala,
+								OS.sol_ramal,
+								OS.data_in,
+								OS.data_up,
+								OS.dest_coord,
+								OS.dest_setor,
+								OS.dest_area,
+								OS.file,
+								OS.descr_topic,
+								OS.descr,
+								LA.id_tecnico,
+								LA.user_tec,
+								LA.tecnico,
+								LA.tec_email,
+								LA.laudo_topic,
+								LA.laudo,
+								LA.tec_ala,
+								LA.tec_sala,
+								LA.tec_ramal
+							FROM `ordemservice` AS OS
+							JOIN (
+								SELECT * FROM tecnico
+								WHERE id_tecnico in (
+									SELECT MAX(id_tecnico) FROM tecnico GROUP BY id_os
+								) ORDER BY id_tecnico
+							) AS LA ON OS.id_os = LA.id_os
+							WHERE OS.status='ENCERRADA' AND YEAR(OS.data_up) IN (:current, :last)";
+			$stmt = $this->link->prepare($sql);
+			//$stmt->bindParam(':dest_coord', $OS->dest_coord, \PDO::PARAM_STR);
+			$stmt->bindParam(':current', $current ,\PDO::PARAM_STR);
+			$stmt->bindParam(':last', $last,\PDO::PARAM_STR);
+			$stmt->execute();
+			$count = $stmt->rowCount();
+			$row = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+		}
+		catch (\PDOException $e)
+		{
+			print 'Erro' . $e->getMessage() . "<br/>";
+		}
+
+		return array('count' => $count, 'rows' => $row);
+	}
+	// (admin coord) ordens de serviços recebidas
 	public function recebidaOSnova($OS)
 	{
 		$row = array();

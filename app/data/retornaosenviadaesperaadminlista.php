@@ -23,9 +23,10 @@ $host = "localhost";
 $dbname = "cbpf_os";
 
 $OS = new OS();
-//$OS->dest_coord = $_SESSION['user_coord'];
+$OS->sol_coord = $_SESSION['user_coord'];
+
 $PDO = new CN($host, $dbname);
-$data_os = $PDO->recebidaOSandamentoAdmin();
+$data_os = $PDO->enviadaOSesperaAdmin();
 $count = $data_os['count'];
 $rows = $data_os['rows'];
 $row = [];
