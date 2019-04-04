@@ -1121,6 +1121,38 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
         }
     }
 })
+.directive('ngSetorResp', function (CoordService) {
+    console.log("setor");
+    return {
+        link: function (scope, element, attr) {
+            CoordService.getSetorResp(scope);
+        }
+    }
+    
+})
+.directive('ngAreaResp', function (CoordService) {
+    console.log("area");
+    return {
+        link: function (scope, element, attr) {
+            scope.$watch("seach.dest_setor", function (e) {
+                if (e != undefined) {CoordService.getAreabysetor(e, scope);}
+                else {
+                    if (scope.areadados != undefined) {
+                        scope.areadados = "";
+                    }
+                }
+            })
+        }
+    }
+})
+.directive('ngAreaTec', function (CoordService) {
+    console.log("area");
+    return {
+        link: function (scope, element, attr) {
+            CoordService.getAreaTec(scope);            
+        }
+    }
+})
 .directive('ngRecarregar', function ($state) {
     return {
         link: function(scope, element, attrs) {
@@ -2746,6 +2778,20 @@ angular.module('app', ['ui.router', 'ngAnimate', 'ngProgress', 'toaster'])
                 console.log(resp.data);
                 $scope.setordadosSolic = resp.data;
             });
+        },
+        getSetorResp: function ($scope) {
+            $http.get("/app/data/app.php?d=setor-resp")
+            .then(function (resp) {
+                console.log(resp.data);
+                $scope.setordados = resp.data;
+            });
+        },
+        getAreaTec: function ($scope) {
+            $http.get("/app/data/app.php?d=area-tec")
+            .then(function (resp) {
+                console.log(resp.data);
+                $scope.areadados = resp.data;
+            })
         },
         postCriarOS: function(service) {
             $http.post("/app/data/app.php?d=criarOS", service).then(function(resp) {
