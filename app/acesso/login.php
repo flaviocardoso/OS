@@ -42,7 +42,7 @@ ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
 if($ldapconn) {
 	// echo "OK conexão - 4"; cn=Mr Spock,ou=Admin,o=cbpf,c=br star..trek
     // binding to ldap server cn=Mr Spock, ou=Admin, o=CBPF, c=BR Cland3s58nam3n53..
-    $ldapbind = ldap_bind($ldapconn, 'cn=Mr Spock,ou=Admin,o=cbpf,c=br', 'Cland3s58nam3n53..'); // or die ("Error trying to bind: ".ldap_error($ldapconn));
+    $ldapbind = ldap_bind($ldapconn, 'cn=Mr Spock,ou=Admin,o=cbpf,c=br', '*************'); // or die ("Error trying to bind: ".ldap_error($ldapconn));
     
 } else {
 	$out['error'] = true;
