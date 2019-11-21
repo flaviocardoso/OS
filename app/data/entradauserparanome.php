@@ -24,7 +24,7 @@ if ($session == 'ON') {
     ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
     ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
 
-    $ldapbind = ldap_bind($ldapconn, 'cn=Mr Spock,ou=Admin,o=cbpf,c=br', 'Cland3s58nam3n53..');
+    $ldapbind = ldap_bind($ldapconn, 'cn=Mr Spock,ou=Admin,o=cbpf,c=br', '**********');
     $justthese = array("sn");
 
     $filter="(uid=" . trim($user['user']) . ")";
