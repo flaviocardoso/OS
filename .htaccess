@@ -1,0 +1,5 @@
+RewriteEngine On
+RewriteBase /
+
+
+ErrorDocument 404 https//os.cbpf.br/404.php
