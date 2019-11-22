@@ -13,6 +13,8 @@ $data = date('Y-m-d');
 
 $PDO = new CN("localhost", "cbpf_os");
 
+$dado = $PDO->getOSSimplesAndamento();
+
 for ($i = 0; $i < $dado['count']; $i++) // tipo de variável gettype
 {    
     $time = strtotime("$data") - strtotime($dado['rows'][$i]['data_up']);

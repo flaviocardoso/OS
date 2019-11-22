@@ -12,7 +12,6 @@ use lib\Conn\CN;
 $data = date('Y-m-d');
 
 $PDO = new CN("localhost", "cbpf_os");
-$PDO->connect($host, $dbname);
 
 $dado = $PDO->getOSSimplesNova();
 echo $dado['count'] . " ||| <br>";
